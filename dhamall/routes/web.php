@@ -26,3 +26,6 @@ Route::get('/verification', function () {
 Route::get('/new-password', function () {
     return view('createnewpassword');
 });
+use App\Http\Controllers\buyer\CartController;
+
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
