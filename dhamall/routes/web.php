@@ -11,18 +11,18 @@ Route::get('/admin/login', [AdminLoginController::class,'index'])->name('admin.l
 
 
 Route::get('/login', function () {
-    return view('login');
+    return view('users.login');
 });
 
 Route::get('/reset', function () {
-    return view('resetpassword');
+    return view('users.resetpassword');
 });
 Route::get('/check-email', function () {
-    return view('checkemail');
+    return view('users.checkemail');
 });
 Route::get('/verification', function () {
-    return view('verification');
+    return view('users.verification');
 });
 Route::get('/new-password', function () {
-    return view('createnewpassword');
+    return view('users.createnewpassword');
 });
