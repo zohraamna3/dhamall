@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\AdminLoginController;
@@ -10,13 +11,12 @@ Route::get('/', function () {
 Route::get('/admin/login', [AdminLoginController::class,'index'])->name('admin.login');
 
 
-Route::get('/login', function () {
-    return view('users.login');
-});
+
 
 Route::get('/reset', function () {
     return view('users.resetpassword');
 });
+
 Route::get('/check-email', function () {
     return view('users.checkemail');
 });
@@ -30,3 +30,10 @@ Route::get('/new-password', function () {
 Route::get('/home', function () {
     return view('users.buyer.home');
 });
+
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegisterController::class, 'register']);
+Route::get('/login', function () {
+    return view('users.login');
+})->name('login');
+
