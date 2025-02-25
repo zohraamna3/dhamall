@@ -26,3 +26,7 @@ Route::get('/verification', function () {
 Route::get('/new-password', function () {
     return view('users.createnewpassword');
 });
+
+Route::get('/home', function () {
+    return view('users.buyer.home');
+});
