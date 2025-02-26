@@ -42,12 +42,12 @@
             <!-- Right Content Section -->
             <div class="col-md-9">
                 <div class="card shadow-sm rounded p-4" id="content-area">
-                    @include('profile.partials.profile_information')
-                    @include('profile.partials.orders', ['orders' => $orders])
-                    @include('profile.partials.wishlist')
-                    @include('profile.partials.cart')
-                    @include('profile.partials.payment_details')
-                    @include('profile.partials.notifications')
+                @include('profile.partials.profile_information')
+                @include('profile.partials.orders', ['orders' => $orders])
+                @include('profile.partials.wishlist', ['wishlist' => $wishlist])
+                @include('profile.partials.cart', ['cart' => $shoppingCart])
+                @include('profile.partials.payment_details', ['paymentDetails' => $paymentDetails])
+                @include('profile.partials.notifications')
                 </div>
             </div>
         </div>

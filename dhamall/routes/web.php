@@ -1,49 +1,12 @@
 <?php
 
-// use App\Http\Controllers\Auth\RegisterController;
-// use Illuminate\Support\Facades\Route;
-
-// use App\Http\Controllers\Admin\AdminLoginController;
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Route::get('/admin/login', [AdminLoginController::class,'index'])->name('admin.login');
-
-
-
-
-// Route::get('/reset', function () {
-//     return view('users.resetpassword');
-// });
-
-// Route::get('/check-email', function () {
-//     return view('users.checkemail');
-// });
-// Route::get('/verification', function () {
-//     return view('users.verification');
-// });
-// Route::get('/new-password', function () {
-    //     return view('users.createnewpassword');
-    // });
-
-    // Route::get('/home', function () {
-//     return view('users.buyer.home');
-// });
-
-// Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
-// Route::post('/register', [RegisterController::class, 'register']);
-// Route::get('/login', function () {
-    //     return view('users.login');
-    // })->name('login');
-    
-
-use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 
-
+// Authentication Routes
 Route::get('/signin', [AuthController::class, 'showSignIn'])->name('signin');
 Route::post('/signin', [AuthController::class, 'signIn'])->name('login');
 
@@ -52,6 +15,10 @@ Route::post('/signup', [AuthController::class, 'signUp'])->name('register');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+// Home Route (Earbuds E-commerce Homepage)
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// Profile Route
 Route::get('/profile', function () {
     $user = Auth::user(); // Get the logged-in user
 
@@ -65,5 +32,53 @@ Route::get('/profile', function () {
             return $order;
         });
 
-    return view('profile.edit', compact('orders'));
+    $paymentDetails = DB::table('user_payment_details')->where('user_id', $user->id)->first();
+    $wishlist = DB::table('wishlist')->where('user_id', $user->id)->get();
+    $shoppingCart = DB::table('shopping_cart')->where('user_id', $user->id)->get();
+
+    return view('profile.edit', compact('orders', 'wishlist', 'shoppingCart', 'paymentDetails'));
 })->middleware('auth');
+
+// Payment Update Route
+Route::post('/profile/payment/update', function (Illuminate\Http\Request $request) {
+    $user = Auth::user(); 
+
+    $validated = $request->validate([
+        'payment_type'   => 'required|string',
+        'account_number' => 'nullable|string|max:20',
+        'expiry_date'    => 'nullable|date',
+        'paypal_email'   => 'nullable|email',
+        'bank_name'      => 'nullable|string|max:100',
+        'is_default'     => 'nullable|boolean',
+    ]);
+
+    $existingPayment = DB::table('user_payment_details')->where('user_id', $user->id)->first();
+
+    if ($existingPayment) {
+        DB::table('user_payment_details')
+            ->where('user_id', $user->id)
+            ->update([
+                'payment_type'   => $validated['payment_type'],
+                'account_number' => $validated['account_number'] ?? null,
+                'expiry_date'    => $validated['expiry_date'] ?? null,
+                'paypal_email'   => $validated['paypal_email'] ?? null,
+                'bank_name'      => $validated['bank_name'] ?? null,
+                'is_default'     => $request->has('is_default') ? 1 : 0,
+                'updated_at'     => now(),
+            ]);
+    } else {
+        DB::table('user_payment_details')->insert([
+            'user_id'        => $user->id,
+            'payment_type'   => $validated['payment_type'],
+            'account_number' => $validated['account_number'] ?? null,
+            'expiry_date'    => $validated['expiry_date'] ?? null,
+            'paypal_email'   => $validated['paypal_email'] ?? null,
+            'bank_name'      => $validated['bank_name'] ?? null,
+            'is_default'     => $request->has('is_default') ? 1 : 0,
+            'created_at'     => now(),
+            'updated_at'     => now(),
+        ]);
+    }
+
+    return redirect('/profile')->with('success', 'Payment details updated successfully.');
+})->middleware('auth')->name('payment.update');
