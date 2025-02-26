@@ -1,5 +1,14 @@
 @extends('layouts.app')
 
+
+@section('breadcrumb')
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb custom-breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page" id="breadcrumb-current">Sign Up</li>
+        </ol>
+    </nav>
+@endsection
 @section('content')
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
         <div class="row w-100 shadow-lg rounded-3 overflow-hidden" style="max-width: 900px; background-color: #f8f9fa;">
@@ -17,7 +26,7 @@
             <div class="col-md-7 bg-white p-5">
                 <h3 class="fw-bold mb-3 text-dark">Create an Account</h3>
                 <p class="text-muted">Already have an account?
-                    <a href="{{ route('login') }}" class="text-primary fw-bold">Log in</a>
+                    <a href="{{ route('signin') }}" class="text-primary fw-bold">Log in</a>
                 </p>
 
                 <!-- Registration Form -->
@@ -27,6 +36,35 @@
                         <label for="name" class="form-label fw-bold">Full Name</label>
                         <input type="text" name="name" class="form-control p-2" placeholder="Enter your name" required>
                     </div>
+
+                    <div class="mb-3">
+                        <label for="phone" class="form-label fw-bold">Phone Number</label>
+                        <input type="text" name="phone" class="form-control p-2" placeholder="Enter your phone number" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="gender" class="form-label fw-bold">Gender</label>
+                        <select name="gender" class="form-control p-2" required>
+                            <option value="">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="dob" class="form-label fw-bold">Date of Birth</label>
+                        <input type="date" name="dob" class="form-control p-2" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="role" class="form-label fw-bold">Role</label>
+                        <select name="role" class="form-control p-2" required>
+                            <option value="buyer">Buyer</option>
+                            <option value="seller">Seller</option>
+                        </select>
+                    </div>
+
 
                     <div class="mb-3">
                         <label for="email" class="form-label fw-bold">Email Address</label>
@@ -45,6 +83,9 @@
 
                     <button type="submit" class="btn btn-dark w-100 py-2 fw-bold text-gold">Register</button>
                 </form>
+
+
+
 
                 <!-- Social Login -->
                 <div class="text-center my-4 text-muted">Or sign up with</div>

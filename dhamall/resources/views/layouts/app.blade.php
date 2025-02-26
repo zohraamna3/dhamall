@@ -12,10 +12,51 @@
         .btn-login { background-color: #6f42c1; color: white; }
         .btn-signin { border: 1px solid #6f42c1; color: white; background-color: #6f42c1; }
         .btn-outline-dark:hover { background-color: #6f42c1; border: 1px solid #6f42c1; }
+        /* Breadcrumb Background */
+        .custom-breadcrumb {
+            background-color: #1a1a2e;
+            border-radius: 8px;
+            padding: 12px 20px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+            font-size: 1rem;
+            font-weight: 500;
+            width: 100%;
+        }
+
+        /* Breadcrumb Links */
+        .breadcrumb a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease-in-out;
+            font-weight: bold;
+        }
+
+        .breadcrumb a:hover {
+            color: #1565c0;
+        }
+
+        /* Active Item */
+        .breadcrumb-item.active {
+            font-weight: bold;
+            color: #b3a31c;
+        }
+
+        /* Change the "/" Separator to White */
+        .breadcrumb-item + .breadcrumb-item::before {
+            color: white !important;
+        }
     </style>
+    <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
+
+
 </head>
 <body>
     @include('layouts.header')  <!-- Include the navbar -->
+
+    <!-- Breadcrumb Section -->
+    <div class="container mt-3">
+        @yield('breadcrumb')
+    </div>
 
     <div class="container mt-4">
         @yield('content')  <!-- Page content will be inserted here -->
