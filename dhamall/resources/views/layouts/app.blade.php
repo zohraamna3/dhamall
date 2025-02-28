@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Dhamall')</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Animate.css CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
@@ -22,6 +28,11 @@
             font-weight: 500;
             width: 100%;
         }
+        /* body {
+            background-blend-mode: overlay;
+            background-color: black;
+        } */
+
 
         /* Breadcrumb Links */
         .breadcrumb a {
@@ -54,6 +65,11 @@
     @include('layouts.header')  <!-- Include the navbar -->
 
     <!-- Breadcrumb Section -->
+    
+    <div class="container-fluid px-0">
+        @yield('hero')  <!-- Page content will be inserted here -->
+    </div>
+    
     <div class="container mt-3">
         @yield('breadcrumb')
     </div>

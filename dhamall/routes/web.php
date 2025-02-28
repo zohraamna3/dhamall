@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
 
 // Authentication Routes
 Route::get('/signin', [AuthController::class, 'showSignIn'])->name('signin');
@@ -37,7 +38,7 @@ Route::get('/profile', function () {
     $shoppingCart = DB::table('shopping_cart')->where('user_id', $user->id)->get();
 
     return view('profile.edit', compact('orders', 'wishlist', 'shoppingCart', 'paymentDetails'));
-})->middleware('auth');
+})->middleware('auth')->name('profile.edit');
 
 // Payment Update Route
 Route::post('/profile/payment/update', function (Illuminate\Http\Request $request) {
@@ -82,3 +83,16 @@ Route::post('/profile/payment/update', function (Illuminate\Http\Request $reques
 
     return redirect('/profile')->with('success', 'Payment details updated successfully.');
 })->middleware('auth')->name('payment.update');
+
+
+
+Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
+
+
+// Route::post('/products', [ProductController::class, 'store']);
+// Route::get('/products/{id}', [ProductController::class, 'show']);
+// Route::get('/get-csrf-token', function () {
+//     return response()->json([
+//         'csrf_token' => csrf_token(),
+//     ]);
+// });

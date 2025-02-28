@@ -12,9 +12,8 @@ class HomeController extends Controller
     public function index()
     {
         // Fetch top-selling earbuds (assuming sorting by sales or popularity)
-        $earbudsCategory = Category::where('name', 'like', '%earbuds%')->first();
-        
-        $earbuds = $earbudsCategory ? Product::where('category_id', $earbudsCategory->id)->take(6)->get() : collect();
+        $earbudsCategories = Category::whereIn('name', ['Wireless Earpods', 'Wired Earpods'])->pluck('id');
+        $earbuds = Product::whereIn('category_id', $earbudsCategories)->take(6)->get();
 
         // Fetch latest reviews with user and product details
         $reviews = Review::with(['user', 'product'])->latest()->take(6)->get();

@@ -3,6 +3,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Review;
+
 
 class Product extends Model
 {
@@ -17,13 +19,12 @@ class Product extends Model
         'features',
     ];
 
-    public function category()
+    public function images()
     {
-        return $this->belongsTo(Category::class);
+        return $this->hasMany(ProductImage::class);
     }
-
     public function reviews()
     {
-        return $this->hasMany(Review::class);
+        return $this->hasMany(Review::class); // Assuming a Product has many Reviews
     }
 }
