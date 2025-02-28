@@ -15,6 +15,7 @@ class PaymentsSeeder extends Seeder
         DB::table('payments')->insert([
             [
                 'order_id' => 1,
+                'user_id'=>1,
                 'payment_method' => 'Credit Card',
                 'payment_status' => 'completed',
                 'payment_date' => Carbon::now(),
@@ -23,6 +24,7 @@ class PaymentsSeeder extends Seeder
             ],
             [
                 'order_id' => 2,
+                'user_id'=> 2,
                 'payment_method' => 'PayPal',
                 'payment_status' => 'completed',
                 'payment_date' => Carbon::now()->subDays(1),

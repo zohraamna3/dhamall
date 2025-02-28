@@ -41,7 +41,7 @@
             <p><strong>Description:</strong> {{ $product->description }}</p>
             <p><strong>Stock:</strong> {{ $product->quantity_in_stock }}</p>
             <button class="btn shop-btn text-dark px-4 py-2 fw-bold mt-2">Add to Cart</button>
-            <button class="btn shop-now-btn text-dark px-4 py-2 fw-bold mt-2">Checkout</button>
+            <a href="{{ route('checkout.index') }}" class="btn shop-now-btn text-dark px-4 py-2 fw-bold mt-2">Checkout</a>
         </div>
     </div>
 

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CheckoutController;
 
 // Authentication Routes
 Route::get('/signin', [AuthController::class, 'showSignIn'])->name('signin');
@@ -89,10 +90,8 @@ Route::post('/profile/payment/update', function (Illuminate\Http\Request $reques
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
 
 
-// Route::post('/products', [ProductController::class, 'store']);
-// Route::get('/products/{id}', [ProductController::class, 'show']);
-// Route::get('/get-csrf-token', function () {
-//     return response()->json([
-//         'csrf_token' => csrf_token(),
-//     ]);
-// });
+Route::middleware(['auth'])->group(function () {
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
+    Route::post('/checkout/update', [CheckoutController::class, 'update'])->name('checkout.update');
+});
