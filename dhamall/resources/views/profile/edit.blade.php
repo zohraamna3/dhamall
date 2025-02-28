@@ -14,7 +14,7 @@
     <div class="container my-4">
         <div class="row">
             <!-- Sidebar Section -->
-            <div class="col-md-3">
+            <div class="col-md-3" style="height:45vh; background: linear-gradient(135deg, #1a1a2e, #0d0d1a); padding: 30px; border-radius: 15px;">
                 <div class="list-group shadow-sm rounded" id="profile-menu">
                     <a href="#" class="list-group-item list-group-item-action active" data-section="personal-details" data-title="Personal Information">
                         <i class="bi bi-person-circle me-2"></i> Personal Information
@@ -78,7 +78,7 @@
         /* Ensure non-selected items are transparent */
         #profile-menu .list-group-item {
             background-color: transparent;
-            color: black;
+            color: white;
             transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
         }
 

@@ -1,7 +1,18 @@
 @extends('layouts.app')
 
+
+@section('breadcrumb')
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb custom-breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page" id="breadcrumb-current">Personal Details</li>
+        </ol>
+    </nav>
+@endsection
+
+
 @section('content')
-<div class="container py-5">
+<div class="container ">
     <div class="row">
         <!-- Product Images -->
         <div class="col-md-6">
@@ -50,8 +61,9 @@
                         <span class="ms-auto text-muted">{{ $review->created_at->format('M d, Y') }}</span>
                     </div>
                     <div class="mb-2">
-                        @for ($i = 1; $i <= 5; $i++)
-                            <i class="fas fa-star {{ $i <= $review->rating ? 'text-warning' : 'text-secondary' }}"></i>
+                        @for ($i = 1; $i <= $review->rating; $i++)
+                            <!-- <i class="fas fa-star {{ $i <= $review->rating ? 'text-warning' : 'text-secondary' }}"></i> -->
+                            ⭐
                         @endfor
                         <span class="ms-2">({{ $review->rating }}/5)</span>
                     </div>
@@ -62,14 +74,14 @@
     </div>
 
     <!-- You May Also Like -->
-    <div class="mt-5">
+    <div class="mt-5" style="background: linear-gradient(135deg, #1a1a2e, #0d0d1a); padding: 30px; border-radius: 15px;">
         <h3 class="text-warning">You May Also Like</h3>
         <div class="row">
             @foreach($relatedProducts as $related)
                 <div class="col-md-3">
                     <div class="card shadow-lg border-0 rounded-lg overflow-hidden transition-transform transform hover:scale-105">
                         <img src="{{ $related->images->first()->image_url }}" class="card-img-top" alt="Product Image">
-                        <div class="card-body text-center" style="background: #1a1a2e; color: #b3a31c;">
+                        <div class="card-body text-center" style="background: linear-gradient(135deg, #1a1a2e, #24243e); color: #b3a31c;">
                             <h5 class="card-title fw-bold">{{ $related->name }}</h5>
                             <p class="fw-bold fs-5 text-warning">${{ number_format($related->price, 2) }}</p>
                             <a href="{{ route('product.show', $related->id) }}" class="btn view-details-btn w-100 text-white fw-bold py-2">

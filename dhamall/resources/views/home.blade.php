@@ -7,7 +7,7 @@
     <div class="position-absolute top-0 start-0 w-100" style="background: linear-gradient(to bottom, rgba(26, 26, 46, 0.4), rgba(26, 26, 46, 0.9));"></div>
 
     <!-- Text Content with Glow Effect -->
-    <div class="position-relative z-index-2 p-5 mx-auto rounded-lg" style="max-width: 700px; background: rgba(26, 26, 46, 0.75); backdrop-filter: blur(8px); border-radius: 15px; padding: 30px;">
+    <div class="position-relative z-index-2 p-5 mx-auto rounded-lg" style="max-width: 700px; background: linear-gradient(135deg, #1a1a2e, #24243e); backdrop-filter: blur(8px); border-radius: 15px; padding: 30px;">
         <h1 class="display-4 fw-bold text-warning animate__animated animate__fadeIn" style="text-shadow: 0 0 15px rgba(179, 163, 28, 0.6);">
             Experience True Wireless Freedom
         </h1>
@@ -32,7 +32,7 @@
 @section('content')
     <div class="container">
             <!-- Featured Products -->
-            <section id="shop" class="my-5">
+            <section id="shop" class="my-5" style="background: linear-gradient(135deg, #1a1a2e, #0d0d1a); padding: 30px; border-radius: 15px;">
                 <h2 style="color: #b3a31c;" class="text-center font-weight-bold mb-5">Top Selling Earbuds</h2>
                 <div class="row">
                     @foreach($earbuds as $earbud)
@@ -42,7 +42,7 @@
                                 <img src="https://res.cloudinary.com/ddoeppfx0/image/upload/e_background_removal,f_png/cld-sample-5" class="card-img-top img-fluid" style="height: 250px; object-fit: cover;">
                                 <span class="badge badge-warning position-absolute top-0 end-0 m-2 px-3 py-2 rounded-pill">New</span>
                             </div>
-                            <div class="card-body text-center" style="background: #1a1a2e; color: #b3a31c;">
+                            <div class="card-body text-center" style="background: linear-gradient(135deg, #1a1a2e, #24243e); color: #b3a31c;">
                                 <h5 class="card-title fw-bold">{{ $earbud->name }}</h5>
                                 <p class="card-text text-truncate" style="max-height: 60px; overflow: hidden;">{{ $earbud->description }}</p>
                                 <p class="fw-bold fs-5 text-warning">${{ $earbud->price }}</p>
@@ -59,7 +59,7 @@
             </section>
 
             <!-- Categories -->
-            <section class="my-5">
+            <section class="my-5" style="background: linear-gradient(135deg, #1a1a2e, #0d0d1a); padding: 30px; border-radius: 15px;">
                 <h2 class="text-center font-weight-bold mb-5" style="color: #b3a31c;">Shop by Category</h2>
                 <div class="row">
                     <div class="col-12 col-md-6 mb-4">
@@ -91,12 +91,12 @@
 
 
             <!-- Customer Reviews -->
-            <section class="my-5">
+            <section class="my-5" style="background: linear-gradient(135deg, #1a1a2e, #0d0d1a); padding: 30px; border-radius: 15px;">
                 <h2 class="text-center font-weight-bold mb-5" style="color: #b3a31c;">What Our Customers Say</h2>
                 <div class="row">
                     @foreach($reviews as $review)
                     <div class="col-12 col-md-4 mb-4">
-                        <div class="card shadow-lg border-0 position-relative overflow-hidden" style="background: linear-gradient(135deg, #1a1a2e, #0d0d1a); border-radius: 15px;">
+                        <div class="card shadow-lg border-0 position-relative overflow-hidden" style="background: linear-gradient(135deg, #1a1a2e, #24243e); height:30vh; border-radius: 15px;">
                             <div class="card-body p-4">
                                 <!-- Quote Icon -->
                                 <i class="fas fa-quote-left text-warning" style="font-size: 24px;"></i>
