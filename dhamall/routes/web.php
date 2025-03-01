@@ -9,6 +9,10 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SellerController;
+use  App\Http\Controllers\Admin\AdminDashboardController;
+use  App\Http\Controllers\Admin\AdminLoginController;
+use  App\Http\Controllers\CategoryController;
+use  App\Http\Controllers\ReviewController;
 
 
 // Authentication Routes
@@ -114,4 +118,50 @@ Route::prefix('seller')->group(function () {
     Route::get('/product/{id}/reviews', [reviewController::class, 'showReviews'])->name('seller.product.reviews');
 
 
+});
+
+
+
+Route::get('/admin/login', [AdminLoginController::class,'index'])->name('admin.login');
+
+Route::get('/about', function () {
+    return view('aboutus');
+});
+
+
+
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/seller-requests', [SellerController::class, 'index'])->name('seller.requests');
+    Route::patch('/seller-approve/{id}', [SellerController::class, 'approve'])->name('seller.approve');
+    Route::delete('/seller-reject/{id}', [SellerController::class, 'reject'])->name('seller.reject');
+    Route::get('/seller-statistics/{id}', [AdminDashboardController::class, 'show'])->name('seller.statistics');
+    Route::get('/sellers', [AdminDashboardController::class, 'allSellers'])->name('sellers');
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories');
+    Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
+    Route::patch('/categories/{id}', [CategoryController::class, 'update'])->name('categories.update');
+    Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+    Route::get('/product/{id}/reviews', [reviewController::class, 'showReview'])->name('product.reviews');
+
+});
+
+
+Route::get('/products', function () {
+    return view('users.seller.comment'); // Ensure your Blade file is named 'products.blade.php'
+});
+
+
+Route::get('/reset', function () {
+    return view('users.resetpassword');
+});
+
+Route::get('/check-email', function () {
+    return view('users.checkemail');
+});
+Route::get('/verification', function () {
+    return view('users.verification');
+});
+Route::get('/new-password', function () {
+    return view('users.createnewpassword');
 });
