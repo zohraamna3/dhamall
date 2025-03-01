@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\SearchController;
 
 // Authentication Routes
 Route::get('/signin', [AuthController::class, 'showSignIn'])->name('signin');
@@ -96,6 +97,4 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/checkout/update', [CheckoutController::class, 'update'])->name('checkout.update');
 });
 
-Route::get('/search',function(){
-    return view('search');
-});
+Route::get('/search', [SearchController::class, 'index'])->name('search');

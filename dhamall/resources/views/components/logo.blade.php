@@ -1,4 +1,3 @@
-<!-- resources/views/components/logo.blade.php -->
 <div class="logo">
     <!-- Earpod Icon -->
     <div class="earpod-icon"></div>
@@ -29,20 +28,20 @@
 
     /* Earpod Icon */
     .earpod-icon {
-        width: 40px;
-        height: 40px;
-        background-color:#b3a31c;
+        width: 2.5rem; /* Relative unit */
+        height: 2.5rem; /* Relative unit */
+        background-color: #b3a31c;
         border-radius: 50%;
         position: relative;
-        margin-right: 10px;
+        margin-right: 0.625rem; /* Relative unit */
     }
 
     /* Earpod Design */
     .earpod-icon::before {
         content: '';
         position: absolute;
-        width: 20px;
-        height: 20px;
+        width: 1.25rem; /* Relative unit */
+        height: 1.25rem; /* Relative unit */
         background-color: #000000;
         border-radius: 50%;
         top: 50%;
@@ -53,8 +52,8 @@
     .earpod-icon::after {
         content: '';
         position: absolute;
-        width: 10px;
-        height: 10px;
+        width: 0.625rem; /* Relative unit */
+        height: 0.625rem; /* Relative unit */
         background-color: #FFFFFF;
         border-radius: 50%;
         top: 50%;
@@ -66,14 +65,14 @@
     .sound-waves {
         display: flex;
         align-items: center;
-        margin-left: 10px;
+        margin-left: 0.625rem; /* Relative unit */
     }
 
     .wave {
-        width: 5px;
-        height: 20px;
+        width: 0.3125rem; /* Relative unit */
+        height: 1.25rem; /* Relative unit */
         background-color: #b3a31c;
-        margin: 0 3px;
+        margin: 0 0.1875rem; /* Relative unit */
         animation: wave 1.2s infinite ease-in-out;
     }
 
@@ -96,15 +95,47 @@
 
     /* Text */
     .logo-text {
-        font-size: 24px;
+        font-size: 1.5rem; /* Relative unit */
         text-transform: uppercase;
         color: #b3a31c;
     }
 
     .tagline {
-        font-size: 12px;
-        margin-left: 10px;
+        font-size: 0.75rem; /* Relative unit */
+        margin-left: 0.625rem; /* Relative unit */
         font-weight: normal;
         color: white;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .logo {
+            flex-direction: column; /* Stack elements vertically */
+            align-items: flex-start;
+        }
+
+        .earpod-icon {
+            width: 2rem; /* Smaller size for small screens */
+            height: 2rem; /* Smaller size for small screens */
+            margin-right: 0; /* Remove margin for stacked layout */
+        }
+
+        .logo-text {
+            font-size: 1.25rem; /* Smaller font size for small screens */
+        }
+
+        .tagline {
+            font-size: 0.625rem; /* Smaller font size for small screens */
+            margin-left: 0; /* Remove margin for stacked layout */
+        }
+
+        .sound-waves {
+            margin-left: 0; /* Remove margin for stacked layout */
+        }
+
+        .wave {
+            width: 0.25rem; /* Smaller waves for small screens */
+            height: 1rem; /* Smaller waves for small screens */
+        }
     }
 </style>

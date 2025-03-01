@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
     <div class="container">
         <!-- Logo -->
-        <a class="navbar-brand fw-bold" href="/">
+        <a class="navbar-brand fw-bold me-0" href="/">
             <x-logo /> <!-- Include the logo component -->
         </a>
 

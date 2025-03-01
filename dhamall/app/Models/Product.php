@@ -4,6 +4,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Review;
+use App\Models\ProductImage;
+use App\Models\Category;
 
 
 class Product extends Model
@@ -27,4 +29,9 @@ class Product extends Model
     {
         return $this->hasMany(Review::class); // Assuming a Product has many Reviews
     }
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
 }
