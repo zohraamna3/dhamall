@@ -42,18 +42,18 @@
             <!-- Right Content Section -->
             <div class="col-md-9">
                 <div class="card shadow-sm rounded p-4" id="content-area">
-                @include('profile.partials.profile_information')
-                @include('profile.partials.orders', ['orders' => $orders])
-                @include('profile.partials.wishlist', ['wishlist' => $wishlist])
-                @include('profile.partials.cart', ['cart' => $shoppingCart])
-                @include('profile.partials.payment_details', ['paymentDetails' => $paymentDetails])
-                @include('profile.partials.notifications')
+                @include('users.buyer.profile.partials.profile_information')
+                @include('users.buyer.profile.partials.orders', ['orders' => $orders])
+                @include('users.buyer.profile.partials.wishlist', ['wishlist' => $wishlist])
+                @include('users.buyer.profile.partials.cart', ['cart' => $shoppingCart])
+                @include('users.buyer.profile.partials.payment_details', ['paymentDetails' => $paymentDetails])
+                @include('users.buyer.profile.partials.notifications')
                 </div>
             </div>
         </div>
     </div>
 
-    @include('profile.partials.profile_scripts') 
+    @include('users.buyer.profile.partials.profile_scripts') 
 
 
 <!-- Custom CSS for Breadcrumb -->

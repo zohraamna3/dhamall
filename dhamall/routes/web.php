@@ -8,6 +8,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\SellerController;
+
 
 // Authentication Routes
 Route::get('/signin', [AuthController::class, 'showSignIn'])->name('signin');
@@ -39,7 +41,7 @@ Route::get('/profile', function () {
     $wishlist = DB::table('wishlist')->where('user_id', $user->id)->get();
     $shoppingCart = DB::table('shopping_cart')->where('user_id', $user->id)->get();
 
-    return view('profile.edit', compact('orders', 'wishlist', 'shoppingCart', 'paymentDetails'));
+    return view('users.buyer.profile.edit', compact('orders', 'wishlist', 'shoppingCart', 'paymentDetails'));
 })->middleware('auth')->name('profile.edit');
 
 // Payment Update Route
@@ -98,3 +100,18 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('/search', [SearchController::class, 'index'])->name('search');
+
+Route::prefix('seller')->group(function () {
+    Route::get('/dashboard', [SellerController::class, 'dashboard'])->name('seller.dashboard');
+    Route::get('/products', [SellerController::class, 'products'])->name('seller.products');
+    Route::get('/profile', [SellerController::class, 'profile'])->name('seller.profile');
+    Route::post('/profile/update', [SellerController::class, 'updateProfile'])->name('seller.updateProfile');
+    Route::get('/orders', [SellerController::class, 'orders'])->name('seller.orders'); // Ensure this exists
+    Route::get('/seller/reviews', [SellerController::class, 'reviews'])->name('seller.reviews');
+    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+    Route::post('/seller/profile/update', [SellerController::class, 'updateProfile'])->name('seller.profile.update');
+    Route::get('/seller/products', [SellerController::class, 'productListings'])->name('seller.product_listings');
+    Route::get('/product/{id}/reviews', [reviewController::class, 'showReviews'])->name('seller.product.reviews');
+
+
+});
