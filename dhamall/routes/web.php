@@ -95,3 +95,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
     Route::post('/checkout/update', [CheckoutController::class, 'update'])->name('checkout.update');
 });
+
+Route::get('/search',function(){
+    return view('search');
+});

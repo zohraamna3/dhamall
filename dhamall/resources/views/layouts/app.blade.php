@@ -56,6 +56,12 @@
         .breadcrumb-item + .breadcrumb-item::before {
             color: white !important;
         }
+        @media(max-width:575px){
+            .container{
+                padding-left: calc(var(--bs-gutter-x)*1);
+                padding-right: calc(var(--bs-gutter-x)*1);
+            }
+        }
     </style>
     <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
 
@@ -79,6 +85,7 @@
     </div>
 
     @include('layouts.footer')  <!-- Include the footer -->
-
+<!-- Bootstrap JS (required for navbar toggle functionality) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

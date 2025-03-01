@@ -1,21 +1,16 @@
 @extends('layouts.app')
 
-@section('hero')
-<div class="position-relative text-white text-center py-5 w-100" style="background: linear-gradient(135deg, #0d0d1a, #1a1a2e); overflow: hidden;">
-    <div class="position-absolute top-0 start-0 w-100" style="background: linear-gradient(to bottom, rgba(26, 26, 46, 0.4), rgba(26, 26, 46, 0.9));"></div>
-    <div class="position-relative z-index-2 p-5 mx-auto rounded-lg" style="max-width: 700px; background: linear-gradient(135deg, #1a1a2e, #24243e); backdrop-filter: blur(8px); border-radius: 15px; padding: 30px;">
-        <h1 class="display-4 fw-bold text-warning animate__animated animate__fadeIn" style="text-shadow: 0 0 15px rgba(179, 163, 28, 0.6);">
-            Secure & Hassle-Free Checkout
-        </h1>
-        <p class="lead text-light animate__animated animate__fadeIn animate__delay-1s">
-            Complete your purchase with confidence and ease.
-        </p>
-    </div>
-</div>
+@section('breadcrumb')
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb custom-breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page" id="breadcrumb-current">Checkout</li>
+        </ol>
+    </nav>
 @endsection
 
 @section('content')
-<div class="container py-5">
+<div class="container">
     <div class="card shadow-lg border-0 rounded-lg position-relative" style="background: linear-gradient(135deg, #1a1a2e, #0d0d1a); color: white; padding: 30px; border-radius: 15px;">
         
         <button type="button" id="editBtn" class="btn btn-primary position-absolute top-0 end-0 m-3">Edit</button>
@@ -32,9 +27,6 @@
         <form id="checkoutForm" method="POST" action="{{ route('payment.update', $paymentMethod->id) }}">
             @csrf
 
-
-            <!-- <button type="button" id="editBtn" class="btn btn-primary position-absolute top- end-0 m-3">Edit</button> -->
-        
             <!-- Shipping Address -->
             <div class="mb-4">
                 <h4 class="text-warning text-center rounded p-5 bg-dark m-5 border-start border-end border-bottom border-white border-1">Shipping Details</h4>
@@ -44,7 +36,6 @@
                     <h5 class="text-warning">Address Line 1</h5>
                     <p class="editable" data-field="address_line1">{{ $shippingAddress->address_line1 }}</p>
                     <input type="text" name="address_line1" class="form-control d-none" value="{{ $shippingAddress->address }}">
-
                 </div>
                 
                 <!-- City -->
@@ -79,48 +70,52 @@
             <!-- Payment Method -->
             <div class="mb-4">
                 <h4 class="text-warning">Payment Method</h4>
-                <p class="editable" data-field="payment_method">{{ $paymentMethod->payment_type }}</p>
-                <select name="payment_method" class="form-control d-none">
-                    <option value="credit_card" {{ $paymentMethod->payment_type == 'credit_card' ? 'selected' : '' }}>Credit Card</option>
-                    <option value="paypal" {{ $paymentMethod->payment_type == 'paypal' ? 'selected' : '' }}>PayPal</option>
-                    <option value="bank_transfer" {{ $paymentMethod->payment_type == 'bank_transfer' ? 'selected' : '' }}>Bank Transfer</option>
-                </select>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="payment_method" id="credit_card" value="credit_card" {{ $paymentMethod->payment_type == 'credit_card' ? 'checked' : 'disabled' }}>
+                    <label class="form-check-label" for="credit_card">Credit Card</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="payment_method" id="paypal" value="paypal" {{ $paymentMethod->payment_type == 'paypal' ? 'checked' : 'disabled' }}>
+                    <label class="form-check-label" for="paypal">PayPal</label>
+                </div>
             </div>
             
             <!-- Payment Details -->
             <div class="mb-4">
                 <h4 class="text-warning text-center rounded p-5 bg-dark m-5 border-start border-end border-bottom border-white border-1">Payment Details</h4>
                 
-
                 <h5 class="text-warning">Payment Id</h5>
                 <p class="editable" data-field="payment_id">{{ $paymentMethod->id }}</p>
                 
-                <!-- Card Number -->
-                <div class="mb-3">
-                    <h5 class="text-warning">Card Number</h5>
-                    <p class="editable" data-field="card_number">{{ $paymentMethod->account_number }}</p>
-                    <input type="number" name="card_number" class="form-control d-none" value="{{ $paymentMethod->account_number }}">
-                </div>
-                
-                <!-- Expiry Date -->
-                <div class="mb-3">
-                    <h5 class="text-warning">Expiry Date</h5>
-                    <p class="editable" data-field="expiry_date">{{ $paymentMethod->expiry_date }}</p>
-                    <input type="date" name="expiry_date" class="form-control d-none" value="{{ $paymentMethod->expiry_date }}">
-                </div>
-                
-                <!-- CVV -->
-                <div class="mb-3">
-                    <h5 class="text-warning">CVV</h5>
-                    <p class="editable" data-field="cvv">{{ $paymentMethod->cvv }}</p>
-                    <input type="number" name="cvv" class="form-control d-none" value="{{ $paymentMethod->cvv }}">
-                </div>
-                
-                <!-- Name on Card -->
-                <div class="mb-3">
-                    <h5 class="text-warning">Name on Card</h5>
-                    <p class="editable" data-field="card_name">{{ $paymentMethod->card_name }}</p>
-                    <input type="text" name="card_name" class="form-control d-none" value="{{ $paymentMethod->card_name }}">
+                <!-- Card Details (Visible only if Credit Card is selected) -->
+                <div id="cardDetails" class="{{ $paymentMethod->payment_type == 'paypal' ? 'd-none' : '' }}">
+                    <!-- Card Number -->
+                    <div class="mb-3">
+                        <h5 class="text-warning">Card Number</h5>
+                        <p class="editable" data-field="card_number">{{ $paymentMethod->account_number }}</p>
+                        <input type="number" name="card_number" class="form-control d-none" value="{{ $paymentMethod->account_number }}">
+                    </div>
+                    
+                    <!-- Expiry Date -->
+                    <div class="mb-3">
+                        <h5 class="text-warning">Expiry Date</h5>
+                        <p class="editable" data-field="expiry_date">{{ $paymentMethod->expiry_date }}</p>
+                        <input type="date" name="expiry_date" class="form-control d-none" value="{{ $paymentMethod->expiry_date }}">
+                    </div>
+                    
+                    <!-- CVV -->
+                    <div class="mb-3">
+                        <h5 class="text-warning">CVV</h5>
+                        <p class="editable" data-field="cvv">{{ $paymentMethod->cvv }}</p>
+                        <input type="number" name="cvv" class="form-control d-none" value="{{ $paymentMethod->cvv }}">
+                    </div>
+                    
+                    <!-- Name on Card -->
+                    <div class="mb-3">
+                        <h5 class="text-warning">Name on Card</h5>
+                        <p class="editable" data-field="card_name">{{ $paymentMethod->card_name }}</p>
+                        <input type="text" name="card_name" class="form-control d-none" value="{{ $paymentMethod->card_name }}">
+                    </div>
                 </div>
             </div>
             
@@ -160,6 +155,8 @@
         const cancelEditBtn = document.getElementById("cancelEdit");
         const editActions = document.getElementById("editActions");
         const editableElements = document.querySelectorAll(".editable");
+        const paymentMethodRadios = document.querySelectorAll("input[name='payment_method']");
+        const cardDetails = document.getElementById("cardDetails");
 
         let originalValues = {};
 
@@ -175,6 +172,11 @@
                     el.classList.add("d-none"); // Hide text
                     inputField.classList.remove("d-none"); // Show input
                 }
+            });
+
+            // Enable radio buttons for editing
+            paymentMethodRadios.forEach(radio => {
+                radio.removeAttribute("disabled");
             });
 
             editActions.classList.remove("d-none"); // Show Save/Cancel buttons
@@ -194,8 +196,26 @@
                 }
             });
 
+            // Disable radio buttons
+            paymentMethodRadios.forEach(radio => {
+                if (!radio.checked) {
+                    radio.setAttribute("disabled", true);
+                }
+            });
+
             editActions.classList.add("d-none"); // Hide Save/Cancel buttons
             editBtn.classList.remove("d-none"); // Show Edit button
+        });
+
+        // Handle Payment Method Change
+        paymentMethodRadios.forEach(radio => {
+            radio.addEventListener("change", function() {
+                if (this.value === "paypal") {
+                    cardDetails.classList.add("d-none"); // Hide card details
+                } else {
+                    cardDetails.classList.remove("d-none"); // Show card details
+                }
+            });
         });
     });
 </script>

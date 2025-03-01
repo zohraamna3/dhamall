@@ -5,7 +5,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb custom-breadcrumb">
             <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page" id="breadcrumb-current">Personal Details</li>
+            <li class="breadcrumb-item active" aria-current="page" id="breadcrumb-current">Product Details</li>
         </ol>
     </nav>
 @endsection
