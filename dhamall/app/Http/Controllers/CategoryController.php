@@ -15,7 +15,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-        return view('admin.manage_categories', ['categories' => $this->categories]);
+        return view('admin.pages.manage_categories', ['categories' => $this->categories]);
     }
 
     public function store(Request $request)

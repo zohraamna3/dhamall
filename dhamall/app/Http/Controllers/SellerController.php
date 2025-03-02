@@ -40,7 +40,7 @@ class SellerController extends Controller
     ];
 
     public function index() {
-        return view('admin.sellerrequests', ['sellerRequests' => $this->sellers]);
+        return view('admin.pages.sellerrequests', ['sellerRequests' => $this->sellers]);
     }
 
     public function approve($id) {

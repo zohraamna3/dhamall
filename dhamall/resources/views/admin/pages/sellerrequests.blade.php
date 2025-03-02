@@ -1,10 +1,14 @@
-@extends('layouts.admin')
+@extends('admin.layouts.app')
 
 @section('content')
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <h3 class="mt-4">Seller Requests</h3>
+        <div class="text-center mb-4">
+            <h3 class="fw-bold text-gold rounded-1" style="background: #1a1a2e; color: #b3a31c; padding:1.5rem;">
+                Seller Requests
+            </h3>
+        </div>
 
             @if(session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>

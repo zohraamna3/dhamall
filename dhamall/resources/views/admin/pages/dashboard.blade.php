@@ -1,14 +1,14 @@
-@extends('layouts.admin')
+@extends('admin.layouts.app')
 
 @section('content')
 <div class="container-fluid">
-    <div class="row">
+    <div class="row justify-content-center">
         <!-- Main Content -->
         <div class="col-md-10">
-            <div class="row mt-3">
+            <div class="row mt-3" >
                 <!-- Seller Requests Card -->
                 <div class="col-md-6">
-                    <div class="card bg-info text-white p-3">
+                    <div class="card text-warning p-3" style="background: #1a1a2e;">
                         <h5>Pending Seller Requests</h5>
                         <h3>{{ $data['pending_sellers'] }}</h3>
                         <p>Sellers waiting for approval</p>
@@ -17,7 +17,7 @@
 
                 <!-- Total Sellers Card -->
                 <div class="col-md-6">
-                    <div class="card bg-dark text-white p-3">
+                    <div class="card p-3 bg-warning" style="color: #1a1a2e;">
                         <h5>Total Sellers</h5>
                         <h3>{{ $data['total_sellers'] }}</h3>
                         <p>Approved sellers on the platform</p>
@@ -26,16 +26,16 @@
 
                 <!-- Monthly Seller Registration Graph -->
                 <div class="col-md-12 mt-4">
-                    <div class="card p-3">
-                        <h5>Seller Registrations Trend</h5>
+                    <div class="card p-3" >
+                        <h5 class="text-warning p-4 rounded" style="background: #1a1a2e;">Seller Registrations Trend</h5>
                         <canvas id="sellerChart"></canvas>
                     </div>
                 </div>
 
                 <!-- Revenue Graph -->
                 <div class="col-md-12 mt-4">
-                    <div class="card p-3">
-                        <h4>Total Revenue</h4>
+                    <div class="card p-3 text-warning">
+                        <h4 style="background: #1a1a2e;" class="p-4 rounded">Total Revenue</h4>
                         <p>{{ $data['total_revenue_growth'] }} <span class="text-success">↑ $5K from last month</span></p>
                         <canvas id="revenueChart"></canvas>
                     </div>
@@ -44,11 +44,11 @@
                 <!-- Most Sold Items -->
                 <div class="col-md-12 mt-4">
                     <div class="card p-3">
-                        <h4>Most Sold Items</h4>
+                        <h4 style="background: #1a1a2e;" class="text-warning p-4 rounded">Most Sold Items</h4>
                         @foreach($data['most_sold_items'] as $item)
                             <p>{{ $item['name'] }} <span class="float-end">{{ $item['percentage'] }}%</span></p>
                             <div class="progress">
-                                <div class="progress-bar" style="width: {{ $item['percentage'] }}%"></div>
+                                <div class="progress-bar" style="background: #1a1a2e;width: {{ $item['percentage'] }}%"></div>
                             </div>
                         @endforeach
                     </div>
@@ -56,8 +56,8 @@
 
                 <!-- Latest Orders -->
                 <div class="col-md-12 mt-4">
-                    <div class="card p-3">
-                        <h4>Latest Orders</h4>
+                    <div class="card p-3" style="background: #1a1a2e;">
+                        <h4 class="text-warning">Latest Orders</h4>
                         <table class="table table-dark table-striped">
                             <thead>
                                 <tr>
@@ -111,8 +111,18 @@
             datasets: [{
                 label: 'Revenue',
                 data: {!! json_encode(array_values($data['revenue_trend'])) !!},
-                backgroundColor: 'rgba(54, 162, 235, 0.6)'
+                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                
             }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    labels: {
+                        
+                    }
+                }
+            }
         }
     });
 
@@ -128,7 +138,17 @@
                 borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 1
             }]
-        }});
+        },
+        options: {
+            plugins: {
+                legend: {
+                    labels: {
+                        
+                    }
+                }
+            }
+        }
+    });
 </script>
 
 @endsection

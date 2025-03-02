@@ -42,7 +42,7 @@ class AdminDashboardController extends Controller
             ]
         ];
 
-        return view('admin.dashboard', compact('data'));
+        return view('admin.pages.dashboard', compact('data'));
     }
     
 
@@ -112,7 +112,7 @@ class AdminDashboardController extends Controller
                 ],
             ];
     
-            return view('admin.seller_statistics', compact('sellerStats'));
+            return view('admin.pages.seller_statistics', compact('sellerStats'));
         }
     
     
@@ -125,7 +125,7 @@ class AdminDashboardController extends Controller
         ['id' => 4, 'name' => 'Sara Noor', 'email' => 'sara@example.com', 'shop_name' => 'Sara’s Home Decor'],
     ];
 
-    return view('admin.all_sellers', compact('sellers'));
+    return view('admin.pages.all_sellers', compact('sellers'));
 }
 
 }

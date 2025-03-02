@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Seller Dashboard - Dhamall')</title>
-
+    <title>@yield('title', 'Admin Dashboard - Dhamall')</title>
     <!-- Bootstrap & Font Awesome -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
@@ -19,39 +18,24 @@
     <!-- Seller-specific CSS -->
     <link rel="stylesheet" href="{{ asset('css/seller-admin.css') }}">
 
-    @stack('styles') <!-- Optional: For additional styles -->
 </head>
 <body>
-    <!-- Include Seller Header -->
-    @include('users.seller.partials.header')
-
-    <div class="grid-container">
-        <!-- Include Seller Sidebar -->
-        @include('users.seller.partials.sidebar')
-
+    
+    @include('admin.partials.header')
+    <!-- Sidebar -->
+     <div class="grid-container">
+        @include('admin.partials.sidebar')
+        
         <!-- Main Content -->
-        <main class="main-content">
+        <div class="main-content">
             @yield('content')
-        </main>
+        </div>
     </div>
 
-    <!-- Include Seller Footer -->
-    @include('users.seller.partials.footer')
+    @include('admin.partials.footer')
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset('js/seller/seller.css') }}"></script>
 
-    @stack('scripts') <!-- Optional: For additional scripts -->
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const toggleBtn = document.querySelector('.toggle-btn');
-        const sidebar = document.querySelector('.sidebar');
-
-        toggleBtn.addEventListener('click', function () {
-            sidebar.classList.toggle('active');
-        });
-    });
-</script>
 </body>
+
 </html>

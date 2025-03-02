@@ -1,8 +1,12 @@
-@extends('layouts.admin')
+@extends('admin.layouts.app')
 
 @section('content')
 <div class="container mt-4">
-    <h2 class="text-center mb-4">Manage Categories</h2>
+    <div class="text-center mb-4">
+        <h3 class="fw-bold text-gold rounded-1" style="background: #1a1a2e; color: #b3a31c; padding:1.5rem;">
+            Manage Categories
+        </h3>
+    </div>
 
     <!-- Add Category Form -->
     <div class="card mb-4">
