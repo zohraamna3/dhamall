@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('content')
-<div class="container-fluid">
+<div class="container">
     <div class="row justify-content-center">
         <!-- Main Content -->
         <div class="col-md-10">
@@ -56,7 +56,7 @@
 
                 <!-- Latest Orders -->
                 <div class="col-md-12 mt-4">
-                    <div class="card p-3" style="background: #1a1a2e;">
+                    <div class="card p-3 table-responsive" style="background: #1a1a2e;">
                         <h4 class="text-warning">Latest Orders</h4>
                         <table class="table table-dark table-striped">
                             <thead>

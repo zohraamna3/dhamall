@@ -31,6 +31,7 @@
     {{-- Recent Orders --}}
     <div class="card shadow-sm border-0 mt-4 p-4 text-warning" style="background: #1a1a2e;">
         <h4>Recent Orders</h4>
+        <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -53,6 +54,7 @@
                 @endforeach
             </tbody>
         </table>
+        </div>
     </div>
 
     {{-- Graph Containers --}}

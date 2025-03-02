@@ -1,9 +1,9 @@
 @extends('admin.layouts.app')
 
 @section('content')
-<div class="container-fluid">
+<div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 ">
         <div class="text-center mb-4">
             <h3 class="fw-bold text-gold rounded-1" style="background: #1a1a2e; color: #b3a31c; padding:1.5rem;">
                 Seller Requests
@@ -17,6 +17,8 @@
             @if(session('error'))
                 <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
+
+            <div class="table-responsive">
 
             <table class="table table-striped mt-3">
                 <thead>
@@ -56,6 +58,7 @@
                     @endforeach
                 </tbody>
             </table>
+</div>
         </div>
     </div>
 </div>
