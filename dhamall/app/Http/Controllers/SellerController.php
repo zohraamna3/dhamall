@@ -87,7 +87,7 @@ class SellerController extends Controller
             ],
         ];
     
-        return view('users.seller.dashboard', compact('totalProducts', 'totalOrders', 'totalEarnings', 'recentOrders','salesData'));
+        return view('users.seller.pages.dashboard', compact('totalProducts', 'totalOrders', 'totalEarnings', 'recentOrders','salesData'));
     }
     
     
@@ -99,7 +99,7 @@ class SellerController extends Controller
                 ['id' => 3, 'name' => 'Noise Cancelling Headphones', 'status' => 'Active', 'price' => 150],
             ];
     
-            return view('users.seller.products', compact('products'));
+            return view('users.seller.pages.products', compact('products'));
         }
     
         public function profile()
@@ -112,7 +112,7 @@ class SellerController extends Controller
                 'address' => '123 Main Street, New York, USA'
             ];
     
-            return view('users.seller.profile', compact('seller'));
+            return view('users.seller.pages.profile', compact('seller'));
         }
     
         public function orders()
@@ -120,7 +120,7 @@ class SellerController extends Controller
             // Temporary empty array to prevent errors
             $orders = [];
         
-            return view('users.seller.orders', compact('orders'));
+            return view('users.seller.pages.orders', compact('orders'));
         }
         
         
@@ -139,7 +139,7 @@ class SellerController extends Controller
             // Use an empty array for frontend development
             $reviews = []; 
         
-            return view('users.seller.reviews', compact('reviews'));
+            return view('users.seller.pages.reviews', compact('reviews'));
         }
         
         public function productListings()
@@ -166,6 +166,6 @@ class SellerController extends Controller
             ],
         ]);
     
-        return view('users.seller.product_listings', compact('products'));
+        return view('users.seller.pages.product_listings', compact('products'));
     }
 }

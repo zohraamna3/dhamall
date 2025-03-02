@@ -1,12 +1,16 @@
-@extends('layouts.seller')
+@extends('users.seller.layouts.app')
 
 @section('content')
 <div class="container mt-4">
     <div class="row justify-content-center">
         <!-- Product Management Section -->
         <div class="col-md-10">
-            <h2 class="text-center">Product Management</h2>
-            <div class="card shadow-sm p-4 border-0">
+        <div class="text-center mb-4">
+            <h3 class="fw-bold text-gold rounded-1" style="background: #1a1a2e; color: #b3a31c; padding:1.5rem;">
+              Product Management
+            </h3>
+        </div>
+            <div class="card shadow-sm p-4 border-0 text-warning" style="background: #1a1a2e;">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4>My Products</h4>
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">

@@ -1,12 +1,16 @@
-@extends('layouts.seller')
+@extends('users.seller.layouts.app')
 
 @section('content')
 <div class="container mt-5 px-4">
     <div class="row justify-content-center">
         <div class="col-lg-10">
-            <h2 class="mb-4 text-center">Recent Reviews</h2>
+        <div class="text-center mb-4">
+            <h3 class="fw-bold text-gold rounded-1" style="background: #1a1a2e; color: #b3a31c; padding:1.5rem;">
+                Recent Reviews
+            </h3>
+        </div>
 
-            <div class="card shadow-sm p-4 border-0">
+            <div class="card shadow-sm p-4 border-0 mb-5" style="background: linear-gradient(135deg, #1a1a2e, #0d0d1a);">
                 <div class="table-responsive">
                     <table class="table table-striped table-hover align-middle">
                         <thead class="table-dark">
@@ -51,8 +55,12 @@
                 </div>
             </div>
 
-            <h2 class="mt-5 text-center">All Products</h2>
-            <div class="card shadow-sm p-4 border-0">
+            <div class="text-center mb-4">
+                <h3 class="fw-bold text-gold rounded-1" style="background: #1a1a2e; color: #b3a31c; padding:1.5rem;">
+                    <i class="fas fa-credit-card me-2"></i> Product Wise Reviews
+                </h3>
+            </div>
+            <div class="card shadow-sm p-4 border-0" style="background: linear-gradient(135deg, #1a1a2e, #0d0d1a);">
                 <div class="table-responsive">
                     <table class="table table-striped table-hover align-middle">
                         <thead class="table-dark">

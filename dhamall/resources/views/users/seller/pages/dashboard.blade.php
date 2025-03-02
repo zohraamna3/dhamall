@@ -1,23 +1,27 @@
-@extends('layouts.seller')
+@extends('users.seller.layouts.app')
 
 @section('content')
-<div class="container">
-    <h2 class="mt-4">Seller Statistics</h2>
+<div class="container text-warning">
+    <div class="text-center mb-4">
+        <h3 class="fw-bold text-gold rounded-1" style="background: #1a1a2e; color: #b3a31c; padding:1.5rem;">
+            Seller Statistics
+        </h3>
+    </div>
     <div class="row mt-4">
         <div class="col-md-4">
-            <div class="card shadow-sm border-0 p-4 text-center">
+            <div class="card shadow-sm border-0 p-4 text-center text-warning" style="background: #1a1a2e;">
                 <h4>Total Products</h4>
                 <p class="display-6 fw-bold">{{ $totalProducts }}</p>
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card shadow-sm border-0 p-4 text-center">
+            <div class="card shadow-sm border-0 p-4 text-center text-warning" style="background: #1a1a2e;">
                 <h4>Total Orders</h4>
                 <p class="display-6 fw-bold">{{ $totalOrders }}</p>
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card shadow-sm border-0 p-4 text-center">
+            <div class="card shadow-sm border-0 p-4 text-center text-warning" style="background: #1a1a2e;">
                 <h4>Total Earnings</h4>
                 <p class="display-6 fw-bold">Rs. {{ number_format($totalEarnings, 2) }}</p>
             </div>
@@ -25,7 +29,7 @@
     </div>
 
     {{-- Recent Orders --}}
-    <div class="card shadow-sm border-0 mt-4 p-4">
+    <div class="card shadow-sm border-0 mt-4 p-4 text-warning" style="background: #1a1a2e;">
         <h4>Recent Orders</h4>
         <table class="table table-bordered">
             <thead>
@@ -52,7 +56,7 @@
     </div>
 
     {{-- Graph Containers --}}
-    <div class="row mt-4">
+    <div class="row mt-4" style="background: #1a1a2e;">
         @php
             $charts = [
                 'monthlySalesChart' => 'Monthly Sales Trend',

@@ -84,6 +84,8 @@
 
 <style>
 /* Navbar Styling */
+
+
 .navbar {
     background: linear-gradient(135deg, #1a1a2e, #0d0d1a);
     padding: 15px 20px;
