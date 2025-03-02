@@ -17,8 +17,7 @@
                 <li class="nav-item"><a href="{{ route('admin.dashboard') }}" class="nav-hover nav-link text-white">Dashboard</a></li>
                 <li class="nav-item"><a href="{{ route('admin.seller.requests') }}" class="nav-hover nav-link text-white">Seller Requests</a></li>
                 <li class="nav-item"><a href="{{ route('admin.categories') }}" class="nav-hover nav-link text-white">Manage Categories</a></li>
-                <li class="nav-item"><a href="{{ route('admin.sellers') }}" class="nav-hover nav-link text-white">Statistics</a></li>
-                <li class="nav-item"><a href="#" class="nav-hover nav-link text-white">Manage Sellers</a></li>
+                <li class="nav-item"><a href="{{ route('admin.sellers') }}" class="nav-hover nav-link text-white">Manage Sellers</a></li>
             </ul>
         </div>
     </div>

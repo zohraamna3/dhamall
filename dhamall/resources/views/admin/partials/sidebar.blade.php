@@ -9,8 +9,7 @@
         <li class="nav-item"><a href="{{ route('admin.dashboard') }}" class="nav-link">Dashboard</a></li>
         <li class="nav-item"><a href="{{ route('admin.seller.requests') }}" class="nav-link">Seller Requests</a></li>
         <li class="nav-item"><a href="{{ route('admin.categories') }}" class="nav-link">Manage Categories</a></li>
-        <li class="nav-item"><a href="{{ route('admin.sellers') }}" class="nav-link">Statistics</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Manage Sellers</a></li>
+        <li class="nav-item"><a href="{{ route('admin.sellers') }}" class="nav-link">Manage Sellers</a></li>
     </ul>
 </div>
 
