@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('users.buyer.layouts.app')
 
 @section('title', 'Create New Password - Dhamall')
 
 @section('content')
     <!-- Navbar -->
-    
+
     <div class="container-fluid d-flex">
         <!-- Left Side Image -->
         <div class="col-md-6 d-none d-md-block">
@@ -22,13 +22,15 @@
 
                     <div class="mb-3">
                         <label class="form-label">Email</label>
-                        <input type="email" name="email" class="form-control" value="user@example.com" required autofocus>
+                        <input type="email" name="email" class="form-control" value="user@example.com" required
+                               autofocus>
                     </div>
-                    
+
                     <div class="mb-3">
                         <label class="form-label">Password</label>
                         <div class="input-group">
-                            <input type="password" id="password" name="password" class="form-control" placeholder="Enter new password" required>
+                            <input type="password" id="password" name="password" class="form-control"
+                                   placeholder="Enter new password" required>
                             <span class="input-group-text" onclick="togglePassword('password')">
                                 <i class="bi bi-eye"></i>
                             </span>
@@ -39,12 +41,14 @@
                     <div class="mb-3">
                         <label class="form-label">Confirm Password</label>
                         <div class="input-group">
-                            <input type="password" id="confirm-password" name="password_confirmation" class="form-control" placeholder="Confirm password" required>
+                            <input type="password" id="confirm-password" name="password_confirmation"
+                                   class="form-control" placeholder="Confirm password" required>
                             <span class="input-group-text" onclick="togglePassword('confirm-password')">
                                 <i class="bi bi-eye"></i>
                             </span>
                         </div>
-                        <small id="error-message" class="error-message d-none">New password and confirm new password do not match</small>
+                        <small id="error-message" class="error-message d-none">New password and confirm new password do
+                            not match</small>
                     </div>
 
                     <button type="submit" class="btn btn-primary w-100">Reset Password</button>

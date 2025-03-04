@@ -1,5 +1,13 @@
 @extends('users.seller.layouts.app')
 
+@section('breadcrumb')
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb custom-breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page" id="breadcrumb-current">Products</li>
+        </ol>
+    </nav>
+@endsection
 @section('content')
 <div class="container mt-4">
     <div class="row justify-content-center">
@@ -53,9 +61,9 @@
                         <tr>
                             <td>{{ $product['id'] }}</td>
                             <td>
-                                <img src="{{ asset($product['image']) }}" 
-                                     alt="Product Image" 
-                                     class="img-thumbnail" 
+                                <img src="{{ asset($product['image']) }}"
+                                     alt="Product Image"
+                                     class="img-thumbnail"
                                      width="50">
                             </td>
                             <td>{{ $product['name'] }}</td>

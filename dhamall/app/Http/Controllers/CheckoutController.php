@@ -18,7 +18,7 @@ class CheckoutController extends Controller
     $shippingAddress = $user->shippingAddresses()->where('is_default', true)->first();
     $paymentMethod = $user->userPaymentDetails()->where('is_default', true)->first();
 
-    return view('checkout', compact('cart', 'shippingAddress', 'paymentMethod'));
+    return view('users.buyer.product.checkout', compact('cart', 'shippingAddress', 'paymentMethod'));
 }
 
 

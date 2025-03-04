@@ -1,5 +1,13 @@
 @extends('users.seller.layouts.app')
 
+@section('breadcrumb')
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb custom-breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page" id="breadcrumb-current">Orders</li>
+        </ol>
+    </nav>
+@endsection
 @section('content')
 <div class="container mt-4">
     <div class="row">
@@ -25,10 +33,10 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach([ 
-                    ['id' => 101, 'product' => 'Wireless Earbuds', 'image' => 'earbuds.jpg', 'quantity' => 2, 'customer' => 'Ali Khan', 'total' => 4500, 'status' => 'Pending'], 
-                    ['id' => 102, 'product' => 'Gaming Headset', 'image' => 'headset.jpg', 'quantity' => 1, 'customer' => 'Ayesha Ahmed', 'total' => 3200, 'status' => 'Shipped'], 
-                    ['id' => 103, 'product' => 'Noise Cancelling Headphones', 'image' => 'headphones.jpg', 'quantity' => 1, 'customer' => 'Zain Raza', 'total' => 5400, 'status' => 'Completed'] 
+                @foreach([
+                    ['id' => 101, 'product' => 'Wireless Earbuds', 'image' => 'earbuds.jpg', 'quantity' => 2, 'customer' => 'Ali Khan', 'total' => 4500, 'status' => 'Pending'],
+                    ['id' => 102, 'product' => 'Gaming Headset', 'image' => 'headset.jpg', 'quantity' => 1, 'customer' => 'Ayesha Ahmed', 'total' => 3200, 'status' => 'Shipped'],
+                    ['id' => 103, 'product' => 'Noise Cancelling Headphones', 'image' => 'headphones.jpg', 'quantity' => 1, 'customer' => 'Zain Raza', 'total' => 5400, 'status' => 'Completed']
                 ] as $order)
                 <tr data-order-id="{{ $order['id'] }}">
                     <td>#{{ $order['id'] }}</td>
@@ -40,8 +48,8 @@
                     <td>{{ $order['customer'] }}</td>
                     <td>Rs. {{ number_format($order['total'], 2) }}</td>
                     <td>
-                        <span class="badge bg-{{ 
-                            $order['status'] == 'Completed' ? 'success' : 
+                        <span class="badge bg-{{
+                            $order['status'] == 'Completed' ? 'success' :
                             ($order['status'] == 'Pending' ? 'warning' : 'primary') }}">
                             {{ $order['status'] }}
                         </span>
@@ -238,7 +246,7 @@
 
 /* Adjustments for screens below 410px */
 @media (max-width: 410px) {
-    
+
     .table, .table thead, .table tbody, .table th, .table td, .table tr {
         display: block; /* Convert table to block layout */
         width: 100%;

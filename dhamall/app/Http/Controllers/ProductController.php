@@ -16,7 +16,7 @@ class ProductController extends Controller
                                   ->limit(4)
                                   ->get();
 
-        return view('product.product_details_page', compact('product', 'averageRating', 'relatedProducts'));
+        return view('users.buyer.product.product_details_page', compact('product', 'averageRating', 'relatedProducts'));
     }
 }
 

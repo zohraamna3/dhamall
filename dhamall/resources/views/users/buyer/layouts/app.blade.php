@@ -12,11 +12,31 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <!-- Seller-specific CSS -->
+    <link rel="stylesheet" href="{{ asset('css/seller-admin.css') }}">
+
     <style>
-        .btn-signup { border: 1px solid #6f42c1; color: #6f42c1; }
-        .btn-login { background-color: #6f42c1; color: white; }
-        .btn-signin { border: 1px solid #6f42c1; color: white; background-color: #6f42c1; }
-        .btn-outline-dark:hover { background-color: #6f42c1; border: 1px solid #6f42c1; }
+        .btn-signup {
+            border: 1px solid #6f42c1;
+            color: #6f42c1;
+        }
+
+        .btn-login {
+            background-color: #6f42c1;
+            color: white;
+        }
+
+        .btn-signin {
+            border: 1px solid #6f42c1;
+            color: white;
+            background-color: #6f42c1;
+        }
+
+        .btn-outline-dark:hover {
+            background-color: #6f42c1;
+            border: 1px solid #6f42c1;
+        }
+
         /* Breadcrumb Background */
         .custom-breadcrumb {
             background-color: #1a1a2e;
@@ -27,6 +47,7 @@
             font-weight: 500;
             width: 100%;
         }
+
         /* body {
             background-blend-mode: overlay;
             background-color: black;
@@ -55,10 +76,11 @@
         .breadcrumb-item + .breadcrumb-item::before {
             color: white !important;
         }
-        @media(max-width:575px){
-            .container{
-                padding-left: calc(var(--bs-gutter-x)*1);
-                padding-right: calc(var(--bs-gutter-x)*1);
+
+        @media (max-width: 575px) {
+            .container {
+                padding-left: calc(var(--bs-gutter-x) * 1);
+                padding-right: calc(var(--bs-gutter-x) * 1);
             }
         }
     </style>
@@ -67,23 +89,23 @@
 
 </head>
 <body>
-    @include('layouts.header')  <!-- Include the navbar -->
+@include('users.buyer.partials.header')  <!-- Include the navbar -->
 
-    <!-- Breadcrumb Section -->
-    
-    <div class="container-fluid px-0">
-        @yield('hero')  <!-- Page content will be inserted here -->
-    </div>
-    
-    <div class="container mt-3">
-        @yield('breadcrumb')
-    </div>
+<!-- Breadcrumb Section -->
 
-    <div class="container mt-4">
-        @yield('content')  <!-- Page content will be inserted here -->
-    </div>
+<div class="container-fluid px-0">
+    @yield('hero')  <!-- Page content will be inserted here -->
+</div>
 
-    @include('layouts.footer')  <!-- Include the footer -->
+<div class="container mt-3">
+    @yield('breadcrumb')
+</div>
+
+<div class="container mt-4">
+    @yield('content')  <!-- Page content will be inserted here -->
+</div>
+
+@include('users.buyer.partials.footer')  <!-- Include the footer -->
 <!-- Bootstrap JS (required for navbar toggle functionality) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -12,7 +12,7 @@ class AdminDashboardController extends Controller
     {
         $data = [
             // Previously existing data
-            'pending_sellers' => 5, 
+            'pending_sellers' => 5,
             'total_sellers' => 50,
             'months' => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
             'monthly_sellers' => [10, 15, 12, 8, 20, 18, 22, 25, 30],
@@ -44,7 +44,7 @@ class AdminDashboardController extends Controller
 
         return view('admin.pages.dashboard', compact('data'));
     }
-    
+
 
 
         public function show($sellerId)
@@ -55,67 +55,67 @@ class AdminDashboardController extends Controller
                 'completed_orders' => 120,
                 'pending_orders' => 30,
                 'cancelled_orders' => 10,
-    
+
                 // Monthly Sales Trend (Last 6 months)
                 'monthly_sales' => [
-                    'Sep' => 10000, 'Oct' => 15000, 'Nov' => 20000, 
+                    'Sep' => 10000, 'Oct' => 15000, 'Nov' => 20000,
                     'Dec' => 25000, 'Jan' => 30000, 'Feb' => 40000
                 ],
-    
+
                 // Sales Breakdown by Category
                 'category_sales' => [
-                    'Headphones' => 50000, 'Earbuds' => 40000, 
+                    'Headphones' => 50000, 'Earbuds' => 40000,
                     'Speakers' => 30000, 'Accessories' => 20000
                 ],
-    
+
                 // Best-Selling Products
                 'best_selling_products' => [
-                    'Sony WH-1000XM4' => 300, 'Apple AirPods Pro' => 250, 
+                    'Sony WH-1000XM4' => 300, 'Apple AirPods Pro' => 250,
                     'JBL Flip 6' => 200, 'Samsung Buds 2' => 180
                 ],
-    
+
                 // Revenue by Payment Method
                 'payment_methods' => [
                     'Credit Card' => 60000, 'PayPal' => 30000, 'Cash on Delivery' => 20000
                 ],
-    
+
                 // Average Order Value Over Time
                 'aov' => [
-                    'Sep' => 200, 'Oct' => 250, 'Nov' => 300, 
+                    'Sep' => 200, 'Oct' => 250, 'Nov' => 300,
                     'Dec' => 350, 'Jan' => 400, 'Feb' => 450
                 ],
-    
+
                 // Customer Reviews Distribution
                 'reviews_distribution' => [
-                    '1 Star' => 5, '2 Stars' => 10, '3 Stars' => 15, 
+                    '1 Star' => 5, '2 Stars' => 10, '3 Stars' => 15,
                     '4 Stars' => 30, '5 Stars' => 50
                 ],
-    
+
                 // Returning vs. New Customers
                 'returning_customers' => 60,
                 'new_customers' => 40,
-    
+
                 // Order Status Overview
                 'order_status' => [
                     'Completed' => 120, 'Pending' => 30, 'Cancelled' => 10
                 ],
-    
+
                 // Sales by Region
                 'sales_by_region' => [
-                    'North' => 50000, 'South' => 40000, 
+                    'North' => 50000, 'South' => 40000,
                     'East' => 30000, 'West' => 20000
                 ],
-    
+
                 // Top Customer Countries
                 'customer_countries' => [
                     'USA' => 500, 'UK' => 400, 'Canada' => 300, 'Germany' => 200
                 ],
             ];
-    
+
             return view('admin.pages.seller_statistics', compact('sellerStats'));
         }
-    
-    
+
+
     public function allSellers()
 {
     $sellers = [

@@ -27,7 +27,7 @@ class reviewController extends Controller
 
         $productReviews = $reviews[$id] ?? [];
 
-        return view('users.seller.comments', compact('productReviews', 'id'));
+        return view('users.seller.pages.comments', compact('productReviews', 'id'));
     }
     public function showReview($id)
     {

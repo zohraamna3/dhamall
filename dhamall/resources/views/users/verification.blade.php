@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('users.buyer.layouts.app')
 
 @section('title', 'Verification - Dhamall')
 
@@ -25,7 +25,8 @@
                     <button type="submit" class="btn btn-primary w-100">Verify Code</button>
                 </form>
 
-                <p class="text-center mt-3"><a href="/signin" class="text-decoration-none custom-link">Back to Login</a></p>
+                <p class="text-center mt-3"><a href="/signin" class="text-decoration-none custom-link">Back to Login</a>
+                </p>
             </div>
         </div>
     </div>

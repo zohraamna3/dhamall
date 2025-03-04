@@ -1,4 +1,4 @@
-<footer class="footer bg-gradient text-white mt-5">
+<footer class="footer bg-gradient text-white ">
     <div class="container py-5">
         <div class="row">
             <!-- Need Help -->

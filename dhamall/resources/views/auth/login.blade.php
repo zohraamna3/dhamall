@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('users.buyer.layouts.app')
 
 @section('breadcrumb')
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb custom-breadcrumb">
             <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
-           <li class="breadcrumb-item active" aria-current="page" id="breadcrumb-current">Login</li>
+            <li class="breadcrumb-item active" aria-current="page" id="breadcrumb-current">Login</li>
         </ol>
     </nav>
 @endsection
@@ -60,7 +60,8 @@
                     <button type="submit" class="btn btn-signin w-100 mt-3">Sign In</button>
                 </form>
 
-                <p class="text-center mt-3">Don't have an account? <a href="{{ route('signup') }}" class="text-primary">Sign up</a></p>
+                <p class="text-center mt-3">Don't have an account? <a href="{{ route('signup') }}" class="text-primary">Sign
+                        up</a></p>
             </div>
         </div>
     </div>
@@ -91,7 +92,8 @@
         .btn-signin:hover {
             background-color: #5a33a3;
         }
-        .text-golden{
+
+        .text-golden {
             color: #b3a31c;
         }
 

@@ -45,12 +45,12 @@ Route::get('/profile', function () {
     $wishlist = DB::table('wishlist')->where('user_id', $user->id)->get();
     $shoppingCart = DB::table('shopping_cart')->where('user_id', $user->id)->get();
 
-    return view('users.buyer.profile.edit', compact('orders', 'wishlist', 'shoppingCart', 'paymentDetails'));
+    return view('users.buyer.profile.profile-page', compact('orders', 'wishlist', 'shoppingCart', 'paymentDetails'));
 })->middleware('auth')->name('profile.edit');
 
 // Payment Update Route
 Route::post('/profile/payment/update', function (Illuminate\Http\Request $request) {
-    $user = Auth::user(); 
+    $user = Auth::user();
 
     $validated = $request->validate([
         'payment_type'   => 'required|string',
@@ -111,9 +111,9 @@ Route::prefix('seller')->group(function () {
     Route::get('/profile', [SellerController::class, 'profile'])->name('seller.profile');
     Route::post('/profile/update', [SellerController::class, 'updateProfile'])->name('seller.updateProfile');
     Route::get('/orders', [SellerController::class, 'orders'])->name('seller.orders'); // Ensure this exists
-    Route::get('/seller/reviews', [SellerController::class, 'reviews'])->name('seller.reviews');
+    Route::get('/reviews', [SellerController::class, 'reviews'])->name('seller.reviews');
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-    Route::post('/seller/profile/update', [SellerController::class, 'updateProfile'])->name('seller.profile.update');
+    Route::post('/profile/update', [SellerController::class, 'updateProfile'])->name('seller.profile.update');
     Route::get('/seller/products', [SellerController::class, 'productListings'])->name('seller.product_listings');
     Route::get('/product/{id}/reviews', [reviewController::class, 'showReviews'])->name('seller.product.reviews');
 
@@ -147,9 +147,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 });
 
 
-Route::get('/products', function () {
-    return view('users.seller.comment'); // Ensure your Blade file is named 'products.blade.php'
-});
+//Route::get('/products', function () {
+//    return view('users.seller.comment'); // Ensure your Blade file is named 'products.blade.php'
+//});
 
 
 Route::get('/reset', function () {

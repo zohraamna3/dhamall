@@ -61,9 +61,9 @@ class SellerController extends Controller
             'labels' => ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
             'values' => [5000, 7000, 8000, 6500, 9000]
         ];
-    
+
         $recentOrders = [
-            
+
             (object)[
                 'id' => 101,
                 'customer' => (object)['name' => 'Ali Khan'],
@@ -86,11 +86,11 @@ class SellerController extends Controller
                 'created_at' => now()->subDays(3),
             ],
         ];
-    
+
         return view('users.seller.pages.dashboard', compact('totalProducts', 'totalOrders', 'totalEarnings', 'recentOrders','salesData'));
     }
-    
-    
+
+
         public function products()
         {
             $products = [
@@ -98,10 +98,10 @@ class SellerController extends Controller
                 ['id' => 2, 'name' => 'Gaming Headphones', 'status' => 'Out of Stock', 'price' => 89],
                 ['id' => 3, 'name' => 'Noise Cancelling Headphones', 'status' => 'Active', 'price' => 150],
             ];
-    
+
             return view('users.seller.pages.products', compact('products'));
         }
-    
+
         public function profile()
         {
             // Mock seller data
@@ -111,20 +111,20 @@ class SellerController extends Controller
                 'phone' => '+92 3456789032',
                 'address' => '123 Main Street, New York, USA'
             ];
-    
+
             return view('users.seller.pages.profile', compact('seller'));
         }
-    
+
         public function orders()
         {
             // Temporary empty array to prevent errors
             $orders = [];
-        
+
             return view('users.seller.pages.orders', compact('orders'));
         }
-        
-        
-    
+
+
+
         public function updateProfile(Request $request)
         {
             return redirect()->back()->with('success', 'Profile updated successfully!');
@@ -135,13 +135,13 @@ class SellerController extends Controller
             // $reviews = Review::with(['product', 'user'])->whereHas('product', function ($query) {
             //     $query->where('seller_id', auth()->id());
             // })->get();
-        
+
             // Use an empty array for frontend development
-            $reviews = []; 
-        
+            $reviews = [];
+
             return view('users.seller.pages.reviews', compact('reviews'));
         }
-        
+
         public function productListings()
     {
         // Mock product data as a collection instead of an array
@@ -165,7 +165,7 @@ class SellerController extends Controller
                 'status' => 'active',
             ],
         ]);
-    
+
         return view('users.seller.pages.product_listings', compact('products'));
     }
 }
