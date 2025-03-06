@@ -1,5 +1,12 @@
 @extends('admin.layouts.app')
-
+@section('breadcrumb')
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb custom-breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page" id="breadcrumb-current">Seller Statistics</li>
+        </ol>
+    </nav>
+@endsection
 @section('content')
 <div class="container">
 
@@ -90,71 +97,71 @@
     }
 
     // Charts Data
-    createChart('monthlySalesChart', 'line', 
-        @json(array_keys($sellerStats['monthly_sales'])), 
-        @json(array_values($sellerStats['monthly_sales'])), 
+    createChart('monthlySalesChart', 'line',
+        @json(array_keys($sellerStats['monthly_sales'])),
+        @json(array_values($sellerStats['monthly_sales'])),
         ['rgba(75, 192, 192, 0.2)'], ['rgba(75, 192, 192, 1)']
     );
 
-    createChart('categorySalesChart', 'bar', 
-        @json(array_keys($sellerStats['category_sales'])), 
-        @json(array_values($sellerStats['category_sales'])), 
+    createChart('categorySalesChart', 'bar',
+        @json(array_keys($sellerStats['category_sales'])),
+        @json(array_values($sellerStats['category_sales'])),
         ['rgba(255, 99, 132, 0.2)'], ['rgba(255, 99, 132, 1)']
     );
 
-    createChart('bestSellingChart', 'bar', 
-        @json(array_keys($sellerStats['best_selling_products'])), 
-        @json(array_values($sellerStats['best_selling_products'])), 
+    createChart('bestSellingChart', 'bar',
+        @json(array_keys($sellerStats['best_selling_products'])),
+        @json(array_values($sellerStats['best_selling_products'])),
         ['rgba(54, 162, 235, 0.2)'], ['rgba(54, 162, 235, 1)']
     );
 
-    createChart('paymentMethodsChart', 'doughnut', 
-        @json(array_keys($sellerStats['payment_methods'])), 
-        @json(array_values($sellerStats['payment_methods'])), 
-        ['rgba(255, 205, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)'], 
+    createChart('paymentMethodsChart', 'doughnut',
+        @json(array_keys($sellerStats['payment_methods'])),
+        @json(array_values($sellerStats['payment_methods'])),
+        ['rgba(255, 205, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)'],
         ['rgba(255, 205, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)']
     );
 
-    createChart('reviewsChart', 'pie', 
-        @json(array_keys($sellerStats['reviews_distribution'])), 
-        @json(array_values($sellerStats['reviews_distribution'])), 
-        ['rgba(255, 99, 132, 0.2)', 'rgba(255, 159, 64, 0.2)', 'rgba(255, 205, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(54, 162, 235, 0.2)'], 
+    createChart('reviewsChart', 'pie',
+        @json(array_keys($sellerStats['reviews_distribution'])),
+        @json(array_values($sellerStats['reviews_distribution'])),
+        ['rgba(255, 99, 132, 0.2)', 'rgba(255, 159, 64, 0.2)', 'rgba(255, 205, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(54, 162, 235, 0.2)'],
         ['rgba(255, 99, 132, 1)', 'rgba(255, 159, 64, 1)', 'rgba(255, 205, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(54, 162, 235, 1)']
     );
 
-    createChart('customerTypeChart', 'pie', 
-        ['Returning Customers', 'New Customers'], 
-        [{{ $sellerStats['returning_customers'] }}, {{ $sellerStats['new_customers'] }}], 
-        ['rgba(255, 206, 86, 0.2)', 'rgba(54, 162, 235, 0.2)'], 
+    createChart('customerTypeChart', 'pie',
+        ['Returning Customers', 'New Customers'],
+        [{{ $sellerStats['returning_customers'] }}, {{ $sellerStats['new_customers'] }}],
+        ['rgba(255, 206, 86, 0.2)', 'rgba(54, 162, 235, 0.2)'],
         ['rgba(255, 206, 86, 1)', 'rgba(54, 162, 235, 1)']
     );
 
-    createChart('orderStatusChart', 'bar', 
-        @json(array_keys($sellerStats['order_status'])), 
-        @json(array_values($sellerStats['order_status'])), 
+    createChart('orderStatusChart', 'bar',
+        @json(array_keys($sellerStats['order_status'])),
+        @json(array_values($sellerStats['order_status'])),
         ['rgba(75, 192, 192, 0.2)'], ['rgba(75, 192, 192, 1)']
     );
     // Sales by Region
-createChart('regionSalesChart', 'bar', 
-    @json(array_keys($sellerStats['sales_by_region'])), 
-    @json(array_values($sellerStats['sales_by_region'])), 
-    ['rgba(153, 102, 255, 0.2)'], 
+createChart('regionSalesChart', 'bar',
+    @json(array_keys($sellerStats['sales_by_region'])),
+    @json(array_values($sellerStats['sales_by_region'])),
+    ['rgba(153, 102, 255, 0.2)'],
     ['rgba(153, 102, 255, 1)']
 );
 
 // Top Customer Countries
-createChart('customerCountriesChart', 'bar', 
-    @json(array_keys($sellerStats['customer_countries'])), 
-    @json(array_values($sellerStats['customer_countries'])), 
-    ['rgba(255, 159, 64, 0.2)'], 
+createChart('customerCountriesChart', 'bar',
+    @json(array_keys($sellerStats['customer_countries'])),
+    @json(array_values($sellerStats['customer_countries'])),
+    ['rgba(255, 159, 64, 0.2)'],
     ['rgba(255, 159, 64, 1)']
 );
 
 // Average Order Value Over Time
-createChart('aovChart', 'line', 
-    @json(array_keys($sellerStats['aov'])), 
-    @json(array_values($sellerStats['aov'])), 
-    ['rgba(75, 192, 192, 0.2)'], 
+createChart('aovChart', 'line',
+    @json(array_keys($sellerStats['aov'])),
+    @json(array_values($sellerStats['aov'])),
+    ['rgba(75, 192, 192, 0.2)'],
     ['rgba(75, 192, 192, 1)']
 );
 

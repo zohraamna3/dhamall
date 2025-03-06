@@ -17,19 +17,19 @@
         </h3>
     </div>
     <div class="row mt-4">
-        <div class="col-md-4">
+        <div class="col-md-4 mb-3 mb-lg-0">
             <div class="card shadow-sm border-0 p-4 text-center text-warning" style="background: #1a1a2e;">
                 <h4>Total Products</h4>
                 <p class="display-6 fw-bold">{{ $totalProducts }}</p>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 mb-3 mb-lg-0">
             <div class="card shadow-sm border-0 p-4 text-center text-warning" style="background: #1a1a2e;">
                 <h4>Total Orders</h4>
                 <p class="display-6 fw-bold">{{ $totalOrders }}</p>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 mb-3 mb-lg-0">
             <div class="card shadow-sm border-0 p-4 text-center text-warning" style="background: #1a1a2e;">
                 <h4>Total Earnings</h4>
                 <p class="display-6 fw-bold">Rs. {{ number_format($totalEarnings, 2) }}</p>

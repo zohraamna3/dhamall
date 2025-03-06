@@ -8,6 +8,7 @@
       <sourceFolder url="file://$MODULE_DIR$/dhamall/tests" isTestSource="true" packagePrefix="Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/dhamall/tests/Feature" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/dhamall/tests/Unit" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/dhamall/vendor/brick/math" />
       <excludeFolder url="file://$MODULE_DIR$/dhamall/vendor/carbonphp/carbon-doctrine-types" />
       <excludeFolder url="file://$MODULE_DIR$/dhamall/vendor/composer" />
@@ -119,6 +120,10 @@
       <excludeFolder url="file://$MODULE_DIR$/dhamall/vendor/vlucas/phpdotenv" />
       <excludeFolder url="file://$MODULE_DIR$/dhamall/vendor/voku/portable-ascii" />
       <excludeFolder url="file://$MODULE_DIR$/dhamall/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/dhamall/vendor/cloudinary-labs/cloudinary-laravel" />
+      <excludeFolder url="file://$MODULE_DIR$/dhamall/vendor/cloudinary/cloudinary_php" />
+      <excludeFolder url="file://$MODULE_DIR$/dhamall/vendor/cloudinary/transformation-builder-sdk" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

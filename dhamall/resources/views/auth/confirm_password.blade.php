@@ -1,27 +1,41 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
+@extends('users.buyer.layouts.app')
+
+@section('title', 'Confirm Password - Dhamall')
+
+@section('content')
+    <div class="container-fluid d-flex">
+        <!-- Left Side Image -->
+        <div class="col-md-6 d-none d-md-block">
+            <img src="/images/verification.png" class="img-fluid h-100 w-100 object-fit-cover" alt="Confirm Password">
+        </div>
+
+        <!-- Right Side - Confirm Password Form -->
+        <div class="col-md-6 d-flex align-items-center justify-content-center">
+            <div class="verification-container w-75">
+                <h2 class="mb-3">Confirm Password</h2>
+                <p class="text-muted">This is a secure area of the application. Please confirm your password before continuing.</p>
+
+                <form method="POST" action="{{ route('password.confirm') }}">
+                    @csrf
+
+                    <!-- Password Field -->
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input id="password" type="password" name="password" class="form-control" placeholder="Enter your password" required autocomplete="current-password">
+                        @error('password')
+                        <div class="text-danger mt-2">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-primary w-100">Confirm Password</button>
+                </form>
+
+                <!-- Back to Login Link -->
+                <p class="text-center mt-3">
+                    <a href="{{ route('login') }}" class="text-decoration-none custom-link">Back to Login</a>
+                </p>
+            </div>
+        </div>
     </div>
-
-    <form method="POST" action="{{ route('password.confirm') }}">
-        @csrf
-
-        <!-- Password -->
-        <div>
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <div class="flex justify-end mt-4">
-            <x-primary-button>
-                {{ __('Confirm') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+@endsection

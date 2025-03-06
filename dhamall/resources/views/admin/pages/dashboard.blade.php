@@ -1,5 +1,14 @@
 @extends('admin.layouts.app')
 
+
+@section('breadcrumb')
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb custom-breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page" id="breadcrumb-current">Dashboard</li>
+        </ol>
+    </nav>
+@endsection
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -8,7 +17,7 @@
             <div class="row mt-3" >
                 <!-- Seller Requests Card -->
                 <div class="col-md-6">
-                    <div class="card text-warning p-3" style="background: #1a1a2e;">
+                    <div class="card text-warning p-3 mb-3 mb-lg-0" style="background: #1a1a2e;">
                         <h5>Pending Seller Requests</h5>
                         <h3>{{ $data['pending_sellers'] }}</h3>
                         <p>Sellers waiting for approval</p>
@@ -112,14 +121,14 @@
                 label: 'Revenue',
                 data: {!! json_encode(array_values($data['revenue_trend'])) !!},
                 backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                
+
             }]
         },
         options: {
             plugins: {
                 legend: {
                     labels: {
-                        
+
                     }
                 }
             }
@@ -130,7 +139,7 @@
     var sellerChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: {!! json_encode($data['months']) !!}, 
+            labels: {!! json_encode($data['months']) !!},
             datasets: [{
                 label: 'Sellers Registered',
                 data: {!! json_encode($data['monthly_sellers']) !!},
@@ -143,7 +152,7 @@
             plugins: {
                 legend: {
                     labels: {
-                        
+
                     }
                 }
             }

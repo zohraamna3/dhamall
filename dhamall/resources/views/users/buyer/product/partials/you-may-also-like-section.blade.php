@@ -1,4 +1,4 @@
-<div class="mt-5"
+<div class="my-5"
      style="background: linear-gradient(135deg, #1a1a2e, #0d0d1a); padding: 30px; border-radius: 15px;">
     <h3 class="text-warning">You May Also Like</h3>
     <div class="row">

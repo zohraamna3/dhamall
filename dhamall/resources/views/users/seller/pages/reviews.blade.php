@@ -65,7 +65,7 @@
 
             <div class="text-center mb-4">
                 <h3 class="fw-bold text-gold rounded-1" style="background: #1a1a2e; color: #b3a31c; padding:1.5rem;">
-                    <i class="fas fa-credit-card me-2"></i> Product Wise Reviews
+                    Product Wise Reviews
                 </h3>
             </div>
             <div class="card shadow-sm p-4 border-0" style="background: linear-gradient(135deg, #1a1a2e, #0d0d1a);">

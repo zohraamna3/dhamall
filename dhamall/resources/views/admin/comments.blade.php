@@ -1,10 +1,21 @@
 @extends('admin.layouts.app')
-
+@section('breadcrumb')
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb custom-breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page" id="breadcrumb-current">Product Reviews</li>
+        </ol>
+    </nav>
+@endsection
 @section('content')
 <div class="container mt-5 px-4">
     <div class="row justify-content-center">
         <div class="col-lg-10">
-            <h2 class="mb-4 text-center">Product Reviews</h2>
+            <div class="text-center mb-4">
+                <h3 class="fw-bold text-gold rounded-1" style="background: #1a1a2e; color: #b3a31c; ">
+                    Product Reviews
+                </h3>
+            </div>
 
             <div class="card shadow-sm p-4 border-0">
                 <div class="table-responsive">

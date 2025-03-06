@@ -3,8 +3,9 @@
 
     <!-- Shipping Address -->
     <div class="mb-4">
-        <h4 class="text-warning text-center rounded p-5 bg-dark m-5 border-start border-end border-bottom border-white border-1">
-            Shipping Details</h4>
+        <h4 class="text-warning text-center rounded p-2 p-lg-5 bg-dark m-2 m-lg-5 border border-white">
+            Shipping Details
+        </h4>
 
         <!-- Address -->
         <div class="mb-3">
@@ -48,7 +49,9 @@
 
     <!-- Payment Method -->
     <div class="mb-4">
-        <h4 class="text-warning">Payment Method</h4>
+        <h4 class="text-warning text-center rounded p-2 p-lg-5 bg-dark m-2 m-lg-5 border border-white">
+            Payment Method
+        </h4>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="payment_method" id="credit_card"
                    value="credit_card" {{ $paymentMethod->payment_type == 'credit_card' ? 'checked' : 'disabled' }}>
@@ -63,8 +66,9 @@
 
     <!-- Payment Details -->
     <div class="mb-4">
-        <h4 class="text-warning text-center rounded p-5 bg-dark m-5 border-start border-end border-bottom border-white border-1">
-            Payment Details</h4>
+        <h4 class="text-warning text-center rounded p-2 p-lg-5 bg-dark m-2 m-lg-5 border border-white">
+            Payment Details
+        </h4>
 
         <h5 class="text-warning">Payment Id</h5>
         <p class="editable" data-field="payment_id">{{ $paymentMethod->id }}</p>
@@ -107,17 +111,20 @@
 
     <!-- Order Summary -->
     <div class="mb-4">
-        <h4 class="text-warning">Order Summary</h4>
+        <h4 class="text-warning text-center rounded p-2 p-lg-5 bg-dark m-2 m-lg-5 border border-white">
+            Order Summary
+        </h4>
         <ul class="list-group bg-transparent">
             @foreach($cart as $item)
                 <li class="list-group-item bg-transparent border-warning text-white d-flex justify-content-between align-items-center">
                     <span>{{ $item['name'] }}</span> - ${{ $item['price'] }} x {{ $item['quantity'] }}
-                    <span
-                        class="badge bg-warning text-dark">${{ $item['price'] * $item['quantity'] }}</span>
+                    <span class="badge bg-warning text-dark">${{ $item['price'] * $item['quantity'] }}</span>
                 </li>
             @endforeach
         </ul>
     </div>
+
+    <!-- Edit Actions -->
     <div id="editActions" class="d-none mt-3">
         <button type="submit" class="btn btn-success">
             <i class="fas fa-save me-2"></i> Save Changes
@@ -132,3 +139,66 @@
         <a href="{{ route('checkout.process') }}" class="btn btn-success">Proceed to Checkout</a>
     </div>
 </form>
+
+<!-- Responsive CSS -->
+<style>
+    /* Adjust padding and margins for small screens */
+    @media (max-width: 767.98px) {
+        h4 {
+            font-size: 1rem; /* Smaller font size for headings */
+            padding: 1rem !important; /* Reduce padding */
+            margin: 1rem !important; /* Reduce margin */
+        }
+
+        h5 {
+            font-size: 0.85rem; /* Smaller font size for subheadings */
+        }
+
+        .form-control {
+            font-size: 0.9rem; /* Smaller font size for inputs */
+        }
+
+        .btn {
+            font-size: 0.9rem; /* Smaller font size for buttons */
+            padding: 0.5rem 1rem; /* Adjust button padding */
+        }
+
+        .list-group-item {
+            font-size: 0.9rem; /* Smaller font size for list items */
+        }
+
+        .badge {
+            font-size: 0.8rem; /* Smaller font size for badges */
+        }
+    }
+
+    /* Adjustments for very small screens (below 400px) */
+    @media (max-width: 399.98px) {
+        h4 {
+            font-size: 0.9rem; /* Further reduce heading size */
+            padding: 0.75rem !important; /* Further reduce padding */
+            margin: 0.75rem !important; /* Further reduce margin */
+        }
+
+        h5 {
+            font-size: 0.75rem; /* Further reduce subheading size */
+        }
+
+        .form-control {
+            font-size: 0.8rem; /* Further reduce input font size */
+        }
+
+        .btn {
+            font-size: 0.8rem; /* Further reduce button font size */
+            padding: 0.4rem 0.8rem; /* Further adjust button padding */
+        }
+
+        .list-group-item {
+            font-size: 0.8rem; /* Further reduce list item font size */
+        }
+
+        .badge {
+            font-size: 0.7rem; /* Further reduce badge font size */
+        }
+    }
+</style>

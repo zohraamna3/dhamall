@@ -13,7 +13,7 @@ use  App\Http\Controllers\Admin\AdminDashboardController;
 use  App\Http\Controllers\Admin\AdminLoginController;
 use  App\Http\Controllers\CategoryController;
 use  App\Http\Controllers\ReviewController;
-
+use App\Http\Controllers\AuthenticatedSessionController;
 
 // Authentication Routes
 Route::get('/signin', [AuthController::class, 'showSignIn'])->name('signin');
@@ -155,6 +155,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::get('/reset', function () {
     return view('users.resetpassword');
 });
+
+Route::get('/confirm password', function () {
+    return view('auth.confirm_password');
+});
+
+
+
+// Password confirmation route
+Route::post('/confirm-password', [AuthenticatedSessionController::class, 'confirmPassword'])
+    ->middleware('auth')
+    ->name('password.confirm');
 
 Route::get('/check-email', function () {
     return view('users.checkemail');

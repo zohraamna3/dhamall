@@ -43,7 +43,7 @@
             <h2 style="color: #b3a31c;" class="text-center font-weight-bold mb-5">Top Selling Earbuds</h2>
             <div class="row">
                 @foreach($earbuds as $earbud)
-                    <div class="col-12 col-md-4 mb-4">
+                    <div class="col-12 col-sm-6 col-md-4 mb-4 mb-lg-0 p-3">
                         <div
                             class="card shadow-lg border-0 rounded-lg overflow-hidden transition-transform transform hover:scale-105">
                             <div class="position-relative">

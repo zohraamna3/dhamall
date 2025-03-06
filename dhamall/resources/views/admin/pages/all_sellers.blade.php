@@ -1,5 +1,13 @@
 @extends('admin.layouts.app')
 
+@section('breadcrumb')
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb custom-breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page" id="breadcrumb-current">All Sellers</li>
+        </ol>
+    </nav>
+@endsection
 @section('content')
 <div class="container">
     <div class="text-center mb-4">
@@ -46,7 +54,7 @@
 </div>
 
 <style>
- 
+
 
 
 

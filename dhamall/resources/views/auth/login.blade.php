@@ -11,10 +11,10 @@
 
 @section('content')
     <div class="container d-flex justify-content-center align-items-center min-vh-100 m-auto">
-        <div class="row w-100 shadow-lg rounded-lg overflow-hidden login-card" style="max-width: 800px;">
+        <div class="row w-100 shadow-lg rounded-lg overflow-hidden login-card mb-3 mb-md-0" style="max-width: 800px;">
 
             <!-- Left Section (Brand Info) -->
-            <div class="col-md-5 d-flex flex-column justify-content-between p-4" style="background-color: #1a1a2e;">
+            <div class="col-md-5 d-flex flex-column justify-content-between p-4 d-none d-md-block" style="background-color: #1a1a2e;">
                 <h2 class="fw-bold text-golden">Dhamall</h2>
                 <div class="flex-grow-1 d-flex align-items-center">
                     <h4 class="text-center text-light">Premium Sound, Ultimate Comfort</h4>

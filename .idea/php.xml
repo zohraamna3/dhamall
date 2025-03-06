@@ -128,6 +128,10 @@
       <path value="$PROJECT_DIR$/dhamall/vendor/symfony/var-dumper" />
       <path value="$PROJECT_DIR$/dhamall/vendor/symfony/yaml" />
       <path value="$PROJECT_DIR$/dhamall/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/dhamall/vendor/cloudinary/transformation-builder-sdk" />
+      <path value="$PROJECT_DIR$/dhamall/vendor/cloudinary/cloudinary_php" />
+      <path value="$PROJECT_DIR$/dhamall/vendor/cloudinary-labs/cloudinary-laravel" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2">
@@ -139,6 +143,7 @@
   <component name="PhpUnit">
     <phpunit_settings>
       <PhpUnitSettings configuration_file_path="$PROJECT_DIR$/dhamall/phpunit.xml" custom_loader_path="$PROJECT_DIR$/dhamall/vendor/autoload.php" use_configuration_file="true" />
+      <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/vendor/autoload.php" />
     </phpunit_settings>
   </component>
   <component name="PsalmOptionsConfiguration">
