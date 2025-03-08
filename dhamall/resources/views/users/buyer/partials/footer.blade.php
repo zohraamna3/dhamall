@@ -5,11 +5,11 @@
             <div class="col-md-3">
                 <h5 class="fw-bold">Need Help?</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="footer-link">Contact Us</a></li>
-                    <li><a href="#" class="footer-link">Track Order</a></li>
-                    <li><a href="#" class="footer-link">Returns & Refunds</a></li>
-                    <li><a href="#" class="footer-link">FAQs</a></li>
-                    <li><a href="#" class="footer-link">Career</a></li>
+                    <li><a href="{{route('contact-us')}}" class="footer-link">Contact Us</a></li>
+                    <li><a href="{{ route('profile.edit', ['section' => 'orders']) }}" class="footer-link">Track Order</a></li>
+                    <li><a href="{{route('returns-refunds')}}" class="footer-link">Returns & Refunds</a></li>
+                    <li><a href="{{route('faqs')}}" class="footer-link">FAQs</a></li>
+                    <li><a href="{{route('career')}}" class="footer-link">Career</a></li>
                 </ul>
             </div>
 
@@ -17,10 +17,8 @@
             <div class="col-md-3">
                 <h5 class="fw-bold">Company</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="footer-link">About Us</a></li>
-                    <li><a href="#" class="footer-link">Dhamall Blog</a></li>
-                    <li><a href="#" class="footer-link">Collaboration</a></li>
-                    <li><a href="#" class="footer-link">Media</a></li>
+                    <li><a href="{{route('about-us')}}" class="footer-link">About Us</a></li>
+                    <li><a href="{{route('collaboration')}}" class="footer-link">Collaboration</a></li>
                 </ul>
             </div>
 
@@ -28,10 +26,9 @@
             <div class="col-md-3">
                 <h5 class="fw-bold">More Info</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="footer-link">Terms & Conditions</a></li>
-                    <li><a href="#" class="footer-link">Privacy Policy</a></li>
-                    <li><a href="#" class="footer-link">Shipping Policy</a></li>
-                    <li><a href="#" class="footer-link">Sitemap</a></li>
+                    <li><a href="{{route('terms-conditions')}}" class="footer-link">Terms & Conditions</a></li>
+                    <li><a href="{{route('privacy-policy')}}" class="footer-link">Privacy Policy</a></li>
+                    <li><a href="{{route('shipping-policy')}}" class="footer-link">Shipping Policy</a></li>
                 </ul>
             </div>
 
@@ -51,10 +48,10 @@
         <div class="text-center mt-4">
             <h5 class="fw-bold">Follow Us</h5>
             <div class="social-icons">
-                <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="social-icon"><i class="bi bi-twitter"></i></a>
-                <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
+                <a href="https://www.facebook.com" class="social-icon"><i class="bi bi-facebook"></i></a>
+                <a href="https://www.instagram.com" class="social-icon"><i class="bi bi-instagram"></i></a>
+                <a href="https://twitter.com" class="social-icon"><i class="bi bi-twitter"></i></a>
+                <a href="https://www.linkedin.com" class="social-icon"><i class="bi bi-linkedin"></i></a>
             </div>
         </div>
 
@@ -65,7 +62,7 @@
                 <a href="#" class="footer-link" data-bs-toggle="collapse" data-bs-target="#categories">Popular Categories <i class="bi bi-chevron-down"></i></a>
             </p>
             <div id="categories" class="collapse mt-2">
-                <p>Fashion, Electronics, Home & Kitchen, Beauty & Health...</p>
+                <p>EarPods, HandFrees, HeadPhones...</p>
             </div>
         </div>
 

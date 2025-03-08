@@ -181,4 +181,43 @@ Route::get('/new-password', function () {
     return view('users.createnewpassword');
 });
 
+Route::get('/contact-us', function () {
+    return view('users.buyer.pages.contact-us');
+})->name('contact-us');
+
+Route::get('/about-us', function () {
+    return view('users.buyer.pages.about-us');
+})->name('about-us');
+
+Route::get('/privacy-policy', function () {
+    return view('users.buyer.pages.privacy-policy');
+})->name('privacy-policy');
+Route::get('/shipping-policy', function () {
+    return view('users.buyer.pages.shipping-policy');
+})->name('shipping-policy');
+
+Route::get('/terms-conditions', function () {
+    return view('users.buyer.pages.terms-conditions');
+})->name('terms-conditions');
+
+Route::get('/media', function () {
+    return view('users.buyer.pages.media');
+})->name('media');
+
+Route::get('/collaboration', function () {
+    return view('users.buyer.pages.collaboration');
+})->name('collaboration');
+
+Route::get('/returns-refunds', function () {
+    return view('users.buyer.pages.returns-refunds');
+})->name('returns-refunds');
+
+Route::get('/faqs', function () {
+    return view('users.buyer.pages.faqs');
+})->name('faqs');
+
+Route::get('/career', function () {
+    return view('users.buyer.pages.career');
+})->name('career');
+
 // Route for storing reviews
