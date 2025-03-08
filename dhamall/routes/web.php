@@ -220,4 +220,33 @@ Route::get('/career', function () {
     return view('users.buyer.pages.career');
 })->name('career');
 
-// Route for storing reviews
+// Seller Support Pages
+Route::get('/help-center', function () {
+    return view('users.seller.pages.help-center');
+})->name('help-center');
+
+Route::get('/seller-guidelines', function () {
+    return view('users.seller.pages.seller-guidelines');
+})->name('seller-guidelines');
+
+Route::get('/contact-support', function () {
+    return view('users.seller.pages.contact-support');
+})->name('contact-support');
+
+Route::get('/faqs-seller', function () {
+    return view('users.seller.pages.faqs-seller');
+})->name('faqs-seller');
+
+// Legal Pages
+Route::get('/terms-of-service', function () {
+    return view('users.seller.pages.terms-of-service');
+})->name('terms-of-service');
+
+Route::get('/seller/privacy-policy', function () {
+    return view('users.seller.pages.privacy-policy');
+})->name('privacy-policy-seller');
+
+Route::get('/seller-agreement', function () {
+    return view('users.seller.pages.seller-agreement');
+})->name('seller-agreement');
+

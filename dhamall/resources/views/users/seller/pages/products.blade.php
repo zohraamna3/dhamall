@@ -43,7 +43,7 @@
                         ['id' => 3, 'name' => 'Bluetooth Speaker', 'price' => 59.99, 'stock' => 30, 'status' => 'active', 'image' => 'images/speaker.jpg']
                     ];
                 @endphp
-
+<div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -86,7 +86,7 @@
                         @endforeach
                     </tbody>
                 </table>
-
+</div>
             </div>
         </div>
     </div>
@@ -161,29 +161,6 @@
         margin-top: 10px;
     }
 
-    .table thead {
-        display: none;
-    }
-
-    .table tbody tr {
-        display: flex;
-        flex-direction: column;
-        border: 1px solid #ddd;
-        margin-bottom: 10px;
-        padding: 10px;
-        border-radius: 10px;
-    }
-
-    .table td {
-        display: flex;
-        justify-content: space-between;
-        padding: 5px;
-    }
-
-    .table td::before {
-        font-weight: bold;
-        text-transform: uppercase;
-    }
 }
 </style>
 
