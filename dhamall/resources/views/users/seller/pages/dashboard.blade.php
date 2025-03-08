@@ -67,7 +67,7 @@
     </div>
 
     {{-- Graph Containers --}}
-    <div class="row mt-4" style="background: #1a1a2e;">
+    <div class="row mt-4" style="background-color: rgba(173, 216, 230, 0.5); ">
         @php
             $charts = [
                 'monthlySalesChart' => 'Monthly Sales Trend',
