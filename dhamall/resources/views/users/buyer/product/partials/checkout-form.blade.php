@@ -125,8 +125,8 @@
     </div>
 
     <!-- Edit Actions -->
-    <div id="editActions" class="d-none mt-3">
-        <button type="submit" class="btn btn-success">
+    <div id="editActions" class="d-none my-3 row justify-content-center">
+        <button type="submit" class="btn btn-success mb-2">
             <i class="fas fa-save me-2"></i> Save Changes
         </button>
         <button type="button" id="cancelEdit" class="btn btn-secondary">
@@ -136,7 +136,7 @@
 
     <!-- Proceed to Checkout Button -->
     <div class="text-center">
-        <a href="{{ route('checkout.process') }}" class="btn btn-success">Proceed to Checkout</a>
+        <a href="{{ route('checkout.process') }}" class="btn btn-success">Checkout</a>
     </div>
 </form>
 

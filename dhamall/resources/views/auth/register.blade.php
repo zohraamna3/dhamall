@@ -10,11 +10,11 @@
     </nav>
 @endsection
 @section('content')
-    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="d-flex justify-content-center align-items-center min-vh-100">
         <div class="row w-100 shadow-lg rounded-3 overflow-hidden" style="max-width: 900px; background-color: #f8f9fa;">
 
             <!-- Left Section (Branding) -->
-            <div class="col-md-5 text-white d-flex flex-column justify-content-between p-4"
+            <div class="col-md-5 text-white d-none d-md-flex flex-column justify-content-between p-4"
                  style="background-color: #1a1a2e;">
                 <h2 class="fw-bold text-gold">Dhamall</h2>
                 <div class="flex-grow-1 d-flex align-items-center">
@@ -24,7 +24,7 @@
             </div>
 
             <!-- Right Section (Registration Form) -->
-            <div class="col-md-7 bg-white p-5">
+            <div class="col-md-7 bg-white p-3 p-md-5">
                 <h3 class="fw-bold mb-3 text-dark">Create an Account</h3>
                 <p class="text-muted">Already have an account?
                     <a href="{{ route('signin') }}" class="text-primary fw-bold">Log in</a>
@@ -93,11 +93,11 @@
                 <!-- Social Login -->
                 <div class="text-center my-4 text-muted">Or sign up with</div>
                 <div class="d-flex justify-content-between">
-                    <a href="{{ url('/login/google') }}" class="btn google-btn w-50 me-2 p-2">
+                    <a href="{{ url('/login/google') }}" class="btn google-btn w-50 me-2 p-1 p-md-2">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
                              width="20" class="me-2"> Sign up with Google
                     </a>
-                    <a href="{{ url('/login/facebook') }}" class="btn btn-primary w-50 p-2">
+                    <a href="{{ url('/login/facebook') }}" class="btn btn-primary w-50 p-1 p-md-2">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png"
                              width="20" class="me-2"> Sign up with Facebook
                     </a>

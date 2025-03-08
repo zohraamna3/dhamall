@@ -10,11 +10,11 @@
 @endsection
 
 @section('content')
-    <div class="container d-flex justify-content-center align-items-center min-vh-100 m-auto">
+    <div class="d-flex justify-content-center align-items-center min-vh-100 m-auto">
         <div class="row w-100 shadow-lg rounded-lg overflow-hidden login-card mb-3 mb-md-0" style="max-width: 800px;">
 
             <!-- Left Section (Branding) -->
-            <div class="col-md-5 text-white d-flex flex-column justify-content-between p-4"
+            <div class="col-md-5 text-white d-none d-md-flex  flex-column justify-content-between p-4"
                  style="background-color: #1a1a2e;">
                 <h2 class="fw-bold text-gold">Dhamall</h2>
                 <div class="flex-grow-1 d-flex align-items-center">
@@ -25,7 +25,7 @@
 
 
             <!-- Right Section (Login Form) -->
-            <div class="col-md-7 bg-white p-5">
+            <div class="col-md-7 bg-white p-3 p-md-5">
                 <h3 class="font-weight-bold mb-3 text-center">Welcome Back!</h3>
                 <p class="text-center text-muted">Sign in to continue</p>
 

@@ -51,7 +51,7 @@
                         <form action="{{ route('admin.seller.approve', $seller['id']) }}" method="POST" class="d-inline">
     @csrf
     @method('PATCH')
-    <button type="submit" class="btn btn-success btn-sm">Approve</button>
+    <button type="submit" class="btn btn-success btn-sm mb-2">Approve</button>
 </form>
 
 <form action="{{ route('admin.seller.reject', $seller['id']) }}" method="POST" class="d-inline">

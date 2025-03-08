@@ -1,6 +1,6 @@
 <div id="my-orders" class="content-section {{ request('section') === 'orders' ? '' : 'd-none' }}">
     <div class="text-center mb-4">
-        <h3 class="fw-bold text-gold rounded-1" style="background: #1a1a2e; color: #b3a31c; padding:1.5rem; ">My Orders</h3>
+        <h3 class="fw-bold text-gold rounded-1 p-2 pd-sm-3 p-md-4" style="background: #1a1a2e; color: #b3a31c;">My Orders</h3>
     </div>
 
     @if ($orders->isEmpty())

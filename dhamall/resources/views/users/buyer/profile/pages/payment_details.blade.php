@@ -1,6 +1,6 @@
 <div id="payment" class="content-section {{ request('section') === 'payment-details' ? '' : 'd-none' }}">
     <div class="text-center mb-4">
-        <h3 class="fw-bold text-gold rounded-1" style="background: #1a1a2e; color: #b3a31c; padding:1.5rem;">
+        <h3 class="fw-bold text-gold rounded-1 p-2 pd-sm-3 p-md-4" style="background: #1a1a2e; color: #b3a31c;">
             <i class="fas fa-credit-card me-2"></i> User Payment Details
         </h3>
     </div>
@@ -70,7 +70,7 @@
 
                 <!-- Save & Cancel Buttons -->
                 <div id="editActions" class="d-none mt-3">
-                    <button type="submit" class="btn btn-success">
+                    <button type="submit" class="btn btn-success mb-2">
                         <i class="fas fa-save me-2"></i> Save Changes
                     </button>
                     <button type="button" id="cancelEdit" class="btn btn-secondary">

@@ -10,11 +10,11 @@
 @endsection
 
 @section('content')
-    <div class="container">
+
         <div class="row justify-content-center">
             <!-- Main Content -->
             <div class="col-md-10">
-                <div class="card shadow-sm rounded p-4" id="content-area">
+                <div class="card shadow-sm rounded" id="content-area">
                     @include('users.buyer.profile.pages.profile_information')
                     @include('users.buyer.profile.pages.orders', ['orders' => $orders])
                     @include('users.buyer.profile.pages.wishlist', ['wishlist' => $wishlist])
@@ -24,7 +24,7 @@
                 </div>
             </div>
         </div>
-    </div>
+
 
     @include('users.buyer.profile.pages.profile_scripts')
 
@@ -63,6 +63,16 @@
         .btn-outline-primary:hover {
             background-color: #1a1a2e;
             color: white;
+        }
+
+        @media(max-width:300px){
+            .main-content{
+                padding: 2px 0;
+                margin: 2px;
+            }
+            .row{
+               --bs-gutter-x: 0rem;
+            }
         }
 
 

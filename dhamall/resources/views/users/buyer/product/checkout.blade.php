@@ -10,8 +10,7 @@
 @endsection
 
 @section('content')
-    <div class="container mb-4">
-        <div class="card shadow-lg border-0 rounded-lg position-relative"
+        <div class="card shadow-lg border-0 rounded-lg position-relative mb-2"
              style="background: linear-gradient(135deg, #1a1a2e, #0d0d1a); color: white; padding: 30px; border-radius: 15px;">
             <h2 class="text-center text-warning">Checkout</h2>
             <button type="button" id="editBtn" class="btn btn-primary">Edit Details</button>
@@ -25,7 +24,6 @@
 
             @include('users.buyer.product.partials.checkout-form')
         </div>
-    </div>
 <style>
     /* Default styles for the Edit button */
     #editBtn {

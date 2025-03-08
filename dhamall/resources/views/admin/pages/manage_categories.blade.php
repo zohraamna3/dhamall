@@ -45,7 +45,7 @@
                         <td>{{ $category['id'] }}</td>
                         <td>{{ $category['name'] }}</td>
                         <td>
-                            <button class="btn btn-primary btn-sm">Update</button>
+                            <button class="btn btn-primary btn-sm mb-2">Update</button>
                             <button class="btn btn-danger btn-sm">Delete</button>
                         </td>
                     </tr>
