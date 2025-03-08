@@ -13,8 +13,9 @@
 
 @section('content')
 
-    <div class="container ">
-        <div class="row">
+
+        <div class="row mx-2">
+
             <!-- Product Images -->
             @include('users.buyer.product.partials.image-carousel')
 
@@ -27,7 +28,7 @@
 
         <!-- You May Also Like -->
         @include('users.buyer.product.partials.you-may-also-like-section')
-    </div>
+
     <style>
 
         .shop-btn, .shop-now-btn, .view-details-btn {

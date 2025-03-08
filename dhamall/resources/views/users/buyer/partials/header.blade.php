@@ -12,7 +12,7 @@
 
         <!-- Navbar Links -->
         <div class="collapse navbar-collapse" id="navbarNav">
-            <!-- Search Bar -->
+            {{-- Search bar --}}
             <div class="ms-auto d-flex align-items-center flex-column flex-lg-row">
                 <div class="input-group w-100 search-container mb-3 mb-lg-0">
                     <input type="text" class="form-control bg-light text-dark search-input" placeholder="Search">
@@ -23,69 +23,108 @@
             </div>
 
             <!-- Icons (Wishlist, Profile, Cart) -->
-            <div class="ms-auto d-flex align-items-center flex-column flex-lg-row d-none d-lg-flex">
-                <!-- Wishlist Icon -->
-                <div class="position-relative me-lg-3 mb-3 mb-lg-0">
-                    <a href="#" class="text-light icon" id="wishlistIcon">
-                        <i class="bi bi-heart icon-hover"></i>
-                    </a>
-                    <!-- Wishlist Dropdown -->
-                    <div class="wishlist-dropdown dropdown-menu">
-                        <div class="p-3">
-                            <h6 class="mb-3">Your Wishlist</h6>
-                            <div class="wishlist-items">
-                                <!-- Placeholder for wishlist items -->
-                                <p class="text-muted">Your wishlist is empty.</p>
+            @auth
+                <div class="ms-auto d-flex align-items-center flex-column flex-lg-row">
+                    <!-- Wishlist Icon -->
+                    <div class="position-relative me-lg-3 mb-3 mb-lg-0">
+                        <a href="{{ route('profile.edit', ['section' => 'wishlist']) }}" class="text-light icon d-flex text-decoration-none" id="wishlistIcon">
+                            <i class="bi bi-heart icon-hover"></i>
+                            <span class="d-block d-lg-none ps-3 ps-lg-0"> Wishlist</span>
+                        </a>
+                        <!-- Wishlist Dropdown -->
+                        <div class="wishlist-dropdown dropdown-menu">
+                            <div class="p-3">
+                                <h6 class="mb-3">Your Wishlist</h6>
+                                <div class="wishlist-items">
+                                    <!-- Placeholder for wishlist items -->
+                                    <p class="text-muted">Your wishlist is empty.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile Icon -->
+                    <div class="position-relative me-lg-3 mb-3 mb-lg-0">
+                        <a href="{{ route('profile.edit', ['section' => 'profile']) }}" class="text-light icon d-flex text-decoration-none" id="profileIcon">
+                            <i class="bi bi-person icon-hover"></i>
+                            <span class="d-block d-lg-none ps-3 ps-lg-0"> Your Profile</span>
+                        </a>
+                        <!-- Profile Dropdown -->
+                        <div class="profile-dropdown dropdown-menu">
+                            <div class="p-3">
+                                <h6 class="mb-3">Your Profile</h6>
+                                <ul class="list-unstyled">
+                                    <li><a href="#" class="text-dark">My Account</a></li>
+                                    <li><a href="#" class="text-dark">Order History</a></li>
+                                    <li><a href="#" class="text-dark">Settings</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a href="#" class="text-dark">Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cart Icon -->
+                    <div class="position-relative">
+                        <a href="{{ route('profile.edit', ['section' => 'cart']) }}" class="text-light icon d-flex text-decoration-none" id="cartIcon">
+                            <i class="bi bi-cart icon-hover"></i>
+                            <span class="d-block d-lg-none ps-3 ps-lg-0"> Cart</span>
+                        </a>
+                        <!-- Cart Dropdown -->
+                        <div class="cart-dropdown dropdown-menu ">
+                            <div class="p-3">
+                                <h6 class="mb-3">Your Cart</h6>
+                                <div class="cart-items">
+                                    <!-- Placeholder for cart items -->
+                                    <p class="text-muted">Your cart is empty.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            @endauth
 
-                <!-- Profile Icon -->
-                <div class="position-relative me-lg-3 mb-3 mb-lg-0">
-                    <a href="#" class="text-light icon" id="profileIcon">
-                        <i class="bi bi-person icon-hover"></i>
-                    </a>
-                    <!-- Profile Dropdown -->
-                    <div class="profile-dropdown dropdown-menu">
-                        <div class="p-3">
-                            <h6 class="mb-3">Your Profile</h6>
-                            <ul class="list-unstyled">
-                                <li><a href="#" class="text-dark">My Account</a></li>
-                                <li><a href="#" class="text-dark">Order History</a></li>
-                                <li><a href="#" class="text-dark">Settings</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a href="#" class="text-dark">Logout</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Cart Icon -->
-                <div class="position-relative">
-                    <a href="#" class="text-light icon" id="cartIcon">
-                        <i class="bi bi-cart icon-hover"></i>
-                    </a>
-                    <!-- Cart Dropdown -->
-                    <div class="cart-dropdown dropdown-menu">
-                        <div class="p-3">
-                            <h6 class="mb-3">Your Cart</h6>
-                            <div class="cart-items">
-                                <!-- Placeholder for cart items -->
-                                <p class="text-muted">Your cart is empty.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <!-- Authentication Buttons -->
+            <div class="d-flex align-items-center ms-lg-3">
+                @auth
+                    <!-- Show Logout Button if User is Logged In -->
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-outline">Logout</button>
+                    </form>
+                @else
+                    <!-- Show Sign In and Sign Up Buttons if User is Not Logged In -->
+                    <a href="{{ route('signin') }}" class="btn btn-outline me-2">Sign In</a>
+                    <a href="{{ route('signup') }}" class="btn btn-signup">Sign Up</a>
+                @endauth
             </div>
         </div>
     </div>
 </nav>
-
 <style>
 /* Navbar Styling */
 
-
+/* Button Styling */
+.btn-outline {
+    border-color: #fff;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+.btn-outline:hover {
+    background-color: #f8d210;
+    border-color: #f8d210;
+    color: #000;
+}
+.btn-signup {
+    background-color: #f8d210;
+    border-color: #f8d210;
+    color: #000;
+    transition: all 0.3s ease;
+}
+.btn-signup:hover {
+    background-color: #b3a31c;
+    border-color: #b3a31c;
+}
 .navbar {
     background: linear-gradient(135deg, #1a1a2e, #0d0d1a);
     padding: 15px 20px;
@@ -173,41 +212,68 @@
 .profile-dropdown a:hover {
     text-decoration: none; /* Ensures it stays removed on hover */
 }
-
-/* Mobile-specific styles */
 @media (max-width: 991.98px) {
-    .navbar-collapse {
-        padding-top: 10px;
+        .navbar-collapse {
+            padding-top: 10px;
+        }
+        .search-container {
+            max-width: 100%; /* Full width on small screens */
+        }
+        .icon {
+            margin-bottom: 10px; /* Add spacing between icons */
+        }
+
+    .d-flex.align-items-center.ms-lg-3 {
+        flex-direction: column; /* Stack buttons vertically on mobile */
+        margin-top: 10px;
     }
-    .search-container {
-        max-width: 100%; /* Full width on small screens */
-    }
-    .icon {
-        margin-bottom: 10px; /* Add spacing between icons */
+    .btn-outline, .btn-signup {
+        width: 100%; /* Full width buttons on mobile */
+        margin-bottom: 10px;
     }
 }
 </style>
-
 <script>
-// Show dropdown on hover (for desktop)
-document.getElementById('wishlistIcon').addEventListener('mouseenter', () => {
-    document.querySelector('.wishlist-dropdown').classList.add('show');
-});
-document.getElementById('wishlistIcon').addEventListener('mouseleave', () => {
-    document.querySelector('.wishlist-dropdown').classList.remove('show');
-});
+    function setupDropdownHover() {
+        // Check if the screen width is greater than 991px
+        if (window.innerWidth > 991) {
+            // Show dropdown on hover (for desktop)
+            const wishlistIcon = document.getElementById('wishlistIcon');
+            const cartIcon = document.getElementById('cartIcon');
+            const profileIcon = document.getElementById('profileIcon');
 
-document.getElementById('cartIcon').addEventListener('mouseenter', () => {
-    document.querySelector('.cart-dropdown').classList.add('show');
-});
-document.getElementById('cartIcon').addEventListener('mouseleave', () => {
-    document.querySelector('.cart-dropdown').classList.remove('show');
-});
+            if (wishlistIcon) {
+                wishlistIcon.addEventListener('mouseenter', () => {
+                    document.querySelector('.wishlist-dropdown').classList.add('show');
+                });
+                wishlistIcon.addEventListener('mouseleave', () => {
+                    document.querySelector('.wishlist-dropdown').classList.remove('show');
+                });
+            }
 
-document.getElementById('profileIcon').addEventListener('mouseenter', () => {
-    document.querySelector('.profile-dropdown').classList.add('show');
-});
-document.getElementById('profileIcon').addEventListener('mouseleave', () => {
-    document.querySelector('.profile-dropdown').classList.remove('show');
-});
+            if (cartIcon) {
+                cartIcon.addEventListener('mouseenter', () => {
+                    document.querySelector('.cart-dropdown').classList.add('show');
+                });
+                cartIcon.addEventListener('mouseleave', () => {
+                    document.querySelector('.cart-dropdown').classList.remove('show');
+                });
+            }
+
+            if (profileIcon) {
+                profileIcon.addEventListener('mouseenter', () => {
+                    document.querySelector('.profile-dropdown').classList.add('show');
+                });
+                profileIcon.addEventListener('mouseleave', () => {
+                    document.querySelector('.profile-dropdown').classList.remove('show');
+                });
+            }
+        }
+    }
+
+    // Run the function on page load
+    setupDropdownHover();
+
+    // Re-run the function if the window is resized
+    window.addEventListener('resize', setupDropdownHover);
 </script>

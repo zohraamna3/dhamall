@@ -12,6 +12,7 @@
 
         <!-- Navbar Links -->
         <div class="collapse navbar-collapse" id="navbarNav">
+            @auth
             <ul class="navbar-nav ms-auto">
                 <!-- Dashboard Link -->
                 <li class="nav-item">
@@ -38,11 +39,52 @@
                     <a class="nav-link nav-hover text-white" href="{{ route('seller.products') }}">My Products</a>
                 </li>
             </ul>
+                <div class="d-flex align-items-center ms-lg-3">
+                    <!-- Show Logout Button if User is Logged In -->
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-outline-light">Logout</button>
+                    </form>
+                </div>
+
+            @else
+                <ul class="navbar-nav me-auto">
+                    <!-- Empty ul to push buttons to the end -->
+                </ul>
+                <div class="d-flex align-items-center ms-lg-3">
+                    <!-- Show Sign In and Sign Up Buttons if User is Not Logged In -->
+                    <a href="{{ route('signin') }}" class="btn btn-outline-light me-2">Sign In</a>
+                    <a href="{{ route('signup') }}" class="btn btn-signup">Sign Up</a>
+                </div>
+            @endauth
+
         </div>
     </div>
 </nav>
 
 <style>
+
+    /* Button Styling */
+    .btn-outline-light {
+        border-color: #fff;
+        color: #fff;
+        transition: all 0.3s ease;
+    }
+    .btn-outline-light:hover {
+        background-color: #f8d210;
+        border-color: #f8d210;
+        color: #000;
+    }
+    .btn-signup {
+        background-color: #f8d210;
+        border-color: #f8d210;
+        color: #000;
+        transition: all 0.3s ease;
+    }
+    .btn-signup:hover {
+        background-color: #b3a31c;
+        border-color: #b3a31c;
+    }
 /* Navbar Styling */
 .navbar {
     background: linear-gradient(135deg, #1a1a2e, #0d0d1a);
@@ -60,7 +102,7 @@
 .nav-hover {
     position: relative;
     transition: color 0.3s ease;
-    
+
 }
 .nav-hover:hover {
     color: #f8d210 !important;
@@ -81,12 +123,20 @@
 }
 
 /* Mobile-specific styles */
-@media (max-width: 991.98px) {
-    .navbar-collapse {
-        padding-top: 10px;
+    @media (max-width: 991.98px) {
+        .navbar-collapse {
+            padding-top: 10px;
+        }
+        .nav-item {
+            margin-bottom: 10px; /* Add spacing between nav items on mobile */
+        }
+        .d-flex.align-items-center.ms-lg-3 {
+            flex-direction: column; /* Stack buttons vertically on mobile */
+            margin-top: 10px;
+        }
+        .btn-outline-light, .btn-signup {
+            width: 100%; /* Full width buttons on mobile */
+            margin-bottom: 10px;
+        }
     }
-    .nav-item {
-        margin-bottom: 10px; /* Add spacing between nav items on mobile */
-    }
-}
 </style>

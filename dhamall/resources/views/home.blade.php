@@ -36,7 +36,6 @@
 
 
 @section('content')
-    <div class="container">
         <!-- Featured Products -->
         <section id="shop" class="my-5"
                  style="background: linear-gradient(135deg, #1a1a2e, #0d0d1a); padding: 30px; border-radius: 15px;">
@@ -85,7 +84,7 @@
                             <i class="fas fa-headphones-alt fa-3x text-warning mb-3"></i>
                             <h5 class="card-title fw-bold">Noise Cancelling</h5>
                             <p class="card-text text-muted">Block out distractions and immerse in pure sound.</p>
-                            <a href="#" class="btn w-100 text-white fw-bold py-2 shop-now-btn">
+                            <a href="{{route('search')}}" class="btn w-100 text-white fw-bold py-2 shop-now-btn">
                                 Shop Now <i class="fas fa-shopping-cart ms-2"></i>
                             </a>
                         </div>
@@ -99,7 +98,7 @@
                             <i class="fas fa-battery-full fa-3x text-warning mb-3"></i>
                             <h5 class="card-title fw-bold">Long Battery Life</h5>
                             <p class="card-text text-muted">Stay connected all day with extended battery power.</p>
-                            <a href="#" class="btn w-100 text-white fw-bold py-2 shop-now-btn">
+                            <a href="{{route('search')}}" class="btn w-100 text-white fw-bold py-2 shop-now-btn">
                                 Shop Now <i class="fas fa-shopping-cart ms-2"></i>
                             </a>
                         </div>
@@ -117,7 +116,7 @@
                 @foreach($reviews as $review)
                     <div class="col-12 col-md-4 mb-4">
                         <div class="card shadow-lg border-0 position-relative overflow-hidden"
-                             style="background: linear-gradient(135deg, #1a1a2e, #24243e); height:30vh; border-radius: 15px;">
+                             style="background: linear-gradient(135deg, #1a1a2e, #24243e); min-height:30vh; border-radius: 15px;">
                             <div class="card-body p-4">
                                 <!-- Quote Icon -->
                                 <i class="fas fa-quote-left text-warning" style="font-size: 24px;"></i>
@@ -144,8 +143,7 @@
                 @endforeach
             </div>
         </section>
-    </div>
-    </div>
+
 @endsection
 
 @section('scripts')

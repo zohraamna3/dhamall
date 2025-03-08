@@ -41,7 +41,7 @@ class AuthController extends Controller
         ]);
 
         Auth::login($user);
-        
+
 
         return redirect()->route('signin')->with('success', 'Account created successfully.');
     }
@@ -61,7 +61,7 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($request->only('email', 'password'))) {
-            return redirect()->route('profile.edit')->with('success', 'Logged in successfully.');
+            return redirect()->route('home')->with('success', 'Logged in successfully.');
         }
 
         return back()->withErrors(['email' => 'Invalid credentials']);

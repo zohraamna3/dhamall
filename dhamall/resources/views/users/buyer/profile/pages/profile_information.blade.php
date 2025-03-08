@@ -1,4 +1,4 @@
-<div id="personal-details" class="content-section">
+<div id="personal-details" class="content-section {{ request('section') === 'profile' ? '' : 'd-none' }}">
     <div class="text-center mb-4">
         <h3 class="fw-bold rounded-1" style="background: #1a1a2e; color: #b3a31c; padding:1.5rem; ">Personal Information</h3>
     </div>

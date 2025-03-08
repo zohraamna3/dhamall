@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Models\Product;
+use App\Models\Review;
 use Illuminate\Http\Request;
 
-class reviewController extends Controller
+class ReviewController extends Controller
 {
     public function showReviews($id)
     {
@@ -29,6 +30,7 @@ class reviewController extends Controller
 
         return view('users.seller.pages.comments', compact('productReviews', 'id'));
     }
+
     public function showReview($id)
     {
         // Dummy reviews data for each product
@@ -50,5 +52,27 @@ class reviewController extends Controller
         $productReviews = $reviews[$id] ?? [];
 
         return view('admin.comments', compact('productReviews', 'id'));
+    }
+
+    public function store(Request $request, Product $product)
+    {
+        // Validate the request
+        $request->validate([
+            'rating' => 'required|integer|between:1,5',
+            'comment' => 'required|string|max:500',
+        ]);
+
+        // Create a new review
+        $review = new Review([
+            'rating' => $request->rating,
+            'comment' => $request->comment,
+            'user_id' => auth()->id(), // Ensure the user is authenticated
+        ]);
+
+        // Save the review for the product
+        $product->reviews()->save($review);
+
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Review submitted successfully!');
     }
 }

@@ -1,4 +1,4 @@
-<div id="payment" class="content-section d-none">
+<div id="payment" class="content-section {{ request('section') === 'payment-details' ? '' : 'd-none' }}">
     <div class="text-center mb-4">
         <h3 class="fw-bold text-gold rounded-1" style="background: #1a1a2e; color: #b3a31c; padding:1.5rem;">
             <i class="fas fa-credit-card me-2"></i> User Payment Details
@@ -19,7 +19,7 @@
                 @csrf
                 @method('POST')
 
-                <p><strong><i class="fas fa-credit-card me-2"></i> Payment Type:</strong> 
+                <p><strong><i class="fas fa-credit-card me-2"></i> Payment Type:</strong>
                     <span class="editable" data-field="payment_type">{{ ucfirst($paymentDetails->payment_type) }}</span>
                     <select name="payment_type" class="form-control d-none">
                         <option value="credit_card" {{ $paymentDetails->payment_type == 'credit_card' ? 'selected' : '' }}>Credit Card</option>
@@ -29,34 +29,34 @@
                 </p>
 
                 @if ($paymentDetails->account_number)
-                    <p><strong><i class="fas fa-lock me-2"></i> Account Number:</strong> 
+                    <p><strong><i class="fas fa-lock me-2"></i> Account Number:</strong>
                         <span class="editable" data-field="account_number">**** **** **** {{ substr($paymentDetails->account_number, -4) }}</span>
                         <input type="text" name="account_number" class="form-control d-none" value="{{ $paymentDetails->account_number }}">
                     </p>
                 @endif
 
                 @if ($paymentDetails->expiry_date)
-                    <p><strong><i class="far fa-calendar-alt me-2"></i> Expiry Date:</strong> 
+                    <p><strong><i class="far fa-calendar-alt me-2"></i> Expiry Date:</strong>
                         <span class="editable" data-field="expiry_date">{{ $paymentDetails->expiry_date }}</span>
                         <input type="date" name="expiry_date" class="form-control d-none" value="{{ $paymentDetails->expiry_date }}">
                     </p>
                 @endif
 
                 @if ($paymentDetails->paypal_email)
-                    <p><strong><i class="fas fa-envelope me-2"></i> PayPal Email:</strong> 
+                    <p><strong><i class="fas fa-envelope me-2"></i> PayPal Email:</strong>
                         <span class="editable" data-field="paypal_email">{{ $paymentDetails->paypal_email }}</span>
                         <input type="email" name="paypal_email" class="form-control d-none" value="{{ $paymentDetails->paypal_email }}">
                     </p>
                 @endif
 
                 @if ($paymentDetails->bank_name)
-                    <p><strong><i class="fas fa-university me-2"></i> Bank Name:</strong> 
+                    <p><strong><i class="fas fa-university me-2"></i> Bank Name:</strong>
                         <span class="editable" data-field="bank_name">{{ $paymentDetails->bank_name }}</span>
                         <input type="text" name="bank_name" class="form-control d-none" value="{{ $paymentDetails->bank_name }}">
                     </p>
                 @endif
 
-                <p><strong><i class="fas fa-check-circle me-2"></i> Default Payment Method:</strong> 
+                <p><strong><i class="fas fa-check-circle me-2"></i> Default Payment Method:</strong>
                     <span class="editable" data-field="is_default">
                         <span class="{{ $paymentDetails->is_default ? 'text-success' : 'text-danger' }}">
                             {{ $paymentDetails->is_default ? 'Yes' : 'No' }}

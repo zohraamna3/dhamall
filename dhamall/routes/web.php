@@ -48,6 +48,8 @@ Route::get('/profile', function () {
     return view('users.buyer.profile.profile-page', compact('orders', 'wishlist', 'shoppingCart', 'paymentDetails'));
 })->middleware('auth')->name('profile.edit');
 
+
+
 // Payment Update Route
 Route::post('/profile/payment/update', function (Illuminate\Http\Request $request) {
     $user = Auth::user();
@@ -98,9 +100,11 @@ Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.s
 
 
 Route::middleware(['auth'])->group(function () {
+Route::post('/products/{product}/reviews', [ReviewController::class, 'store'])->name('review.store');
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
     Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
     Route::post('/checkout/update', [CheckoutController::class, 'update'])->name('checkout.update');
+
 });
 
 Route::get('/search', [SearchController::class, 'index'])->name('search');
@@ -176,3 +180,5 @@ Route::get('/verification', function () {
 Route::get('/new-password', function () {
     return view('users.createnewpassword');
 });
+
+// Route for storing reviews

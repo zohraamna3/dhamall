@@ -1,4 +1,4 @@
-<div id="my-orders" class="content-section d-none">
+<div id="my-orders" class="content-section {{ request('section') === 'orders' ? '' : 'd-none' }}">
     <div class="text-center mb-4">
         <h3 class="fw-bold text-gold rounded-1" style="background: #1a1a2e; color: #b3a31c; padding:1.5rem; ">My Orders</h3>
     </div>
@@ -17,17 +17,17 @@
                         {{ ucfirst($order->status) }}
                     </span>
                 </div>
-                
+
                 <p class="mb-1"><strong>Order Date:</strong> {{ $order->order_date }}</p>
                 <p class="mb-1"><strong>Total Amount:</strong> <span class="text-success">₹{{ number_format($order->total_amount, 2) }}</span></p>
                 <p class="mb-1"><strong>Payment Method:</strong> {{ ucfirst($order->payment_method) }}</p>
                 <p class="mb-3"><strong>Shipping Address:</strong> {{ $order->shipping_address }}</p>
-                
+
                 <div class="order-items d-flex flex-wrap gap-3">
                     @foreach ($order->orderItems as $item)
                         <div class="product-card p-3 text-center shadow-sm rounded border" style="width: 160px; background: #fff;">
-                            <img src="{{ asset('images/products/' . $item->product_id . '.jpg') }}" 
-                                 class="rounded img-fluid mb-2" 
+                            <img src="{{ asset('images/products/' . $item->product_id . '.jpg') }}"
+                                 class="rounded img-fluid mb-2"
                                  alt="Product Image">
                             <p class="mb-1 fw-bold text-dark">ID: {{ $item->product_id }}</p>
                             <p class="mb-1">Qty: <strong>{{ $item->quantity }}</strong></p>

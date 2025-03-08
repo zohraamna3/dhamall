@@ -97,11 +97,11 @@
     @yield('hero')  <!-- Page content will be inserted here -->
 </div>
 
-<div class="container mt-3">
+<div class="container-fluid mt-3">
     @yield('breadcrumb')
 </div>
 
-<div class="container mt-4">
+<div class="container-fluid">
     @yield('content')  <!-- Page content will be inserted here -->
 </div>
 
