@@ -36,7 +36,7 @@
             </div>
             <div class="card-body">
                 <p class="text-center">Sign in to start your session</p>
-                <form action="dashboard.html" method="post">
+                <form action="{{route('admin.dashboard')}}" method="post">
                     <div class="mb-3">
                         <div class="input-group">
                             <input type="email" class="form-control" placeholder="Email" required>
@@ -49,6 +49,7 @@
                             <span class="input-group-text"><i class="fas fa-lock"></i></span>
                         </div>
                     </div>
+
                     <div class="d-grid">
                         <button type="submit" class="btn btn-primary">Login</button>
                     </div>

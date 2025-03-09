@@ -24,6 +24,6 @@ class AppServiceProvider extends ServiceProvider
         Blade::component('primary-button', \App\View\Components\PrimaryButton::class);
         Blade::component('input-error', \App\View\Components\InputError::class);
         Blade::component('guest-layout', \App\View\Components\GuestLayout::class);
-
+        Blade::component('auth-session-status', \App\View\Components\AuthSessionStatus::class);
     }
 }

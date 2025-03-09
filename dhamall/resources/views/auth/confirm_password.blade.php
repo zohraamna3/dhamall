@@ -6,7 +6,7 @@
     <div class="container-fluid d-flex">
         <!-- Left Side Image -->
         <div class="col-md-6 d-none d-md-block">
-            <img src="/images/verification.png" class="img-fluid h-100 w-100 object-fit-cover" alt="Confirm Password">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhCiNguJGF2T1ur2TGW4HPvyRT3mazCOxg-XAnIuHN6Yb7J0RC5JKyPOUUFKZRJ6VmcIcQBfrXRU22QvFkWtI6ir8pIN7Jk3OiVB_RY1BLhPhgnbJgppSwQHg-MWHTlD0GX3TglnFQoPF0/s728-rw-e365/Password-post-it.jpg" class="img-fluid h-100 w-100 object-fit-cover" alt="Confirm Password">
         </div>
 
         <!-- Right Side - Confirm Password Form -->

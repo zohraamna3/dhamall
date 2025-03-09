@@ -56,7 +56,7 @@
                         <input type="password" name="password" class="form-control" required>
                     </div>
                     <div class="text-end">
-                        <a href="#" class="text-decoration-none">Forgot your password?</a>
+                        <a href="{{route('password.request')}}" class="text-decoration-none">Forgot your password?</a>
                     </div>
 
                     <button type="submit" class="btn btn-signin w-100 mt-3">Sign In</button>

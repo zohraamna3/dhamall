@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\PasswordResetLinkController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -171,6 +172,14 @@ Route::post('/confirm-password', [AuthenticatedSessionController::class, 'confir
     ->middleware('auth')
     ->name('password.confirm');
 
+Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])
+    ->middleware('guest')
+    ->name('password.request');
+
+Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])
+    ->middleware('guest')
+    ->name('password.email');
+
 Route::get('/check-email', function () {
     return view('users.checkemail');
 });
@@ -200,9 +209,6 @@ Route::get('/terms-conditions', function () {
     return view('users.buyer.pages.terms-conditions');
 })->name('terms-conditions');
 
-Route::get('/media', function () {
-    return view('users.buyer.pages.media');
-})->name('media');
 
 Route::get('/collaboration', function () {
     return view('users.buyer.pages.collaboration');
@@ -250,3 +256,13 @@ Route::get('/seller-agreement', function () {
     return view('users.seller.pages.seller-agreement');
 })->name('seller-agreement');
 
+use App\Http\Controllers\Auth\NewPasswordController;
+
+// Password Reset Routes
+Route::get('/reset-password/{token}', [NewPasswordController::class, 'create'])
+    ->middleware('guest')
+    ->name('password.reset');
+
+Route::post('/reset-password', [NewPasswordController::class, 'store'])
+    ->middleware('guest')
+    ->name('password.update');
