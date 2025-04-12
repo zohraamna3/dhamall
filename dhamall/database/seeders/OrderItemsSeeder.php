@@ -1,9 +1,9 @@
 <?php
-// database/seeders/OrderItemsSeeder.php
+
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use DB;
 
 class OrderItemsSeeder extends Seeder
 {
@@ -11,17 +11,35 @@ class OrderItemsSeeder extends Seeder
     {
         DB::table('order_items')->insert([
             [
-                'order_id' => 1,
-                'product_id' => 1, // Apple AirPods Pro
-                'quantity' => 1,
-                'price_at_time_of_order' => 249.99,
+                'OrderId' => 1, // Corresponds to the first order from Jane Smith
+                'ProductId' => 1, // Sony WF-1000XM4
+                'OrderDate' => now(),
+                'Status' => 'Pending',
+                'Quantity' => 1,
+                'PricePerUnit' => 399.99,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
-                'order_id' => 2,
-                'product_id' => 3, // Wired Earpods (Generic)
-                'quantity' => 2,
-                'price_at_time_of_order' => 19.99,
-            ]
+                'OrderId' => 1, // Corresponding to the same order
+                'ProductId' => 2, // Samsung Galaxy Buds Pro
+                'OrderDate' => now(),
+                'Status' => 'Pending',
+                'Quantity' => 1, // Quantity of the product in this order
+                'PricePerUnit' => 249.99,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'OrderId' => 2, // Corresponds to the second order from Jane Smith
+                'ProductId' => 2, // Sony WF-1000XM4
+                'OrderDate' => now(),
+                'Status' => 'Pending',
+                'Quantity' => 1,
+                'PricePerUnit' => 249.99,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
     }
 }

@@ -5,13 +5,14 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use DB;
 
-class WishlistSeeder extends Seeder
+class SellerShopRequestsSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('wishlists')->insert([
+        DB::table('seller_shop_requests')->insert([
             [
-                'UserId' => 3, // Assuming UserId refers to the primary user
+                'ShopId' => 1, // Example Shop ID
+                'RequestStatus' => 'Approved', //
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

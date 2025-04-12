@@ -16,6 +16,7 @@
             <div class="ms-auto d-flex align-items-center flex-column flex-lg-row">
                 <div class="input-group w-100 search-container mb-3 mb-lg-0">
                     <input type="text" class="form-control bg-light text-dark search-input" placeholder="Search">
+
                     <button class="btn btn-outline-light search-btn">
                         <i class="bi bi-search"></i>
                     </button>

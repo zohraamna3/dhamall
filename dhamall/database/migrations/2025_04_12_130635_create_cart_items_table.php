@@ -1,0 +1,29 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up()
+    {
+        Schema::create('cart_items', function (Blueprint $table) {
+            $table->id('CartItemId');
+            $table->unsignedBigInteger('ProductId');
+            $table->integer('Quantity');
+            $table->decimal('PricePerUnit', 10, 2);
+            $table->decimal('TotalPrice', 10, 2)->storedAs('Quantity * PricePerUnit');
+            $table->unsignedBigInteger('CartId');
+            $table->timestamps();
+
+            $table->foreign('ProductId')->references('ProductId')->on('products');
+            $table->foreign('CartId')->references('CartId')->on('carts');
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('cart_items');
+    }
+};

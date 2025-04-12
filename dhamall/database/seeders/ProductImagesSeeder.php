@@ -1,10 +1,9 @@
 <?php
-// database/seeders/ProductImagesSeeder.php
 
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use DB;
 
 class ProductImagesSeeder extends Seeder
 {
@@ -12,41 +11,30 @@ class ProductImagesSeeder extends Seeder
     {
         DB::table('product_images')->insert([
             [
-                'product_id' => 1, // Apple AirPods Pro
-                'image_url' => 'https://example.com/images/apple_airpods_pro_1.jpg',
+                'ProductId' => 1, // Ensure this ProductId corresponds to an existing product
+                'ImageURL' => 'https://example.com/images/product1-image1.jpg', // Replace with actual image URL
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'product_id' => 1, // Apple AirPods Pro
-                'image_url' => 'https://example.com/images/apple_airpods_pro_2.jpg',
+                'ProductId' => 1,
+                'ImageURL' => 'https://example.com/images/product1-image2.jpg', // Replace with actual image URL
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'product_id' => 2, // Sony WF-1000XM4
-                'image_url' => 'https://example.com/images/sony_wf_1000xm4_1.jpg',
+                'ProductId' => 2, // Ensure this ProductId corresponds to another existing product
+                'ImageURL' => 'https://example.com/images/product2-image1.jpg', // Replace with actual image URL
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'product_id' => 2, // Sony WF-1000XM4
-                'image_url' => 'https://example.com/images/sony_wf_1000xm4_2.jpg',
+                'ProductId' => 2,
+                'ImageURL' => 'https://example.com/images/product2-image2.jpg', // Replace with actual image URL
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-            [
-                'product_id' => 3, // Wired Earpods (Generic)
-                'image_url' => 'https://example.com/images/wired_earpods_generic_1.jpg',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'product_id' => 4, // JBL Tune 125TWS
-                'image_url' => 'https://example.com/images/jbl_tune_125tws_1.jpg',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]
+            // You can add more images for more products as needed
         ]);
     }
 }

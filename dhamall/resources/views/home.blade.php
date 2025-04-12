@@ -26,7 +26,7 @@
         </div>
 
         <!-- Floating Earbud Image with Animation -->
-        <div class="position-absolute floating" style="top: 50%; right: 5%; transform: translateY(-50%); z-index: 3;">
+        <div class="position-absolute floating d-none d-lg-block" style="top: 50%; right: 5%; transform: translateY(-50%); z-index: 3;">
             <img src="https://res.cloudinary.com/ddoeppfx0/image/upload/e_background_removal,f_png/cld-sample-5"
                  alt="Earbuds" class="img-fluid" style="max-width: 280px; width: 100%;">
         </div>
