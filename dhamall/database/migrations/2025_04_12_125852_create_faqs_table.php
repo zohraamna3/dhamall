@@ -9,13 +9,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('faqs', function (Blueprint $table) {
-            $table->id('FAQId');
+            $table->id('id');
             $table->text('Question');
             $table->text('Answer');
             $table->unsignedBigInteger('AdminId');
             $table->timestamps();
 
-            $table->foreign('AdminId')->references('UserId')->on('users');
+            $table->foreign('AdminId')->references('id')->on('users');
         });
     }
 

@@ -9,12 +9,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('user_images', function (Blueprint $table) {
-            $table->id('ImageId');
+            $table->id('id');
             $table->unsignedBigInteger('UserId');
             $table->string('ImageURL', 255);
             $table->timestamps();
 
-            $table->foreign('UserId')->references('UserId')->on('users');
+            $table->foreign('UserId')->references('id')->on('users');
         });
     }
 

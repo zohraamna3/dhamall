@@ -9,7 +9,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('payment_details', function (Blueprint $table) {
-            $table->id('PaymentId');
+            $table->id('id');
             $table->enum('PaymentMethod', ['Credit Card', 'PayPal', 'Cash on Delivery'])->default('Cash on Delivery');
             $table->string('CardNumber', 16)->nullable();
             $table->date('ExpiryDate')->nullable();

@@ -9,16 +9,17 @@ return new class extends Migration
     public function up()
     {
         Schema::create('buyer_checkout_details', function (Blueprint $table) {
+            $table->id('id');
             $table->unsignedBigInteger('UserId');
-            $table->unsignedBigInteger('AddressId');
-            $table->unsignedBigInteger('PaymentId');
+            $table->unsignedBigInteger('AddressId')->nullable();
+            $table->unsignedBigInteger('PaymentId')->nullable();
             $table->timestamps();
 
-            $table->foreign('UserId')->references('UserId')->on('users');
-            $table->foreign('AddressId')->references('AddressId')->on('addresses');
-            $table->foreign('PaymentId')->references('PaymentId')->on('payment_details');
+            $table->foreign('UserId')->references('id')->on('users');
+            $table->foreign('AddressId')->references('id')->on('addresses');
+            $table->foreign('PaymentId')->references('id')->on('payment_details');
 
-            $table->primary(['UserId', 'AddressId', 'PaymentId']);
+
         });
     }
 

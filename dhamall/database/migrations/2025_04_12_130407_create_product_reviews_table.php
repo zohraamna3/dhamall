@@ -9,7 +9,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('product_reviews', function (Blueprint $table) {
-            $table->id('ReviewId');
+            $table->id('id');
             $table->unsignedBigInteger('UserId');
             $table->unsignedBigInteger('ProductId');
             $table->integer('Rating')->checkBetween(1, 5);
@@ -18,8 +18,8 @@ return new class extends Migration
             $table->date('PostedOn');
             $table->timestamps();
 
-            $table->foreign('UserId')->references('UserId')->on('users');
-            $table->foreign('ProductId')->references('ProductId')->on('products');
+            $table->foreign('UserId')->references('id')->on('users');
+            $table->foreign('ProductId')->references('id')->on('products');
         });
     }
 

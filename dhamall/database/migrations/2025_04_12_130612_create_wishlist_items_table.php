@@ -9,13 +9,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('wishlist_items', function (Blueprint $table) {
-            $table->id('WishlistItemId');
+            $table->id('id');
             $table->unsignedBigInteger('ProductId');
             $table->unsignedBigInteger('WishlistId');
             $table->timestamps();
 
-            $table->foreign('ProductId')->references('ProductId')->on('products');
-            $table->foreign('WishlistId')->references('WishlistId')->on('wishlists');
+            $table->foreign('ProductId')->references('id')->on('products');
+            $table->foreign('WishlistId')->references('id')->on('wishlists');
         });
     }
 

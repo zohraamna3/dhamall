@@ -9,7 +9,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('cart_items', function (Blueprint $table) {
-            $table->id('CartItemId');
+            $table->id('id');
             $table->unsignedBigInteger('ProductId');
             $table->integer('Quantity');
             $table->decimal('PricePerUnit', 10, 2);
@@ -17,8 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('CartId');
             $table->timestamps();
 
-            $table->foreign('ProductId')->references('ProductId')->on('products');
-            $table->foreign('CartId')->references('CartId')->on('carts');
+            $table->foreign('ProductId')->references('id')->on('products');
+            $table->foreign('CartId')->references('id')->on('carts');
         });
     }
 

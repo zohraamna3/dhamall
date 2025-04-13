@@ -9,7 +9,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->id('ProductId');
+            $table->id('id');
             $table->unsignedBigInteger('BrandId');
             $table->unsignedBigInteger('SellerId');
             $table->unsignedBigInteger('CategoryId');
@@ -22,10 +22,10 @@ return new class extends Migration
             $table->enum('ProductStatus', ['Available', 'Out of Stock', 'Discontinued'])->default('Available');
             $table->timestamps();
 
-            $table->foreign('BrandId')->references('BrandId')->on('brands');
-            $table->foreign('SellerId')->references('UserId')->on('users');
-            $table->foreign('CategoryId')->references('CategoryId')->on('categories');
-            $table->foreign('ShippingId')->references('ShippingId')->on('shipping');
+            $table->foreign('BrandId')->references('id')->on('brands');
+            $table->foreign('SellerId')->references('id')->on('users');
+            $table->foreign('CategoryId')->references('id')->on('categories');
+            $table->foreign('ShippingId')->references('id')->on('shipping');
         });
     }
 

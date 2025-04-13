@@ -9,14 +9,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('about_us', function (Blueprint $table) {
-            $table->id('AboutUsId');
+            $table->id('id');
             $table->text('Description');
             $table->text('Mission');
             $table->text('Vision');
             $table->unsignedBigInteger('AdminId');
             $table->timestamps();
 
-            $table->foreign('AdminId')->references('UserId')->on('users');
+            $table->foreign('AdminId')->references('id')->on('users');
         });
     }
 

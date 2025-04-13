@@ -9,7 +9,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('subscriptions', function (Blueprint $table) {
-            $table->id('SubscriptionId');
+            $table->id('id');
             $table->string('Email', 255);
             $table->timestamps();
         });

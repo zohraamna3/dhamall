@@ -9,7 +9,7 @@ return new class extends Migration
     {
         if (!Schema::hasTable('brands')) {
             Schema::create('brands', function (Blueprint $table) {
-                $table->id('BrandId');
+                $table->id('id');
                 $table->string('Name', 100);
                 $table->string('LogoURL', 255)->nullable();
                 $table->text('Description')->nullable();
@@ -17,7 +17,7 @@ return new class extends Migration
                 $table->unsignedBigInteger('AdminId');
                 $table->timestamps();
 
-                $table->foreign('AdminId')->references('UserId')->on('users');
+                $table->foreign('AdminId')->references('id')->on('users');
             });
         }
     }

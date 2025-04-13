@@ -9,7 +9,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('order_items', function (Blueprint $table) {
-            $table->id('OrderItemId');
+            $table->id('id');
             $table->unsignedBigInteger('OrderId');
             $table->unsignedBigInteger('ProductId');
             $table->dateTime('OrderDate')->useCurrent();
@@ -19,8 +19,8 @@ return new class extends Migration
             $table->decimal('TotalPrice', 10, 2)->storedAs('Quantity * PricePerUnit');
             $table->timestamps();
 
-            $table->foreign('OrderId')->references('OrderId')->on('orders');
-            $table->foreign('ProductId')->references('ProductId')->on('products');
+            $table->foreign('OrderId')->references('id')->on('orders');
+            $table->foreign('ProductId')->references('id')->on('products');
         });
     }
 

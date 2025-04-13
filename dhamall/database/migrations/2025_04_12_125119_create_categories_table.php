@@ -10,12 +10,12 @@ return new class extends Migration
     {
         if (!Schema::hasTable('categories')) {
             Schema::create('categories', function (Blueprint $table) {
-                $table->id('CategoryId');
+                $table->id('id');
                 $table->string('CategoryName', 100);
                 $table->unsignedBigInteger('ParentCategoryId')->nullable();
                 $table->timestamps();
 
-                $table->foreign('ParentCategoryId')->references('CategoryId')->on('categories');
+                $table->foreign('ParentCategoryId')->references('id')->on('categories');
             });
         }
     }

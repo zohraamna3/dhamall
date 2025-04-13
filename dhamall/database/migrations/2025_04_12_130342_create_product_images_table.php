@@ -9,12 +9,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('product_images', function (Blueprint $table) {
-            $table->id('ImageId');
+            $table->id('id');
             $table->unsignedBigInteger('ProductId');
             $table->string('ImageURL', 255);
             $table->timestamps();
 
-            $table->foreign('ProductId')->references('ProductId')->on('products');
+            $table->foreign('ProductId')->references('id')->on('products');
         });
     }
 

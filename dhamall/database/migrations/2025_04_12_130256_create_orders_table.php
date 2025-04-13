@@ -9,14 +9,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id('OrderId');
+            $table->id('id');
             $table->unsignedBigInteger('UserId');
             $table->dateTime('OrderDate')->useCurrent();
             $table->enum('Status', ['Pending', 'Completed'])->default('Pending');
             $table->decimal('TotalBill', 10, 2);
             $table->timestamps();
 
-            $table->foreign('UserId')->references('UserId')->on('users');
+            $table->foreign('UserId')->references('id')->on('users');
         });
     }
 

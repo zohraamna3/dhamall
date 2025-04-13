@@ -9,7 +9,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('notifications', function (Blueprint $table) {
-            $table->id('NotificationId');
+            $table->id('id');
             $table->unsignedBigInteger('UserId');
             $table->unsignedBigInteger('OrderItemId');
             $table->string('Text', 255);
@@ -17,8 +17,8 @@ return new class extends Migration
             $table->enum('Type', ['Order Placed', 'Order Shipped', 'Order Delivered']);
             $table->timestamps();
 
-            $table->foreign('UserId')->references('UserId')->on('users');
-            $table->foreign('OrderItemId')->references('OrderItemId')->on('order_items'); // Correct foreign key
+            $table->foreign('UserId')->references('id')->on('users');
+            $table->foreign('OrderItemId')->references('id')->on('order_items'); // Correct foreign key
         });
     }
 

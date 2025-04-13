@@ -10,7 +10,7 @@ return new class extends Migration
         // Check if the table doesn't exist before creating it
         if (!Schema::hasTable('shipping')) {
             Schema::create('shipping', function (Blueprint $table) {
-                $table->id('ShippingId');
+                $table->id('id');
                 $table->enum('Method', ['Fast Shipping', 'Free Shipping']);
                 $table->string('City', 100);
                 $table->decimal('ShippingFee', 10, 2);
@@ -18,7 +18,7 @@ return new class extends Migration
                 $table->unsignedBigInteger('AdminId');
                 $table->timestamps();
 
-                $table->foreign('AdminId')->references('UserId')->on('users');
+                $table->foreign('AdminId')->references('id')->on('users');
             });
         }
     }

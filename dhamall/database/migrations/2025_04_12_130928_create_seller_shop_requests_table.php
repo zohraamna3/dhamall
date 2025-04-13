@@ -9,12 +9,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('seller_shop_requests', function (Blueprint $table) {
-            $table->id('RequestId');
+            $table->id('id');
             $table->unsignedBigInteger('ShopId');
             $table->enum('RequestStatus', ['Approved', 'Unapproved'])->default('Unapproved');
             $table->timestamps();
 
-            $table->foreign('ShopId')->references('ShopId')->on('seller_shops');
+            $table->foreign('ShopId')->references('id')->on('seller_shops');
         });
     }
 

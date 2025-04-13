@@ -9,7 +9,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('seller_shops', function (Blueprint $table) {
-            $table->id('ShopId');
+            $table->id('id');
             $table->unsignedBigInteger('SellerId');
             $table->string('ShopName', 100);
             $table->unsignedBigInteger('AddressId');
@@ -20,8 +20,8 @@ return new class extends Migration
             $table->enum('OverallRating', ['positive', 'neutral', 'negative'])->default('neutral');
             $table->timestamps();
 
-            $table->foreign('SellerId')->references('UserId')->on('users');
-            $table->foreign('AddressId')->references('AddressId')->on('addresses');
+            $table->foreign('SellerId')->references('id')->on('users');
+            $table->foreign('AddressId')->references('id')->on('addresses');
         });
     }
 
