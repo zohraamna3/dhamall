@@ -4,17 +4,18 @@
     </div>
 
     <div class="text-center mb-4">
-        <p class="fw-semibold">Hello, <span class="text-primary">{{ Auth::user()->name }}</span></p>
+        <img src="{{ $user->getImageUrl() }}" class="rounded-circle" width="100" height="100" alt="Profile Image">
+        <p class="fw-semibold mt-2">Hello, <span class="text-primary">{{ $user->Name }}</span></p>
     </div>
 
     <div class="row">
         <div class="col-md-6">
-            <p><strong>Email Address:</strong> <span class="text-muted">{{ Auth::user()->email }}</span></p>
-            <p><strong>Phone Number:</strong> <span class="text-muted">{{ Auth::user()->phone ?? 'Not Set' }}</span></p>
+            <p><strong>Email Address:</strong> <span class="text-muted">{{ $user->EmailAddress }}</span></p>
+            <p><strong>Phone Number:</strong> <span class="text-muted">{{ $user->PhoneNumber ?? 'Not Set' }}</span></p>
         </div>
         <div class="col-md-6">
-            <p><strong>Gender:</strong> <span class="text-muted">{{ Auth::user()->gender ?? 'Not Specified' }}</span></p>
-            <p><strong>Date of Birth:</strong> <span class="text-muted">{{ Auth::user()->dob ?? 'Not Set' }}</span></p>
+            <p><strong>Gender:</strong> <span class="text-muted">{{ $user->Gender ?? 'Not Specified' }}</span></p>
+            <p><strong>Date of Birth:</strong> <span class="text-muted">{{ $user->DateOfBirth ? $user->DateOfBirth->format('d M Y') : 'Not Set' }}</span></p>
         </div>
     </div>
 

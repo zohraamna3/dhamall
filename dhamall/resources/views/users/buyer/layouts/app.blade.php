@@ -105,7 +105,7 @@
     @yield('content')  <!-- Page content will be inserted here -->
 </div>
 
-{{--@include('users.buyer.partials.footer')  <!-- Include the footer -->--}}
+@include('users.buyer.partials.footer')  <!-- Include the footer -->
 <!-- Bootstrap JS (required for navbar toggle functionality) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

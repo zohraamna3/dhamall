@@ -88,16 +88,24 @@ class AuthController extends Controller
             'Password' => 'required',
         ]);
 
-        if (Auth::attempt($request->only('EmailAddress', 'Password'))) {
+        // Debugging logs
+        Log::info('Attempting login for: ' . $request->EmailAddress);
+
+        // Manual authentication to verify
+        $user = User::where('EmailAddress', $request->EmailAddress)->first();
+
+        if ($user && Hash::check($request->Password, $user->Password)) {
+            Log::info('Password verified for: ' . $user->EmailAddress);
+            Auth::login($user);
             $request->session()->regenerate();
-            return redirect()->intended('/signin')->with('success', 'Logged in successfully.');
+            return redirect()->intended('/profile')->with('success', 'Logged in successfully!');
         }
 
+        Log::warning('Failed login attempt for: ' . $request->EmailAddress);
         return back()->withErrors([
-            'EmailAddress' => 'The provided credentials do not match our records.',
+            'EmailAddress' => 'Invalid credentials',
         ])->onlyInput('EmailAddress');
     }
-
     // Logout
     public function logout(Request $request)
     {

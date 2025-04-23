@@ -21,7 +21,7 @@ class BuyerCheckoutDetail extends Model
      */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'UserId', 'UserId');
+        return $this->belongsTo(User::class, 'UserId');
     }
 
     /**
@@ -29,7 +29,7 @@ class BuyerCheckoutDetail extends Model
      */
     public function address(): BelongsTo
     {
-        return $this->belongsTo(Address::class, 'AddressId', 'AddressId');
+        return $this->belongsTo(Address::class, 'AddressId');
     }
 
     /**
@@ -37,6 +37,6 @@ class BuyerCheckoutDetail extends Model
      */
     public function paymentDetail(): BelongsTo
     {
-        return $this->belongsTo(PaymentDetail::class, 'PaymentId', 'PaymentId');
+        return $this->belongsTo(PaymentDetail::class, 'PaymentId');
     }
 }

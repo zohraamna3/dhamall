@@ -1,7 +1,15 @@
 <?php
+
+use App\Http\Controllers\Admin\AdminFaqsController;
+use App\Http\Controllers\Admin\AdminReturnsAndRefundsController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Buyer\AboutUsController;
+use App\Http\Controllers\Buyer\ContactUsController;
+use App\Http\Controllers\Buyer\FaqsController;
+use App\Http\Controllers\Buyer\FeedbackController;
+use App\Http\Controllers\Buyer\ReturnsAndRefundsController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Buyer\TermsAndConditionsController;
 
 //use App\Http\Controllers\Auth\PasswordResetLinkController;
 //use App\Http\Controllers\HomeController;
@@ -16,9 +24,6 @@ use Illuminate\Support\Facades\Auth;
 //use App\Http\Controllers\AuthenticatedSessionController;
 
 
-
-
-use App\Http\Controllers\AuthController;
 // Authentication Routes
 Route::get('/signin', [AuthController::class, 'showSignIn'])->name('signin');
 Route::post('/signin', [AuthController::class, 'signIn'])->name('login');
@@ -27,6 +32,122 @@ Route::get('/signup', [AuthController::class, 'showSignUp'])->name('signup');
 Route::post('/signup', [AuthController::class, 'signUp'])->name('register');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/contact-us', function () {
+    return view('users.buyer.pages.contact-us');
+})->name('contact-us');
+
+Route::post('/contact-us', [ContactUsController::class, 'store'])->name('contact-us.store');
+
+Route::get('/about-us', [AboutUsController::class, 'index'])->name('about-us');
+
+Route::get('/faqs', [FaqsController::class, 'index'])->name('faqs');
+
+
+
+Route::get('/returns-refunds', [ReturnsAndRefundsController::class, 'index'])->name('returns-refunds');
+
+Route::get('/feedback', function () {
+    return view('users.buyer.pages.feedback');
+})->name('feedback');
+
+Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
+
+
+Route::get('/terms-conditions', [TermsAndConditionsController::class, 'index'])->name('terms-conditions');
+
+// Buyer route
+Route::get('/privacy-policy', [\App\Http\Controllers\Buyer\PrivacyPolicyController::class, 'index'])
+    ->name('privacy-policy');
+
+
+// Buyer route
+Route::get('/shipping-policy', [\App\Http\Controllers\Buyer\ShippingPolicyController::class, 'index'])
+    ->name('shipping-policy');
+
+// Profile route
+Route::get('/profile', [\App\Http\Controllers\Buyer\ProfileController::class, 'index'])
+    ->middleware('auth')
+    ->name('profile.edit');
+
+
+// Notification routes
+Route::post('/notifications/{notification}/mark-as-read', function ($notificationId) {
+    $notification = \App\Models\Notification::findOrFail($notificationId);
+    $notification->update(['Status' => 'Viewed']);
+    return response()->json(['success' => true]);
+})->middleware('auth')->name('notifications.mark-as-read');
+
+// Payment routes
+Route::prefix('payment')->middleware('auth')->group(function () {
+    Route::get('/create', [\App\Http\Controllers\PaymentController::class, 'create'])->name('payment.create');
+    Route::post('/store', [\App\Http\Controllers\PaymentController::class, 'store'])->name('payment.store');
+    Route::put('/update/{paymentDetail}', [\App\Http\Controllers\PaymentController::class, 'update'])->name('payment.update');
+});
+
+
+
+
+// Admin routes
+Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
+    Route::resource('shipping-policy', \App\Http\Controllers\Admin\ShippingPolicyController::class)
+        ->names([
+            'index' => 'admin.shipping-policy.index',
+            'create' => 'admin.shipping-policy.create',
+            'store' => 'admin.shipping-policy.store',
+            'edit' => 'admin.shipping-policy.edit',
+            'update' => 'admin.shipping-policy.update',
+            'destroy' => 'admin.shipping-policy.destroy',
+        ]);
+});
+
+// Admin routes
+Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
+    Route::resource('privacy-policy', \App\Http\Controllers\Admin\PrivacyPolicyController::class)
+        ->names([
+            'index' => 'admin.privacy-policy.index',
+            'create' => 'admin.privacy-policy.create',
+            'store' => 'admin.privacy-policy.store',
+            'edit' => 'admin.privacy-policy.edit',
+            'update' => 'admin.privacy-policy.update',
+            'destroy' => 'admin.privacy-policy.destroy',
+        ]);
+});
+
+Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
+    Route::get('faqs', [AdminFaqsController::class, 'index'])->name('admin.faqs.index');
+    Route::get('faqs/create', [AdminFaqsController::class, 'create'])->name('admin.faqs.create');
+    Route::post('faqs', [AdminFaqsController::class, 'store'])->name('admin.faqs.store');
+    Route::get('faqs/{id}/edit', [AdminFaqsController::class, 'edit'])->name('admin.faqs.edit');
+    Route::put('faqs/{id}', [AdminFaqsController::class, 'update'])->name('admin.faqs.update');
+    Route::delete('faqs/{id}', [AdminFaqsController::class, 'destroy'])->name('admin.faqs.destroy');
+});
+
+
+
+Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
+    Route::get('returns-refunds', [AdminReturnsAndRefundsController::class, 'index'])->name('admin.returns-refunds.index');
+    Route::get('returns-refunds/create', [AdminReturnsAndRefundsController::class, 'create'])->name('admin.returns-refunds.create');
+    Route::post('returns-refunds', [AdminReturnsAndRefundsController::class, 'store'])->name('admin.returns-refunds.store');
+    Route::get('returns-refunds/{id}/edit', [AdminReturnsAndRefundsController::class, 'edit'])->name('admin.returns-refunds.edit');
+    Route::put('returns-refunds/{id}', [AdminReturnsAndRefundsController::class, 'update'])->name('admin.returns-refunds.update');
+    Route::delete('returns-refunds/{id}', [AdminReturnsAndRefundsController::class, 'destroy'])->name('admin.returns-refunds.destroy');
+});
+
+
+
+Route::prefix('admin')->group(function () {
+    Route::resource('terms-and-conditions', \App\Http\Controllers\Admin\TermsAndConditionsController::class)
+        ->names([
+            'index' => 'admin.terms-and-conditions.index',
+            'create' => 'admin.terms-and-conditions.create',
+            'store' => 'admin.terms-and-conditions.store',
+            'edit' => 'admin.terms-and-conditions.edit',
+            'update' => 'admin.terms-and-conditions.update',
+            'destroy' => 'admin.terms-and-conditions.destroy',
+        ]);
+});
+
 
 // Home Route (Earbuds E-commerce Homepage)
 //Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -193,13 +314,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 //    return view('users.createnewpassword');
 //});
 //
-//Route::get('/contact-us', function () {
-//    return view('users.buyer.pages.contact-us');
-//})->name('contact-us');
 //
-//Route::get('/about-us', function () {
-//    return view('users.buyer.pages.about-us');
-//})->name('about-us');
 //
 //Route::get('/privacy-policy', function () {
 //    return view('users.buyer.pages.privacy-policy');
@@ -208,22 +323,13 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 //    return view('users.buyer.pages.shipping-policy');
 //})->name('shipping-policy');
 //
-//Route::get('/terms-conditions', function () {
-//    return view('users.buyer.pages.terms-conditions');
-//})->name('terms-conditions');
 //
 //
 //Route::get('/collaboration', function () {
 //    return view('users.buyer.pages.collaboration');
 //})->name('collaboration');
 //
-//Route::get('/returns-refunds', function () {
-//    return view('users.buyer.pages.returns-refunds');
-//})->name('returns-refunds');
 //
-//Route::get('/faqs', function () {
-//    return view('users.buyer.pages.faqs');
-//})->name('faqs');
 //
 //Route::get('/career', function () {
 //    return view('users.buyer.pages.career');

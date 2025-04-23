@@ -19,16 +19,17 @@
         <div class="mt-4">
             <h3 class="text-warning">Return Policy</h3>
             <ul>
-                <li>30-day return window</li>
-                <li>Items must be unused and in original packaging</li>
-                <li>Contact our <a href="{{ route('contact-us') }}" class="text-warning">customer support</a> to initiate a return</li>
+                @foreach ($returns as $return)
+                    <li>{{ $return->Description }}</li>
+                @endforeach
             </ul>
         </div>
         <div class="mt-4">
             <h3 class="text-warning">Refund Policy</h3>
             <ul>
-                <li>Refunds processed within 5-7 business days</li>
-                <li>Refund issued to the original payment method</li>
+                @foreach ($refunds as $refund)
+                    <li>{{ $refund->Description }}</li>
+                @endforeach
             </ul>
         </div>
     </div>

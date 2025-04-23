@@ -9,7 +9,7 @@
                     <li><a href="{{ route('profile.edit', ['section' => 'orders']) }}" class="footer-link">Track Order</a></li>
                     <li><a href="{{route('returns-refunds')}}" class="footer-link">Returns & Refunds</a></li>
                     <li><a href="{{route('faqs')}}" class="footer-link">FAQs</a></li>
-                    <li><a href="{{route('career')}}" class="footer-link">Career</a></li>
+                    <li><a href="{{route('feedback')}}" class="footer-link">Feedback</a></li>
                 </ul>
             </div>
 
@@ -18,7 +18,6 @@
                 <h5 class="fw-bold">Company</h5>
                 <ul class="list-unstyled">
                     <li><a href="{{route('about-us')}}" class="footer-link">About Us</a></li>
-                    <li><a href="{{route('collaboration')}}" class="footer-link">Collaboration</a></li>
                 </ul>
             </div>
 

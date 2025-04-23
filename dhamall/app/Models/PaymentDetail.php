@@ -3,11 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class PaymentDetail extends Model
 {
-    use HasFactory;
+    protected $table = 'payment_details';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'PaymentMethod',
@@ -15,6 +15,15 @@ class PaymentDetail extends Model
         'ExpiryDate',
         'CVV',
         'NameOnCard',
-        'Zip',
+        'Zip'
     ];
+
+    protected $casts = [
+        'ExpiryDate' => 'date'
+    ];
+
+    public function checkoutDetails()
+    {
+        return $this->hasMany(BuyerCheckoutDetail::class, 'PaymentId');
+    }
 }

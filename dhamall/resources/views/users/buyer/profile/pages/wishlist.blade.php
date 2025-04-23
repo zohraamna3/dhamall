@@ -12,19 +12,16 @@
         <div class="d-flex flex-wrap gap-3 justify-content-center">
             @foreach ($wishlist as $item)
                 <div class="product-card p-3 text-center shadow-sm rounded border" style="width: 160px; background: #fff;">
-                    <img src="{{ asset('images/products/' . $item->product_id . '.jpg') }}"
-                         class="rounded img-fluid mb-2"
-                         alt="Product Image">
-                    <p class="mb-1 fw-bold text-dark">Product ID: {{ $item->product_id }}</p>
+                    @if($item->product && $item->product->images->isNotEmpty())
+                        <img src="{{ asset($item->product->images->first()->ImageURL) }}"
+                             class="rounded img-fluid mb-2"
+                             alt="Product Image" style="height: 120px; object-fit: cover;">
+                    @endif
+                    <p class="mb-1 fw-bold text-dark">{{ $item->product->ProductName ?? 'Product' }}</p>
+                    <p class="mb-1">₹{{ number_format($item->product->Price ?? 0, 2) }}</p>
                     <button class="btn btn-danger btn-sm">Remove</button>
                 </div>
             @endforeach
         </div>
     @endif
 </div>
-<style>
-    .product-card img {
-        height: 120px;
-        object-fit: cover;
-    }
-</style>

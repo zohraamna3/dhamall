@@ -47,13 +47,42 @@
                 <form action="{{ route('login') }}" method="POST">
 
                     @csrf
+                    <!-- Add this right after the opening form tag -->
+                    @if($errors->any())
+                        <div class="alert alert-danger">
+                            <ul class="mb-0">
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    @if(session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
                     <div class="mb-3">
                         <label class="form-label">Email address</label>
-                        <input type="email" name="email" class="form-control" required>
+                        <input type="EmailAddress" name="EmailAddress" class="form-control @error('EmailAddress') is-invalid @enderror"
+                               value="{{ old('EmailAddress') }}" required>
+                        @error('email')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control" required>
+                        <input type="Password" name="Password" class="form-control @error('Password') is-invalid @enderror" required>
+                        @error('Password')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 {{--                    <div class="text-end">--}}
 {{--                        <a href="{{route('password.request')}}" class="text-decoration-none">Forgot your password?</a>--}}
