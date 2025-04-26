@@ -61,6 +61,19 @@ class User extends Authenticatable
         );
     }
 
+    // In App\Models\User.php
+    public function addresses()
+    {
+        return $this->hasManyThrough(
+            Address::class,
+            BuyerCheckoutDetail::class,
+            'UserId', // Foreign key on buyer_checkout_details table
+            'id', // Foreign key on addresses table
+            'id', // Local key on users table
+            'AddressId' // Local key on buyer_checkout_details table
+        );
+    }
+
     public function checkoutDetails()
     {
         return $this->hasOne(BuyerCheckoutDetail::class, 'UserId');

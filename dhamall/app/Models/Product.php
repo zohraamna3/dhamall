@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {
+
     protected $table = 'products';
     protected $primaryKey = 'id';
 
@@ -17,56 +20,68 @@ class Product extends Model
         'ProductName',
         'Description',
         'Price',
-        'StockQuantity',
+        'CompareAtPrice',
+        'QuantityInStock',
         'NumberOfOrders',
-        'ProductStatus'
+        'ProductStatus',
+        'SKU',
+        'Rating',
+        'ReviewCount'
     ];
 
     protected $casts = [
         'Price' => 'decimal:2',
-        'StockQuantity' => 'integer',
-        'NumberOfOrders' => 'integer'
+        'CompareAtPrice' => 'decimal:2',
+        'QuantityInStock' => 'integer',
+        'NumberOfOrders' => 'integer',
+        'Rating' => 'decimal:2',
+        'ReviewCount' => 'integer'
     ];
 
     // Relationships
-    public function brand()
+    public function brand(): BelongsTo
     {
         return $this->belongsTo(Brand::class, 'BrandId');
     }
 
-    public function seller()
+    public function seller(): BelongsTo
     {
         return $this->belongsTo(User::class, 'SellerId');
     }
 
-    public function category()
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'CategoryId');
     }
 
-    public function shipping()
+    public function shipping(): BelongsTo
     {
         return $this->belongsTo(Shipping::class, 'ShippingId');
     }
 
-    public function images()
+    public function images(): HasMany
     {
         return $this->hasMany(ProductImage::class, 'ProductId');
     }
 
-    public function orderItems()
+    public function orderItems(): HasMany
     {
         return $this->hasMany(OrderItem::class, 'ProductId');
     }
 
-    public function cartItems()
+    public function cartItems(): HasMany
     {
         return $this->hasMany(CartItem::class, 'ProductId');
     }
 
-    public function wishlistItems()
+    public function wishlistItems(): HasMany
     {
         return $this->hasMany(WishlistItem::class, 'ProductId');
+    }
+
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(ProductReview::class, 'ProductId');
     }
 
     // Scopes
@@ -78,5 +93,16 @@ class Product extends Model
     public function scopePopular($query, $limit = 5)
     {
         return $query->orderBy('NumberOfOrders', 'desc')->take($limit);
+    }
+
+    /**
+     * Update product rating statistics
+     */
+    public function updateRatingStats(): void
+    {
+        $this->update([
+            'Rating' => $this->reviews()->avg('Rating') ?? 0,
+            'ReviewCount' => $this->reviews()->count()
+        ]);
     }
 }

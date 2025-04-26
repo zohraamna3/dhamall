@@ -1,17 +1,27 @@
-<div class="col-md-6 mb-3">
-    <div id="product-carousel" class="carousel slide shadow-lg rounded" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            @foreach($product->images as $key => $image)
-                <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                    <img src="{{ $image->image_url }}" class="d-block w-100 rounded" alt="Product Image">
-                </div>
-            @endforeach
+<div class="col-md-6 mb-4">
+    <div class="row">
+        <!-- Main Image -->
+        <div class="col-12 mb-3">
+            <div class="ratio ratio-1x1 bg-dark rounded">
+                <img id="mainProductImage"
+                     src="{{ $product->images->first()->image_url ?? '/images/placeholder.jpg' }}"
+                     class="product-image w-100 rounded"
+                     alt="{{ $product->ProductName }}">
+            </div>
         </div>
-        <a class="carousel-control-prev" href="#product-carousel" role="button" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        </a>
-        <a class="carousel-control-next" href="#product-carousel" role="button" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        </a>
+
+        <!-- Thumbnails -->
+        <div class="col-12">
+            <div class="d-flex flex-wrap gap-2">
+                @foreach($product->images as $image)
+                    <div>
+                        <img src="{{ $image->image_url }}"
+                             data-full-image="{{ $image->image_url }}"
+                             class="thumbnail rounded"
+                             alt="Thumbnail {{ $loop->index + 1 }}">
+                    </div>
+                @endforeach
+            </div>
+        </div>
     </div>
 </div>

@@ -1,7 +1,6 @@
 @extends('users.buyer.layouts.app')
 
 @section('hero')
-
     <div class="position-relative text-white text-center py-5 w-100"
          style="background: linear-gradient(135deg, #0d0d1a, #1a1a2e); overflow: hidden;">
         <!-- Soft Gradient Overlay -->
@@ -22,7 +21,6 @@
                class="btn text-dark px-4 py-2 mt-4 fw-bold animate__animated animate__fadeIn animate__delay-2s shop-btn">
                 Shop Now <i class="fas fa-shopping-cart ms-2"></i>
             </a>
-
         </div>
 
         <!-- Floating Earbud Image with Animation -->
@@ -31,119 +29,113 @@
                  alt="Earbuds" class="img-fluid" style="max-width: 280px; width: 100%;">
         </div>
     </div>
-
 @endsection
 
-
 @section('content')
-        <!-- Featured Products -->
-        <section id="shop" class="my-5"
-                 style="background: linear-gradient(135deg, #1a1a2e, #0d0d1a); padding: 30px; border-radius: 15px;">
-            <h2 style="color: #b3a31c;" class="text-center font-weight-bold mb-5">Top Selling Earbuds</h2>
-            <div class="row">
-                @foreach($earbuds as $earbud)
-                    <div class="col-12 col-sm-6 col-md-4 mb-4 mb-lg-0 p-3">
-                        <div
-                            class="card shadow-lg border-0 rounded-lg overflow-hidden transition-transform transform hover:scale-105">
-                            <div class="position-relative">
-                                <img
-                                    src="https://res.cloudinary.com/ddoeppfx0/image/upload/e_background_removal,f_png/cld-sample-5"
-                                    class="card-img-top img-fluid" style="height: 250px; object-fit: cover;">
-                                <span
-                                    class="badge badge-warning position-absolute top-0 end-0 m-2 px-3 py-2 rounded-pill">New</span>
-                            </div>
-                            <div class="card-body text-center"
-                                 style="background: linear-gradient(135deg, #1a1a2e, #24243e); color: #b3a31c;">
-                                <h5 class="card-title fw-bold">{{ $earbud->name }}</h5>
-                                <p class="card-text text-truncate"
-                                   style="max-height: 60px; overflow: hidden;">{{ $earbud->description }}</p>
-                                <p class="fw-bold fs-5 text-warning">${{ $earbud->price }}</p>
-                                <a href="{{ route('product.show', $earbud->id) }}"
-                                   class="btn w-100 text-white fw-bold py-2 view-details-btn">
-                                    View Details <i class="fas fa-arrow-right ms-2"></i>
-                                </a>
-
-                            </div>
+    <!-- Featured Products -->
+    <section id="shop" class="my-5"
+             style="background: linear-gradient(135deg, #1a1a2e, #0d0d1a); padding: 30px; border-radius: 15px;">
+        <h2 style="color: #b3a31c;" class="text-center font-weight-bold mb-5">Top Selling Earbuds</h2>
+        <div class="row">
+            @foreach($earbuds as $earbud)
+                <div class="col-12 col-sm-6 col-md-4 mb-4 mb-lg-0 p-3">
+                    <div class="card shadow-lg border-0 rounded-lg overflow-hidden transition-transform transform hover:scale-105">
+                        <div class="position-relative">
+                            @if($earbud->images->isNotEmpty())
+                                <img src="{{ $earbud->images->first()->ImageURL }}" class="card-img-top img-fluid" style="height: 250px; object-fit: cover;">
+                            @else
+                                <img src="https://res.cloudinary.com/ddoeppfx0/image/upload/e_background_removal,f_png/cld-sample-5" class="card-img-top img-fluid" style="height: 250px; object-fit: cover;">
+                            @endif
+                            <span class="badge badge-warning position-absolute top-0 end-0 m-2 px-3 py-2 rounded-pill">New</span>
+                        </div>
+                        <div class="card-body text-center"
+                             style="background: linear-gradient(135deg, #1a1a2e, #24243e); color: #b3a31c;">
+                            <h5 class="card-title fw-bold">{{ $earbud->ProductName }}</h5>
+                            <p class="card-text text-truncate"
+                               style="max-height: 60px; overflow: hidden;">{{ $earbud->Description }}</p>
+                            <p class="fw-bold fs-5 text-warning">${{ number_format($earbud->Price, 2) }}</p>
+                            <a href="{{ route('product.show', $earbud->id) }}"
+                               class="btn w-100 text-white fw-bold py-2 view-details-btn">
+                                View Details <i class="fas fa-arrow-right ms-2"></i>
+                            </a>
                         </div>
                     </div>
+                </div>
+            @endforeach
+        </div>
+    </section>
 
-                @endforeach
-            </div>
-        </section>
-
-        <!-- Categories -->
-        <section class="my-5"
-                 style="background: linear-gradient(135deg, #1a1a2e, #0d0d1a); padding: 30px; border-radius: 15px;">
-            <h2 class="text-center font-weight-bold mb-5" style="color: #b3a31c;">Shop by Category</h2>
-            <div class="row">
+    <!-- Categories -->
+    <section class="my-5"
+             style="background: linear-gradient(135deg, #1a1a2e, #0d0d1a); padding: 30px; border-radius: 15px;">
+        <h2 class="text-center font-weight-bold mb-5" style="color: #b3a31c;">Shop by Category</h2>
+        <div class="row">
+            @foreach($categories as $category)
                 <div class="col-12 col-md-6 mb-4">
-                    <div
-                        class="card text-white shadow-lg border-0 rounded-lg overflow-hidden transition-transform transform hover:scale-105"
-                        style="background: linear-gradient(135deg, #1a1a2e, #24243e);">
+                    <div class="card text-white shadow-lg border-0 rounded-lg overflow-hidden transition-transform transform hover:scale-105"
+                         style="background: linear-gradient(135deg, #1a1a2e, #24243e);">
                         <div class="card-body text-center p-5">
                             <i class="fas fa-headphones-alt fa-3x text-warning mb-3"></i>
-                            <h5 class="card-title fw-bold">Noise Cancelling</h5>
-                            <p class="card-text text-muted">Block out distractions and immerse in pure sound.</p>
-                            <a href="{{route('search')}}" class="btn w-100 text-white fw-bold py-2 shop-now-btn">
+                            <h5 class="card-title fw-bold">{{ $category->CategoryName }}</h5>
+                            <p class="card-text text-muted">Explore our {{ $category->CategoryName }} collection.</p>
+                            <a href="{{ route('search', ['category' => $category->id]) }}" class="btn w-100 text-white fw-bold py-2 shop-now-btn">
                                 Shop Now <i class="fas fa-shopping-cart ms-2"></i>
                             </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-6 mb-4">
-                    <div
-                        class="card text-white shadow-lg border-0 rounded-lg overflow-hidden transition-transform transform hover:scale-105"
-                        style="background: linear-gradient(135deg, #1a1a2e, #24243e);">
-                        <div class="card-body text-center p-5">
-                            <i class="fas fa-battery-full fa-3x text-warning mb-3"></i>
-                            <h5 class="card-title fw-bold">Long Battery Life</h5>
-                            <p class="card-text text-muted">Stay connected all day with extended battery power.</p>
-                            <a href="{{route('search')}}" class="btn w-100 text-white fw-bold py-2 shop-now-btn">
-                                Shop Now <i class="fas fa-shopping-cart ms-2"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+            @endforeach
+        </div>
+    </section>
 
+    <!-- Customer Reviews -->
+    <section class="my-5"
+             style="background: linear-gradient(135deg, #1a1a2e, #0d0d1a); padding: 30px; border-radius: 15px;">
+        <h2 class="text-center font-weight-bold mb-5" style="color: #b3a31c;">What Our Customers Say</h2>
+        <div class="row">
+            @foreach($reviews as $review)
+                <div class="col-12 col-md-4 mb-4">
+                    <div class="card shadow-lg border-0 position-relative overflow-hidden"
+                         style="background: linear-gradient(135deg, #1a1a2e, #24243e); min-height:30vh; border-radius: 15px;">
+                        <div class="card-body p-4">
+                            <!-- Quote Icon -->
+                            <i class="fas fa-quote-left text-warning" style="font-size: 24px;"></i>
 
-        <!-- Customer Reviews -->
-        <section class="my-5"
-                 style="background: linear-gradient(135deg, #1a1a2e, #0d0d1a); padding: 30px; border-radius: 15px;">
-            <h2 class="text-center font-weight-bold mb-5" style="color: #b3a31c;">What Our Customers Say</h2>
-            <div class="row">
-                @foreach($reviews as $review)
-                    <div class="col-12 col-md-4 mb-4">
-                        <div class="card shadow-lg border-0 position-relative overflow-hidden"
-                             style="background: linear-gradient(135deg, #1a1a2e, #24243e); min-height:30vh; border-radius: 15px;">
-                            <div class="card-body p-4">
-                                <!-- Quote Icon -->
-                                <i class="fas fa-quote-left text-warning" style="font-size: 24px;"></i>
+                            <!-- Review Text -->
+                            <p class="italic text-light mt-2"
+                               style="font-size: 1.1rem; line-height: 1.6; text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);">
+                                "{{ $review->Comment }}"
+                            </p>
 
-                                <!-- Review Text -->
-                                <p class="italic text-light mt-2"
-                                   style="font-size: 1.1rem; line-height: 1.6; text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);">
-                                    "{{ $review->comment }}"
-                                </p>
+                            <!-- User Name -->
+                            <p class="fw-bold mt-3 text-warning" style="font-size: 1rem;">
+                                @if($review->user)
+                                    — {{ $review->user->Name }}
+                                @else
+                                    — Anonymous User
+                                @endif
+                            </p>
 
-                                <!-- User Name -->
-                                <p class="fw-bold mt-3 text-warning" style="font-size: 1rem;">
-                                    — {{ $review->user->name }}
-                                </p>
+                            <!-- Review Rating -->
+                            <div class="mt-2">
+                                @for($i = 1; $i <= 5; $i++)
+                                    @if($i <= $review->Rating)
+                                        <i class="fas fa-star text-warning"></i>
+                                    @else
+                                        <i class="far fa-star text-warning"></i>
+                                    @endif
+                                @endfor
                             </div>
-
-                            <!-- Hover Effect -->
-                            <div
-                                class="position-absolute top-0 start-0 w-100 h-100 bg-gradient opacity-0 transition-opacity"
-                                style="background: rgba(255, 255, 255, 0.05);"></div>
                         </div>
+
+                        <!-- Hover Effect -->
+                        <div class="position-absolute top-0 start-0 w-100 h-100 bg-gradient opacity-0 transition-opacity"
+                             style="background: rgba(255, 255, 255, 0.05);"></div>
                     </div>
-
-                @endforeach
-            </div>
-        </section>
-
+                </div>
+            @endforeach
+        </div>
+    </section>
 @endsection
 
 @section('scripts')
@@ -152,7 +144,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 @endsection
-
 
 <!-- Floating Animation -->
 <style>
@@ -209,6 +200,4 @@
         transform: scale(1.02);
         box-shadow: 0px 0px 8px rgba(255, 204, 0, 0.7);
     }
-
 </style>
-

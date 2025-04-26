@@ -7,7 +7,10 @@ use App\Http\Controllers\Buyer\AboutUsController;
 use App\Http\Controllers\Buyer\ContactUsController;
 use App\Http\Controllers\Buyer\FaqsController;
 use App\Http\Controllers\Buyer\FeedbackController;
+use App\Http\Controllers\Buyer\HomeController;
+use App\Http\Controllers\Buyer\ProductController;
 use App\Http\Controllers\Buyer\ReturnsAndRefundsController;
+use App\Http\Controllers\Buyer\SearchController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Buyer\TermsAndConditionsController;
 
@@ -85,6 +88,43 @@ Route::prefix('payment')->middleware('auth')->group(function () {
     Route::put('/update/{paymentDetail}', [\App\Http\Controllers\PaymentController::class, 'update'])->name('payment.update');
 });
 
+use App\Http\Controllers\Buyer\CartController;
+use App\Http\Controllers\Buyer\CheckoutController;
+
+// Product routes
+Route::prefix('products')->group(function () {
+    Route::get('/', [ProductController::class, 'index'])->name('products.index');
+    Route::get('/{product}', [ProductController::class, 'show'])->name('products.show');
+});
+
+// Cart routes
+Route::prefix('cart')->middleware(['auth'])->group(function () {
+    Route::get('/', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/add', [CartController::class, 'add'])->name('cart.add');
+    Route::put('/update/{item}', [CartController::class, 'update'])->name('cart.update');
+    Route::delete('/remove/{item}', [CartController::class, 'remove'])->name('cart.remove');
+});
+
+// Checkout routes
+Route::prefix('checkout')->middleware(['auth'])->group(function () {
+    Route::get('/', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::post('/process', [CheckoutController::class, 'process'])->name('checkout.process');
+    Route::get('/success', [CheckoutController::class, 'success'])->name('checkout.success');
+});// Reviews routes
+Route::middleware(['auth'])->group(function () {
+    Route::post('/products/{product}/reviews', [ProductController::class, 'storeReview'])
+        ->name('reviews.store');
+});
+
+
+
+// Cart routes - make sure to include these
+Route::prefix('cart')->middleware(['auth'])->group(function () {
+    Route::get('/', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/add', [CartController::class, 'add'])->name('cart.add');
+    Route::put('/update/{item}', [CartController::class, 'update'])->name('cart.update');
+    Route::delete('/remove/{item}', [CartController::class, 'remove'])->name('cart.remove');
+});
 
 
 
@@ -150,7 +190,7 @@ Route::prefix('admin')->group(function () {
 
 
 // Home Route (Earbuds E-commerce Homepage)
-//Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Profile Route
 //Route::get('/profile', function () {
@@ -221,7 +261,7 @@ Route::prefix('admin')->group(function () {
 //
 //
 //
-//Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
+Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
 //
 //
 //Route::middleware(['auth'])->group(function () {
@@ -232,7 +272,7 @@ Route::prefix('admin')->group(function () {
 //
 //});
 //
-//Route::get('/search', [SearchController::class, 'index'])->name('search');
+Route::get('/search', [SearchController::class, 'index'])->name('search');
 //
 //Route::prefix('seller')->group(function () {
 //    Route::get('/dashboard', [SellerController::class, 'dashboard'])->name('seller.dashboard');

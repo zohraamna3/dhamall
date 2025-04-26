@@ -15,4 +15,6 @@ class Address extends Model
         'Street',
         'PostalCode',
     ];
+
+
 }
