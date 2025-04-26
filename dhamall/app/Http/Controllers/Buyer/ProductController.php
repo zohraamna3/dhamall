@@ -78,7 +78,7 @@ class ProductController extends Controller
 
         // Get all categories and brands for filters
         $categories = Category::whereNull('ParentCategoryId')->orWhere('ParentCategoryId', 0)->get();
-        $brands = \App\Models\Brand::orderBy('BrandName')->get();
+        $brands = \App\Models\Brand::orderBy('Name')->get();
 
         return view('users.buyer.products.index', compact('products', 'categories', 'brands'));
     }
@@ -104,7 +104,7 @@ class ProductController extends Controller
             return redirect()->back()->withErrors(['error' => 'Product not found.']);
         }
 
-        Log::info('Product loaded:', ['product' => $product]); // Log loaded product for debugging
+//        Log::info( $product); // Log loaded product for debugging
 
         // Get related products (4 random products from the same category)
         $relatedProducts = Product::with('images')
@@ -115,9 +115,10 @@ class ProductController extends Controller
             ->take(4)
             ->get();
 
-        // Calculate average rating
-        $avgRating = $product->Rating; // From cached value
-        $reviewCount = $product->ReviewCount; // From cached value
+        Log::info($relatedProducts);
+//        Log::info($product->reviews);
+        $avgRating = $this->calculateRating($product);
+        $reviewCount =  count(json_decode($product->reviews, true)); // From cached value
 
         return view('users.buyer.product.product_details_page', compact(
             'product',
@@ -125,6 +126,29 @@ class ProductController extends Controller
             'avgRating',
             'reviewCount'
         ));
+    }
+
+    private function calculateRating($product){
+
+
+        $reviews = json_decode($product->reviews, true);
+
+// Initialize variables for calculating average
+        $totalRating = 0;
+        $numberOfReviews = count($reviews);
+
+// Sum all the ratings
+        foreach ($reviews as $review) {
+            $totalRating += $review['Rating'];
+        }
+
+// Calculate average
+        $avgRating = $numberOfReviews > 0 ? $totalRating / $numberOfReviews : 0;
+
+
+        return $avgRating;
+        // Calculate average rating
+
     }
 
     /**

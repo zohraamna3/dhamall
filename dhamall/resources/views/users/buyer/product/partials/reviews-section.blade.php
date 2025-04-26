@@ -29,12 +29,20 @@
                         @endphp
                         <div class="row align-items-center mb-2">
                             <div class="col-1">
-                                <span class="text-light">{{ $i }} star</span>
+                        <span class="text-light">
+                            @for ($j = 1; $j <= 5; $j++)
+                                @if ($j <= $i)
+                                    <i class="fas fa-star text-warning"></i>
+                                @else
+                                    <i class="far fa-star text-warning"></i>
+                                @endif
+                            @endfor
+                            {{ $i }} Star
+                        </span>
                             </div>
                             <div class="col-8">
                                 <div class="progress bg-dark" style="height: 10px;">
-                                    <div class="progress-bar bg-warning" role="progressbar"
-                                         style="width: {{ $percentage }}%"></div>
+                                    <div class="progress-bar bg-warning" role="progressbar" style="width: {{ $percentage }}%"></div>
                                 </div>
                             </div>
                             <div class="col-1">
@@ -63,11 +71,11 @@
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <div class="d-flex align-items-center">
                                 <div class="me-3">
-                                    <img src="{{ $review->user->profile_image ?? asset('images/default-avatar.png') }}"
+                                    <img src="{{ $review->user->ImageURL ?? asset('images/default-avatar.png') }}"
                                          class="rounded-circle" width="50" height="50" alt="User Avatar">
                                 </div>
                                 <div>
-                                    <strong class="text-warning">{{ $review->user->name }}</strong>
+                                    <strong class="text-warning">{{ $review->user->Name }}</strong>
                                     <div class="rating-stars small">
                                         @for($i = 1; $i <= 5; $i++)
                                             @if($i <= $review->Rating)
@@ -79,7 +87,17 @@
                                     </div>
                                 </div>
                             </div>
-                            <span class="text-muted small">{{ $review->PostedOn->format('M d, Y') }}</span>
+                            <span class="badge
+                                @if($review->Sentiment == 'Positive')
+                                    badge-success
+                                @elseif($review->Sentiment == 'Negative')
+                                    badge-danger
+                                @else
+                                    badge-secondary
+                                @endif">
+                                {{ $review->Sentiment }}
+                            </span>
+                            <span class="small">{{ $review->PostedOn->format('M d, Y') }}</span>
                         </div>
                         <div class="ps-5">
                             <p class="mb-2">{{ $review->Comment }}</p>
@@ -101,6 +119,8 @@
         </div>
     </div>
 </div>
+
+
 
 <!-- Add Review Modal -->
 @auth

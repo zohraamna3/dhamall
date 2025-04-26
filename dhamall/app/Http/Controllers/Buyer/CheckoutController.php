@@ -5,31 +5,36 @@ namespace App\Http\Controllers\Buyer;
 use App\Http\Controllers\Controller;
 use App\Models\BuyerCheckoutDetail;
 use App\Models\Cart;
-use App\Models\CartItem;
 use App\Models\PaymentDetail;
 use App\Models\Address;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class CheckoutController extends Controller
 {
     public function index()
     {
         $user = Auth::user();
-        $cart = Cart::with(['items.product'])->where('UserId', $user->id)->firstOrFail();
+
+        // Retrieve the user's cart with its items
+        $cart = Cart::with(['items.product'])->where('UserId', $user->id)->first();
 
         if ($cart->items->isEmpty()) {
-            return redirect()->route('cart.index')->with('error', 'Your cart is empty');
+            return redirect()->route('profile.edit')->with('error', 'Your cart is empty');
         }
 
-        $total = $cart->items->sum('TotalPrice');
+        // Fetch the checkout details (shipping address and payment method)
+        $checkoutDetail = $user->checkoutDetails; // Get the relationship defined in User model
+        $shippingAddress = $checkoutDetail ? $checkoutDetail->address : null; // Get address through checkout detail
+        $paymentMethod = $checkoutDetail ? $checkoutDetail->paymentDetail : null; // Get payment method through checkout detail
 
-        // Get addresses through BuyerCheckoutDetail
-        $addresses = $user->addresses;
 
-        $paymentMethods = $user->paymentDetails;
+        Log::info($paymentMethod);
+        Log::info($shippingAddress);
+        Log::info($checkoutDetail);
 
-        return view('users.buyer.product.checkout', compact('cart', 'total', 'addresses', 'paymentMethods'));
+        return view('users.buyer.product.checkout', compact('cart', 'shippingAddress', 'paymentMethod'));
     }
 
     public function process(Request $request)
@@ -44,7 +49,7 @@ class CheckoutController extends Controller
         $cart = Cart::with('items')->where('UserId', $user->id)->firstOrFail();
 
         // Create checkout details
-        $checkout = BuyerCheckoutDetail::create([
+        BuyerCheckoutDetail::create([
             'UserId' => $user->id,
             'AddressId' => $request->address_id,
             'PaymentId' => $request->payment_id,

@@ -10,7 +10,7 @@
                             <div class="card h-100 border-0 shadow-sm product-card">
                                 <!-- Product Image -->
                                 <div class="position-relative overflow-hidden" style="height: 200px;">
-                                    <img src="{{ $product->images->first()->image_url ?? asset('images/placeholder.jpg') }}"
+                                    <img src="{{ $product->images->first()->ImageURL ?? asset('images/placeholder.jpg') }}"
                                          class="card-img-top h-100 object-fit-cover"
                                          alt="{{ $product->ProductName }}">
 

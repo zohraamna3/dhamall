@@ -85,7 +85,7 @@ Route::post('/notifications/{notification}/mark-as-read', function ($notificatio
 Route::prefix('payment')->middleware('auth')->group(function () {
     Route::get('/create', [\App\Http\Controllers\PaymentController::class, 'create'])->name('payment.create');
     Route::post('/store', [\App\Http\Controllers\PaymentController::class, 'store'])->name('payment.store');
-    Route::put('/update/{paymentDetail}', [\App\Http\Controllers\PaymentController::class, 'update'])->name('payment.update');
+    Route::post('/update/{paymentDetail}', [\App\Http\Controllers\PaymentController::class, 'update'])->name('payment.update');
 });
 
 use App\Http\Controllers\Buyer\CartController;

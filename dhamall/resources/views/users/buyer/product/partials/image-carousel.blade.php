@@ -4,7 +4,7 @@
         <div class="col-12 mb-3">
             <div class="ratio ratio-1x1 bg-dark rounded">
                 <img id="mainProductImage"
-                     src="{{ $product->images->first()->image_url ?? '/images/placeholder.jpg' }}"
+                     src="{{ $product->images->first()->ImageURL ?? '/images/placeholder.jpg' }}"
                      class="product-image w-100 rounded"
                      alt="{{ $product->ProductName }}">
             </div>
@@ -15,8 +15,8 @@
             <div class="d-flex flex-wrap gap-2">
                 @foreach($product->images as $image)
                     <div>
-                        <img src="{{ $image->image_url }}"
-                             data-full-image="{{ $image->image_url }}"
+                        <img src="{{ $image->ImageURL }}"
+                             data-full-image="{{ $image->ImageURL }}"
                              class="thumbnail rounded"
                              alt="Thumbnail {{ $loop->index + 1 }}">
                     </div>

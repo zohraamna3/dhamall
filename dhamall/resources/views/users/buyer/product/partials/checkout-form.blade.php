@@ -10,40 +10,40 @@
         <!-- Address -->
         <div class="mb-3">
             <h5 class="text-warning">Address Line 1</h5>
-            <p class="editable" data-field="address_line1">{{ $shippingAddress->address_line1 }}</p>
+            <p class="editable" data-field="address_line1">{{ $shippingAddress->Street }}</p>
             <input type="text" name="address_line1" class="form-control d-none"
-                   value="{{ $shippingAddress->address }}">
+                   value="{{ $shippingAddress->Street }}">
         </div>
 
         <!-- City -->
         <div class="mb-3">
             <h5 class="text-warning">City</h5>
-            <p class="editable" data-field="city">{{ $shippingAddress->city }}</p>
-            <input type="text" name="city" class="form-control d-none" value="{{ $shippingAddress->city }}">
+            <p class="editable" data-field="city">{{ $shippingAddress->CityOrState }}</p>
+            <input type="text" name="city" class="form-control d-none" value="{{ $shippingAddress->CityOrState }}">
         </div>
 
         <!-- State -->
         <div class="mb-3">
             <h5 class="text-warning">State</h5>
-            <p class="editable" data-field="state">{{ $shippingAddress->state }}</p>
+            <p class="editable" data-field="state">{{ $shippingAddress->CityOrState }}</p>
             <input type="text" name="state" class="form-control d-none"
-                   value="{{ $shippingAddress->state }}">
+                   value="{{ $shippingAddress->CityOrState }}">
         </div>
 
         <!-- Postal Code -->
         <div class="mb-3">
             <h5 class="text-warning">Postal Code</h5>
-            <p class="editable" data-field="zip_code">{{ $shippingAddress->zip_code }}</p>
+            <p class="editable" data-field="zip_code">{{ $shippingAddress->PostalCode }}</p>
             <input type="text" name="zip_code" class="form-control d-none"
-                   value="{{ $shippingAddress->zip_code }}">
+                   value="{{ $shippingAddress->PostalCode }}">
         </div>
 
         <!-- Country -->
         <div class="mb-3">
             <h5 class="text-warning">Country</h5>
-            <p class="editable" data-field="country">{{ $shippingAddress->country }}</p>
+            <p class="editable" data-field="country">{{ $shippingAddress->Country }}</p>
             <input type="text" name="country" class="form-control d-none"
-                   value="{{ $shippingAddress->country }}">
+                   value="{{ $shippingAddress->Country }}">
         </div>
     </div>
 
@@ -54,12 +54,12 @@
         </h4>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="payment_method" id="credit_card"
-                   value="credit_card" {{ $paymentMethod->payment_type == 'credit_card' ? 'checked' : 'disabled' }}>
+                   value="Credit Card" {{ $paymentMethod->PaymentMethod == 'Credit Card' ? 'checked' : 'disabled' }}>
             <label class="form-check-label" for="credit_card">Credit Card</label>
         </div>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="payment_method" id="paypal"
-                   value="paypal" {{ $paymentMethod->payment_type == 'paypal' ? 'checked' : 'disabled' }}>
+                   value="PayPal" {{ $paymentMethod->PaymentMethod == 'PayPal' ? 'checked' : 'disabled' }}>
             <label class="form-check-label" for="paypal">PayPal</label>
         </div>
     </div>
@@ -70,41 +70,38 @@
             Payment Details
         </h4>
 
-        <h5 class="text-warning">Payment Id</h5>
-        <p class="editable" data-field="payment_id">{{ $paymentMethod->id }}</p>
-
         <!-- Card Details (Visible only if Credit Card is selected) -->
-        <div id="cardDetails" class="{{ $paymentMethod->payment_type == 'paypal' ? 'd-none' : '' }}">
+        <div id="cardDetails" class="{{ $paymentMethod->PaymentMethod == 'paypal' ? 'd-none' : '' }}">
             <!-- Card Number -->
             <div class="mb-3">
                 <h5 class="text-warning">Card Number</h5>
-                <p class="editable" data-field="card_number">{{ $paymentMethod->account_number }}</p>
+                <p class="editable" data-field="card_number">{{ $paymentMethod->CardNumber }}</p>
                 <input type="number" name="card_number" class="form-control d-none"
-                       value="{{ $paymentMethod->account_number }}">
+                       value="{{ $paymentMethod->CardNumber }}">
             </div>
 
             <!-- Expiry Date -->
             <div class="mb-3">
                 <h5 class="text-warning">Expiry Date</h5>
-                <p class="editable" data-field="expiry_date">{{ $paymentMethod->expiry_date }}</p>
+                <p class="editable" data-field="expiry_date">{{ $paymentMethod->ExpiryDate }}</p>
                 <input type="date" name="expiry_date" class="form-control d-none"
-                       value="{{ $paymentMethod->expiry_date }}">
+                       value="{{ $paymentMethod->ExpiryDate }}">
             </div>
 
             <!-- CVV -->
             <div class="mb-3">
                 <h5 class="text-warning">CVV</h5>
-                <p class="editable" data-field="cvv">{{ $paymentMethod->cvv }}</p>
+                <p class="editable" data-field="cvv">{{ $paymentMethod->CVV }}</p>
                 <input type="number" name="cvv" class="form-control d-none"
-                       value="{{ $paymentMethod->cvv }}">
+                       value="{{ $paymentMethod->CVV }}">
             </div>
 
             <!-- Name on Card -->
             <div class="mb-3">
                 <h5 class="text-warning">Name on Card</h5>
-                <p class="editable" data-field="card_name">{{ $paymentMethod->card_name }}</p>
+                <p class="editable" data-field="card_name">{{ $paymentMethod->NameOnCard }}</p>
                 <input type="text" name="card_name" class="form-control d-none"
-                       value="{{ $paymentMethod->card_name }}">
+                       value="{{ $paymentMethod->NameOnCard }}">
             </div>
         </div>
     </div>
@@ -115,15 +112,18 @@
             Order Summary
         </h4>
         <ul class="list-group bg-transparent">
-            @foreach($cart as $item)
-                <li class="list-group-item bg-transparent border-warning text-white d-flex justify-content-between align-items-center">
-                    <span>{{ $item['name'] }}</span> - ${{ $item['price'] }} x {{ $item['quantity'] }}
-                    <span class="badge bg-warning text-dark">${{ $item['price'] * $item['quantity'] }}</span>
-                </li>
-            @endforeach
+            @if($cart && $cart->items->isNotEmpty())
+                @foreach($cart->items as $item)
+                    <li class="list-group-item bg-transparent border-warning text-white d-flex justify-content-between align-items-center">
+                        <span>{{ $item->product->name }}</span> - ${{ $item->PricePerUnit }} x {{ $item->Quantity }}
+                        <span class="badge bg-warning text-dark">${{ $item->PricePerUnit * $item->Quantity }}</span>
+                    </li>
+                @endforeach
+            @else
+                <li class="list-group-item bg-transparent text-white">No items in your cart.</li>
+            @endif
         </ul>
     </div>
-
     <!-- Edit Actions -->
     <div id="editActions" class="d-none my-3 row justify-content-center">
         <button type="submit" class="btn btn-success mb-2">

@@ -48,6 +48,12 @@
                                 </button>
                             </li>
                             <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="specifications-tab" data-bs-toggle="tab"
+                                        data-bs-target="#specifications" type="button" role="tab">
+                                    Specifications
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="features-tab" data-bs-toggle="tab"
                                         data-bs-target="#features" type="button" role="tab">
                                     Features
@@ -64,20 +70,24 @@
                             <div class="tab-pane fade show active" id="description" role="tabpanel">
                                 {!! $product->Description !!}
                             </div>
+                            <div class="tab-pane fade" id="specifications" role="tabpanel">
+                                {!! $product->Specifications !!}
+                            </div>
+
                             <div class="tab-pane fade" id="features" role="tabpanel">
                                 {!! $product->Features !!}
                             </div>
                             <div class="tab-pane fade" id="shipping" role="tabpanel">
                                 @if($product->shipping)
-                                    <p><strong>Delivery Time:</strong> {{ $product->shipping->DeliveryTime }}</p>
+                                    <p><strong>Delivery Time:</strong> {{ $product->shipping->EstimatedDeliveryTime }} days</p>
                                     <p><strong>Shipping Cost:</strong>
-                                        @if($product->shipping->ShippingCost > 0)
-                                            ${{ number_format($product->shipping->ShippingCost, 2) }}
+                                        @if($product->shipping->ShippingFee > 0)
+                                            ${{ number_format($product->shipping->ShippingFee, 2) }}
                                         @else
                                             Free Shipping
                                         @endif
                                     </p>
-                                    <p><strong>Return Policy:</strong> {{ $product->shipping->ReturnPolicy }}</p>
+
                                 @else
                                     <p>Shipping information not available</p>
                                 @endif

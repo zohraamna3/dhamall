@@ -26,27 +26,22 @@
             <div class="mb-4">
                 <h3 class="text-warning">
                     ${{ number_format($product->Price, 2) }}
-                    @if($product->CompareAtPrice > $product->Price)
-                        <small class="text-light text-decoration-line-through ms-2">
-                            ${{ number_format($product->CompareAtPrice, 2) }}
-                        </small>
-                        <span class="badge bg-danger ms-2">
-                            Save ${{ number_format($product->CompareAtPrice - $product->Price, 2) }}
-                        </span>
-                    @endif
+
                 </h3>
-                @if($product->QuantityInStock > 0)
-                    <span class="badge bg-success">In Stock ({{ $product->QuantityInStock }} available)</span>
+                @if($product->StockQuantity > 0)
+                    <span class="badge bg-success">In Stock ({{ $product->StockQuantity }} available)</span>
                 @else
                     <span class="badge bg-danger">Out of Stock</span>
                 @endif
             </div>
 
+
+
             <!-- Brand & Category -->
             <div class="mb-4">
                 <p class="mb-1"><strong class="text-light">Brand:</strong>
                     <a href="{{ route('products.index', ['brand' => $product->brand->id]) }}" class="text-warning">
-                        {{ $product->brand->BrandName }}
+                        {{ $product->brand->Name }}
                     </a>
                 </p>
                 <p class="mb-1"><strong class="text-light">Category:</strong>
@@ -54,7 +49,7 @@
                         {{ $product->category->CategoryName }}
                     </a>
                 </p>
-                <p class="mb-1"><strong class="text-light">SKU:</strong> <span class="text-light">{{ $product->SKU }}</span></p>
+                <p class="mb-1"><strong class="text-light">Number of Orders:</strong> <span class="text-light">{{ $product->NumberOfOrders }}</span></p>
             </div>
 
             <!-- Add to Cart Form -->
@@ -67,7 +62,7 @@
                     <label class="form-label text-light">Quantity</label>
                     <div class="input-group" style="max-width: 150px;">
                         <button class="btn btn-outline-warning" type="button" id="decrement-qty">-</button>
-                        <input type="number" name="quantity" value="1" min="1" max="{{ $product->QuantityInStock }}"
+                        <input type="number" name="quantity" value="1" min="1" max="{{ $product->StockQuantity }}"
                                class="form-control bg-dark text-light text-center" id="product-quantity">
                         <button class="btn btn-outline-warning" type="button" id="increment-qty">+</button>
                     </div>
@@ -76,12 +71,12 @@
                 <!-- Action Buttons -->
                 <div class="d-flex flex-wrap gap-3">
                     <button type="submit" class="btn btn-warning flex-grow-1 py-3"
-                        {{ $product->QuantityInStock <= 0 ? 'disabled' : '' }}>
+                        {{ $product->StockQuantity <= 0 ? 'disabled' : '' }}>
                         <i class="fas fa-shopping-cart me-2"></i> Add to Cart
                     </button>
 
                     <button type="button" class="btn btn-outline-warning flex-grow-1 py-3" id="buy-now-btn"
-                        {{ $product->QuantityInStock <= 0 ? 'disabled' : '' }}>
+                        {{ $product->StockQuantity <= 0 ? 'disabled' : '' }}>
                         <i class="fas fa-bolt me-2"></i> Buy Now
                     </button>
                 </div>
@@ -92,13 +87,6 @@
                 <button class="btn btn-outline-light btn-sm" id="add-to-wishlist">
                     <i class="far fa-heart me-1"></i> Add to Wishlist
                 </button>
-                <div class="share-buttons">
-                    <span class="text-light me-2">Share:</span>
-                    <a href="#" class="text-warning me-2"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="text-warning me-2"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="text-warning me-2"><i class="fab fa-pinterest"></i></a>
-                    <a href="#" class="text-warning"><i class="fas fa-envelope"></i></a>
-                </div>
             </div>
         </div>
     </div>
