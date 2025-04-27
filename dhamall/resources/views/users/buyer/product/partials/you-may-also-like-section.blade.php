@@ -24,7 +24,7 @@
                                 </div>
 
                                 <!-- Product Details -->
-                                <div class="card-body">
+                                <div class="card-body bg-dark">
                                     <h5 class="card-title text-light mb-1">
                                         <a href="{{ route('products.show', $product->id) }}" class="text-decoration-none text-light">
                                             {{ Str::limit($product->ProductName, 40) }}
@@ -45,16 +45,11 @@
                                     </div>
                                     <h5 class="text-warning mb-0">
                                         ${{ number_format($product->Price, 2) }}
-                                        @if($product->CompareAtPrice > $product->Price)
-                                            <small class="text-light text-decoration-line-through ms-1">
-                                                ${{ number_format($product->CompareAtPrice, 2) }}
-                                            </small>
-                                        @endif
                                     </h5>
                                 </div>
 
                                 <!-- Add to Cart Button -->
-                                <div class="card-footer bg-transparent border-top-0">
+                                <div class="card-footer bg-black border-top-0">
                                     <form action="{{ route('cart.add') }}" method="POST">
                                         @csrf
                                         <input type="hidden" name="product_id" value="{{ $product->id }}">

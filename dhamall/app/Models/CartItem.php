@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -13,14 +12,13 @@ class CartItem extends Model
         'ProductId',
         'Quantity',
         'PricePerUnit',
-        'TotalPrice',
         'CartId'
     ];
 
     protected $casts = [
         'Quantity' => 'integer',
         'PricePerUnit' => 'decimal:2',
-        'TotalPrice' => 'decimal:2'
+        // No need to cast or fill for TotalPrice since it's auto-computed
     ];
 
     // Relationships
@@ -34,17 +32,8 @@ class CartItem extends Model
         return $this->belongsTo(Cart::class, 'CartId');
     }
 
-    // Calculate total price
-    public static function calculateTotalPrice($quantity, $pricePerUnit)
-    {
-        return $quantity * $pricePerUnit;
-    }
-
-    // Events
     protected static function booted()
     {
-        static::saving(function ($cartItem) {
-            $cartItem->TotalPrice = $cartItem->Quantity * $cartItem->PricePerUnit;
-        });
+        // You can remove the TotalPrice computation here, as it is handled in the DB
     }
 }

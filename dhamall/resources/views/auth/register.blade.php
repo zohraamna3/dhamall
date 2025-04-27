@@ -72,7 +72,6 @@
                             <option value="">Select Gender</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
-                            <option value="Other">Other</option>
                         </select>
                     </div>
 
@@ -84,7 +83,6 @@
                     <div class="mb-3">
                         <label for="UserRole" class="form-label fw-bold">Role</label>
                         <select name="UserRole" class="form-control p-2" required>
-                            <option value="admin">Admin</option>
                             <option value="buyer">Buyer</option>
                             <option value="seller">Seller</option>
                         </select>

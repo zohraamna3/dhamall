@@ -30,18 +30,18 @@
                 <p class="text-center text-muted">Sign in to continue</p>
 
                 <!-- Social Login Buttons -->
-                <div class="mb-3">
-                    <a href="{{ url('/login/google') }}" class="btn btn-google w-100">
-                        <img src="{{ asset('images/google.png') }}" width="20" class="me-2"> Continue with Google
-                    </a>
-                </div>
-                <div class="mb-3">
-                    <a href="{{ url('/login/twitter') }}" class="btn btn-twitter w-100">
-                        <img src="{{ asset('images/twitter.png') }}" width="20" class="me-2"> Continue with Twitter
-                    </a>
-                </div>
+{{--                <div class="mb-3">--}}
+{{--                    <a href="{{ url('/login/google') }}" class="btn btn-google w-100">--}}
+{{--                        <img src="{{ asset('images/google.png') }}" width="20" class="me-2"> Continue with Google--}}
+{{--                    </a>--}}
+{{--                </div>--}}
+{{--                <div class="mb-3">--}}
+{{--                    <a href="{{ url('/login/twitter') }}" class="btn btn-twitter w-100">--}}
+{{--                        <img src="{{ asset('images/twitter.png') }}" width="20" class="me-2"> Continue with Twitter--}}
+{{--                    </a>--}}
+{{--                </div>--}}
 
-                <div class="text-center my-3 text-muted">OR</div>
+{{--                <div class="text-center my-3 text-muted">OR</div>--}}
 
                 <!-- Login Form -->
                 <form action="{{ route('login') }}" method="POST">

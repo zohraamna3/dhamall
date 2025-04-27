@@ -71,7 +71,7 @@
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <div class="d-flex align-items-center">
                                 <div class="me-3">
-                                    <img src="{{ $review->user->ImageURL ?? asset('images/default-avatar.png') }}"
+                                    <img src="{{ $review->user->ImageURL ?? asset('https://ui-avatars.com/api/?name=John+Doe&background=random&rounded=true') }}"
                                          class="rounded-circle" width="50" height="50" alt="User Avatar">
                                 </div>
                                 <div>

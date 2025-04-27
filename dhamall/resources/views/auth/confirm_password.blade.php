@@ -17,7 +17,6 @@
 
                 <form method="POST" action="{{ route('password.confirm') }}">
                     @csrf
-
                     <!-- Password Field -->
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
@@ -26,16 +25,13 @@
                         <div class="text-danger mt-2">{{ $message }}</div>
                         @enderror
                     </div>
-
                     <!-- Submit Button -->
                     <button type="submit" class="btn btn-primary w-100">Confirm Password</button>
                 </form>
 
-                <!-- Back to Login Link -->
-                <p class="text-center mt-3">
-                    <a href="{{ route('login') }}" class="text-decoration-none custom-link">Back to Login</a>
-                </p>
             </div>
         </div>
     </div>
+    <br/>
+    <br/>
 @endsection

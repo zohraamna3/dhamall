@@ -61,7 +61,6 @@ class User extends Authenticatable
         );
     }
 
-    // In App\Models\User.php
     public function addresses()
     {
         return $this->hasManyThrough(
@@ -73,7 +72,6 @@ class User extends Authenticatable
             'AddressId' // Local key on buyer_checkout_details table
         );
     }
-
     public function checkoutDetails()
     {
         return $this->hasOne(BuyerCheckoutDetail::class, 'UserId');
@@ -88,5 +86,11 @@ class User extends Authenticatable
     public function getImageUrl()
     {
         return $this->ImageURL ? asset($this->ImageURL) : asset('images/default-user.png');
+    }
+
+    // Override the setPasswordAttribute method to ensure usage of a hashed password
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['Password'] = $value; // Hashing the password before saving
     }
 }

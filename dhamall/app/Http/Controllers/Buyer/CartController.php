@@ -29,11 +29,11 @@ class CartController extends Controller
         $product = Product::findOrFail($request->product_id);
         $quantity = $request->quantity ?? 1;
 
-        if ($product->QuantityInStock <= 0) {
+        if ($product->StockQuantity <= 0) {
             return redirect()->back()->with('error', 'This product is out of stock');
         }
 
-        if ($quantity > $product->QuantityInStock) {
+        if ($quantity > $product->StockQuantity) {
             return redirect()->back()->with('error', 'Requested quantity exceeds available stock');
         }
 
@@ -45,13 +45,13 @@ class CartController extends Controller
         try {
             if ($existingItem) {
                 $newQuantity = $existingItem->Quantity + $quantity;
-                if ($newQuantity > $product->QuantityInStock) {
+                if ($newQuantity > $product->StockQuantity) {
                     return redirect()->back()->with('error', 'Cannot add more than available stock');
                 }
 
                 $existingItem->update([
                     'Quantity' => $newQuantity,
-                    'TotalPrice' => $newQuantity * $product->Price
+                    // No TotalPrice update
                 ]);
             } else {
                 CartItem::create([
@@ -59,22 +59,34 @@ class CartController extends Controller
                     'ProductId' => $product->id,
                     'Quantity' => $quantity,
                     'PricePerUnit' => $product->Price,
-                    'TotalPrice' => $quantity * $product->Price
+                    // No TotalPrice here as well
                 ]);
             }
 
-            return redirect()->route('cart.index')->with('success', 'Product added to cart!');
-
+            return redirect()->route('products.show', ['product' => $request->product_id])->with('success', 'Product added to cart!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Failed to add product to cart: ' . $e->getMessage());
         }
+    }    public function getCartItems()
+    {
+        $cart = $this->getCart();
+        return $cart->items()->with('product.images')->get();
     }
+
+    public static function getCartDetails(){
+        $user = Auth::user();
+        $cart = Cart::firstOrCreate(['UserId' => $user->id]);
+        return $cart->items()->with('product.images')->get();
+    }
+
+
+
 
     // View cart
     public function index()
     {
-        $cart = $this->getCart();
-        $items = $cart->items()->with('product.images')->get();
+
+        $items = $this->getCartItems();
         $total = $items->sum('TotalPrice');
 
         return view('users.buyer.cart.index', compact('items', 'total'));
@@ -105,6 +117,6 @@ class CartController extends Controller
     public function remove(CartItem $item)
     {
         $item->delete();
-        return redirect()->back()->with('success', 'Item removed from cart');
+        return response()->json(['success' => true, 'message' => 'Item removed from cart']);
     }
 }

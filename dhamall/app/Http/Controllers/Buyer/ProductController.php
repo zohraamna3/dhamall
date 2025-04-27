@@ -104,7 +104,7 @@ class ProductController extends Controller
             return redirect()->back()->withErrors(['error' => 'Product not found.']);
         }
 
-//        Log::info( $product); // Log loaded product for debugging
+        Log::info( $product); // Log loaded product for debugging
 
         // Get related products (4 random products from the same category)
         $relatedProducts = Product::with('images')
@@ -115,7 +115,7 @@ class ProductController extends Controller
             ->take(4)
             ->get();
 
-        Log::info($relatedProducts);
+//        Log::info($relatedProducts);
 //        Log::info($product->reviews);
         $avgRating = $this->calculateRating($product);
         $reviewCount =  count(json_decode($product->reviews, true)); // From cached value

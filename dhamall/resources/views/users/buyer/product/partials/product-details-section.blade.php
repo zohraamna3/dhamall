@@ -26,7 +26,6 @@
             <div class="mb-4">
                 <h3 class="text-warning">
                     ${{ number_format($product->Price, 2) }}
-
                 </h3>
                 @if($product->StockQuantity > 0)
                     <span class="badge bg-success">In Stock ({{ $product->StockQuantity }} available)</span>
@@ -35,25 +34,28 @@
                 @endif
             </div>
 
-
-
             <!-- Brand & Category -->
             <div class="mb-4">
                 <p class="mb-1"><strong class="text-light">Brand:</strong>
-                    <a href="{{ route('products.index', ['brand' => $product->brand->id]) }}" class="text-warning">
+                    <a href="{{ route('search', ['query' => $product->brand->Name]) }}" class="text-warning">
                         {{ $product->brand->Name }}
                     </a>
                 </p>
                 <p class="mb-1"><strong class="text-light">Category:</strong>
-                    <a href="{{ route('products.index', ['category' => $product->category->id]) }}" class="text-warning">
+                    <a href="{{ route('search', ['query' => $product->category->CategoryName]) }}" class="text-warning">
                         {{ $product->category->CategoryName }}
+                    </a>
+                </p>
+                <p class="mb-1"><strong class="text-light">Seller:</strong>
+                    <a href="{{ route('search', ['query' => $product->seller->Name]) }}" class="text-warning">
+                        {{ $product->seller->Name }}
                     </a>
                 </p>
                 <p class="mb-1"><strong class="text-light">Number of Orders:</strong> <span class="text-light">{{ $product->NumberOfOrders }}</span></p>
             </div>
 
             <!-- Add to Cart Form -->
-            <form action="{{ route('cart.add') }}" method="POST" class="mb-4">
+            <form id="add-to-cart-form" action="{{ route('cart.add') }}" method="POST" class="mb-4">
                 @csrf
                 <input type="hidden" name="product_id" value="{{ $product->id }}">
 
@@ -61,10 +63,8 @@
                 <div class="mb-4">
                     <label class="form-label text-light">Quantity</label>
                     <div class="input-group" style="max-width: 150px;">
-                        <button class="btn btn-outline-warning" type="button" id="decrement-qty">-</button>
                         <input type="number" name="quantity" value="1" min="1" max="{{ $product->StockQuantity }}"
-                               class="form-control bg-dark text-light text-center" id="product-quantity">
-                        <button class="btn btn-outline-warning" type="button" id="increment-qty">+</button>
+                               class="form-control bg-dark text-light text-center" id="product-quantity" style="border-radius: 0;">
                     </div>
                 </div>
 
@@ -75,6 +75,7 @@
                         <i class="fas fa-shopping-cart me-2"></i> Add to Cart
                     </button>
 
+                    <!-- Buy Now Button -->
                     <button type="button" class="btn btn-outline-warning flex-grow-1 py-3" id="buy-now-btn"
                         {{ $product->StockQuantity <= 0 ? 'disabled' : '' }}>
                         <i class="fas fa-bolt me-2"></i> Buy Now
@@ -82,11 +83,15 @@
                 </div>
             </form>
 
-            <!-- Wishlist & Share -->
+            <!-- Wishlist -->
             <div class="d-flex justify-content-between align-items-center border-top border-secondary pt-3">
-                <button class="btn btn-outline-light btn-sm" id="add-to-wishlist">
-                    <i class="far fa-heart me-1"></i> Add to Wishlist
-                </button>
+                <form action="{{ route('wishlist.add') }}" method="POST" class="mb-0">
+                    @csrf
+                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                    <button type="submit" class="btn btn-outline-light btn-sm">
+                        <i class="far fa-heart me-1"></i> Add to Wishlist
+                    </button>
+                </form>
             </div>
         </div>
     </div>
@@ -96,6 +101,8 @@
     document.addEventListener('DOMContentLoaded', function() {
         // Quantity selector functionality
         const quantityInput = document.getElementById('product-quantity');
+
+        // Increment and Decrement Button Handlers
         document.getElementById('decrement-qty').addEventListener('click', function() {
             let value = parseInt(quantityInput.value);
             if (value > 1) {
@@ -113,9 +120,9 @@
 
         // Buy now button functionality
         document.getElementById('buy-now-btn').addEventListener('click', function() {
-            const form = this.closest('form');
-            form.action = "{{ route('checkout.index') }}";
-            form.submit();
+            const form = document.getElementById('add-to-cart-form');
+            form.action = "{{ route('checkout.index') }}"; // Set the action to the checkout route
+            form.submit(); // Submit the form
         });
     });
 </script>

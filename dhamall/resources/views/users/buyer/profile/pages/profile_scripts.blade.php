@@ -1,18 +1,25 @@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        const menuItems = document.querySelectorAll("#profile-menu a");
+        const menuItems = document.querySelectorAll("#profile-menu .list-group-item");
         const contentSections = document.querySelectorAll(".content-section");
         const breadcrumbCurrent = document.getElementById("breadcrumb-current");
 
         // Initially highlight the active menu item
-        const initialActive = document.querySelector("#profile-menu a.active");
+        const initialActive = document.querySelector("#profile-menu .list-group-item.active");
         if (initialActive) {
             initialActive.classList.add("selected");
             initialActive.style.backgroundColor = "#1a1a2e";
             initialActive.style.color = "white";
+
+            // Show the corresponding section
+            const sectionId = initialActive.getAttribute("data-section");
+            if (sectionId) {
+                document.getElementById(sectionId).classList.remove("d-none");
+                breadcrumbCurrent.textContent = initialActive.getAttribute("data-title");
+            }
         }
 
-        // Handle sidebar clicks
+        // Handle menu item clicks
         menuItems.forEach(item => {
             item.addEventListener("click", function (e) {
                 e.preventDefault();
@@ -43,4 +50,10 @@
             });
         });
     });
+
+    // Toggle Script
+    function toggleSidebar() {
+        const sidebar = document.getElementById('profile-menu');
+        sidebar.classList.toggle('active'); // Add a CSS class for collapsed state
+    }
 </script>

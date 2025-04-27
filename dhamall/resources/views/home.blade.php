@@ -46,7 +46,7 @@
                             @else
                                 <img src="https://res.cloudinary.com/ddoeppfx0/image/upload/e_background_removal,f_png/cld-sample-5" class="card-img-top img-fluid" style="height: 250px; object-fit: cover;">
                             @endif
-                            <span class="badge badge-warning position-absolute top-0 end-0 m-2 px-3 py-2 rounded-pill">New</span>
+                            <!-- Removed 'New' Badge Here -->
                         </div>
                         <div class="card-body text-center"
                              style="background: linear-gradient(135deg, #1a1a2e, #24243e); color: #b3a31c;">

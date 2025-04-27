@@ -19,6 +19,7 @@
                 @include('users.buyer.profile.pages.wishlist', ['wishlist' => $wishlist])
                 @include('users.buyer.profile.pages.cart', ['cart' => $cart])
                 @include('users.buyer.profile.pages.payment_details', ['paymentDetails' => $paymentDetails])
+                @include('users.buyer.profile.pages.address', ['addressDetails' => $addressDetails])
                 @include('users.buyer.profile.pages.notifications', ['notifications' => $user->notifications])
             </div>
         </div>

@@ -60,7 +60,8 @@ class AuthController extends Controller
             DB::commit();
             info("DB Commit");
 
-            Auth::login($user);
+//            Auth::login($user);
+            info($validated['Password']);
             info("Login is done");
             return redirect()->route('signin')->with('success', 'Account created successfully. Please log in.');
 
@@ -89,16 +90,19 @@ class AuthController extends Controller
         ]);
 
         // Debugging logs
-        Log::info('Attempting login for: ' . $request->EmailAddress);
 
+        Log::info('Attempting login for: ' . $request->EmailAddress);
+        Log::info( $request->Password);
         // Manual authentication to verify
         $user = User::where('EmailAddress', $request->EmailAddress)->first();
+
+        Log::info( 'user'.$user->Password);
 
         if ($user && Hash::check($request->Password, $user->Password)) {
             Log::info('Password verified for: ' . $user->EmailAddress);
             Auth::login($user);
             $request->session()->regenerate();
-            return redirect()->intended('/profile')->with('success', 'Logged in successfully!');
+            return redirect()->intended('/')->with('success', 'Logged in successfully!');
         }
 
         Log::warning('Failed login attempt for: ' . $request->EmailAddress);
@@ -114,4 +118,51 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
         return redirect()->route('signin')->with('success', 'Logged out successfully.');
     }
+
+    public function confirmPassword(Request $request)
+    {
+        // Validate the password input
+        $request->validate(['password' => 'required|string']);
+
+        // Trim the password input
+        $trimmedPassword = trim($request->input('password'));
+
+        Log::info($trimmedPassword); // Log the trimmed password for debugging
+        Log::info($request->user()); // Log the user's hashed password
+        $user = User::where('EmailAddress', $request->user()->EmailAddress)->first();
+
+        if ($user && Hash::check($trimmedPassword, $user->Password)) {
+            $token = $request->route('token');
+
+            // Store email in session for the next route
+            $request->session()->flash('email', $user->EmailAddress); // Store email in session
+
+            // Redirect to reset password page and pass token in session
+            return redirect()->route('password.reset.show')->with('token', $token);
+        }
+
+        // If the password does not match, return with an error
+        return back()->withErrors(['password' => 'The provided password is incorrect.']);
+    }
+
+    public function resetPassword(Request $request)
+    {
+        // Validate the reset password input
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        // Update the user's password
+        $user = User::where('EmailAddress', $request->email)->first();
+        Log::info($request->password);
+        if ($user) {
+            $user->update(['Password' => Hash::make($request->password)]);
+
+            return redirect()->route('home')->with('status', 'Password updated successfully!');
+        }
+
+        return back()->withErrors(['EmailAddress' => 'No account found with that email address.']);
+    }
+
 }

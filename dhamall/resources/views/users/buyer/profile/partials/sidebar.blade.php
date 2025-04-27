@@ -26,17 +26,13 @@
            data-title="Payment Details">
             <i class="bi bi-credit-card me-2"></i> Payment Details
         </a>
+        <a href="#" class="list-group-item list-group-item-action" data-section="address-details"
+           data-title="Address Details">
+            <i class="bi bi-house me-2"></i> Address Details <!-- Add your icon for Address -->
+        </a>
         <a href="#" class="list-group-item list-group-item-action" data-section="notifications"
            data-title="Notifications">
             <i class="bi bi-bell me-2"></i> Notifications
         </a>
     </div>
 </div>
-
-<!-- Toggle Script -->
-<script>
-    function toggleSidebar() {
-        const sidebar = document.getElementById('profile-menu');
-        sidebar.classList.toggle('active'); // Add a CSS class for collapsed state
-    }
-</script>

@@ -21,7 +21,8 @@ class ProfileController extends Controller
             'wishlist.items.product',
             'cart.items.product',
             'paymentDetails', // This returns a collection
-            'notifications'
+            'notifications',
+            'addresses' // Load the addresses relationship
         ]);
 
         return view('users.buyer.profile.profile-page', [
@@ -29,7 +30,8 @@ class ProfileController extends Controller
             'orders' => $user->orders,
             'wishlist' => $user->wishlist ? $user->wishlist->items : collect(),
             'cart' => $user->cart ? $user->cart->items : collect(),
-            'paymentDetails' => $user->paymentDetails->first() // Get first item or null
+            'paymentDetails' => $user->paymentDetails->first(), // Get first item or null
+            'addressDetails' => $user->addresses // Pass the addresses collection to the view
         ]);
     }
 
