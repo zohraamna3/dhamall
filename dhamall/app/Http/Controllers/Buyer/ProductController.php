@@ -112,7 +112,7 @@ class ProductController extends Controller
             ->where('id', '!=', $product->id)
             ->available()
             ->inRandomOrder()
-            ->take(4)
+            ->take(8)
             ->get();
 
 //        Log::info($relatedProducts);
@@ -169,16 +169,16 @@ class ProductController extends Controller
             'title' => 'nullable|string|max:100',
             'comment' => 'required|string|min:10|max:1000',
         ]);
-
-        // Check if user already reviewed this product
-        $existingReview = ProductReview::where('UserId', Auth::id())
-            ->where('ProductId', $product->id)
-            ->first();
-
-        if ($existingReview) {
-            return redirect()->back()
-                ->with('error', 'You have already reviewed this product!');
-        }
+//
+//        // Check if user already reviewed this product
+//        $existingReview = ProductReview::where('UserId', Auth::id())
+//            ->where('ProductId', $product->id)
+//            ->first();
+//
+//        if ($existingReview) {
+//            return redirect()->back()
+//                ->with('error', 'You have already reviewed this product!');
+//        }
 
         // Create the review
         ProductReview::create([

@@ -242,4 +242,4 @@
             font-size: 0.7rem; /* Further reduce badge font size */
         }
     }
-</style>
+</style>0
