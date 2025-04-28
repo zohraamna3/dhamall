@@ -192,8 +192,6 @@ class ProductController extends Controller
             'PostedOn' => now(),
         ]);
 
-        // Update product rating stats
-        $product->updateRatingStats();
 
         return redirect()->back()
             ->with('success', 'Thank you for your review!');

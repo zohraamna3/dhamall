@@ -1,4 +1,4 @@
-<form id="checkoutForm" method="POST" action="{{ route('payment.update', $paymentMethod->id) }}">
+<form id="checkoutForm" action="{{ route('checkout.process') }}" method="post">
     @csrf
 
     <!-- Shipping Address -->
@@ -11,8 +11,8 @@
         <div class="mb-3">
             <h5 class="text-warning">Address Line 1</h5>
             <p class="editable" data-field="address_line1">{{ $shippingAddress->Street }}</p>
-            <input type="text" name="address_line1" class="form-control d-none"
-                   value="{{ $shippingAddress->Street }}">
+            <input type="hidden" name="address_id" value="{{ $shippingAddress->id }}"> <!-- Address ID -->
+            <input type="text" name="address_line1" class="form-control d-none" value="{{ $shippingAddress->Street }}">
         </div>
 
         <!-- City -->
@@ -22,28 +22,25 @@
             <input type="text" name="city" class="form-control d-none" value="{{ $shippingAddress->CityOrState }}">
         </div>
 
-        <!-- State -->
-        <div class="mb-3">
-            <h5 class="text-warning">State</h5>
-            <p class="editable" data-field="state">{{ $shippingAddress->CityOrState }}</p>
-            <input type="text" name="state" class="form-control d-none"
-                   value="{{ $shippingAddress->CityOrState }}">
-        </div>
-
         <!-- Postal Code -->
         <div class="mb-3">
             <h5 class="text-warning">Postal Code</h5>
             <p class="editable" data-field="zip_code">{{ $shippingAddress->PostalCode }}</p>
-            <input type="text" name="zip_code" class="form-control d-none"
-                   value="{{ $shippingAddress->PostalCode }}">
+            <input type="text" name="zip_code" class="form-control d-none" value="{{ $shippingAddress->PostalCode }}">
         </div>
 
         <!-- Country -->
         <div class="mb-3">
             <h5 class="text-warning">Country</h5>
             <p class="editable" data-field="country">{{ $shippingAddress->Country }}</p>
-            <input type="text" name="country" class="form-control d-none"
-                   value="{{ $shippingAddress->Country }}">
+            <input type="text" name="country" class="form-control d-none" value="{{ $shippingAddress->Country }}">
+        </div>
+
+        <!-- Google Map Link -->
+        <div class="mb-3">
+            <h5 class="text-warning">Google Map Location Link</h5>
+            <p class="editable" data-field="map">{{ $shippingAddress->Map ?? 'Not provided' }}</p>
+            <input type="url" name="map" class="form-control d-none" value="{{ $shippingAddress->Map }}" placeholder="Enter Google Map link">
         </div>
     </div>
 
@@ -53,13 +50,13 @@
             Payment Method
         </h4>
         <div class="form-check">
-            <input class="form-check-input" type="radio" name="payment_method" id="credit_card"
-                   value="Credit Card" {{ $paymentMethod->PaymentMethod == 'Credit Card' ? 'checked' : 'disabled' }}>
+            <input class="form-check-input" type="radio" name="payment_id" id="credit_card"
+                   value="{{ $paymentMethod->id }}" {{ $paymentMethod->PaymentMethod == 'Credit Card' ? 'checked' : 'disabled' }}>
             <label class="form-check-label" for="credit_card">Credit Card</label>
         </div>
         <div class="form-check">
-            <input class="form-check-input" type="radio" name="payment_method" id="paypal"
-                   value="PayPal" {{ $paymentMethod->PaymentMethod == 'PayPal' ? 'checked' : 'disabled' }}>
+            <input class="form-check-input" type="radio" name="payment_id" id="paypal"
+                   value="{{ $paymentMethod->id }}" {{ $paymentMethod->PaymentMethod == 'PayPal' ? 'checked' : 'disabled' }}>
             <label class="form-check-label" for="paypal">PayPal</label>
         </div>
     </div>
@@ -76,32 +73,28 @@
             <div class="mb-3">
                 <h5 class="text-warning">Card Number</h5>
                 <p class="editable" data-field="card_number">{{ $paymentMethod->CardNumber }}</p>
-                <input type="number" name="card_number" class="form-control d-none"
-                       value="{{ $paymentMethod->CardNumber }}">
+                <input type="number" name="card_number" class="form-control d-none" value="{{ $paymentMethod->CardNumber }}">
             </div>
 
             <!-- Expiry Date -->
             <div class="mb-3">
                 <h5 class="text-warning">Expiry Date</h5>
                 <p class="editable" data-field="expiry_date">{{ $paymentMethod->ExpiryDate }}</p>
-                <input type="date" name="expiry_date" class="form-control d-none"
-                       value="{{ $paymentMethod->ExpiryDate }}">
+                <input type="date" name="expiry_date" class="form-control d-none" value="{{ $paymentMethod->ExpiryDate }}">
             </div>
 
             <!-- CVV -->
             <div class="mb-3">
                 <h5 class="text-warning">CVV</h5>
                 <p class="editable" data-field="cvv">{{ $paymentMethod->CVV }}</p>
-                <input type="number" name="cvv" class="form-control d-none"
-                       value="{{ $paymentMethod->CVV }}">
+                <input type="number" name="cvv" class="form-control d-none" value="{{ $paymentMethod->CVV }}">
             </div>
 
             <!-- Name on Card -->
             <div class="mb-3">
                 <h5 class="text-warning">Name on Card</h5>
                 <p class="editable" data-field="card_name">{{ $paymentMethod->NameOnCard }}</p>
-                <input type="text" name="card_name" class="form-control d-none"
-                       value="{{ $paymentMethod->NameOnCard }}">
+                <input type="text" name="card_name" class="form-control d-none" value="{{ $paymentMethod->NameOnCard }}">
             </div>
         </div>
     </div>
@@ -111,32 +104,80 @@
         <h4 class="text-warning text-center rounded p-2 p-lg-5 bg-dark m-2 m-lg-5 border border-white">
             Order Summary
         </h4>
-        <ul class="list-group bg-transparent">
-            @if($cart && $cart->items->isNotEmpty())
-                @foreach($cart->items as $item)
-                    <li class="list-group-item bg-transparent border-warning text-white d-flex justify-content-between align-items-center">
-                        <span>{{ $item->product->name }}</span> - ${{ $item->PricePerUnit }} x {{ $item->Quantity }}
-                        <span class="badge bg-warning text-dark">${{ $item->PricePerUnit * $item->Quantity }}</span>
-                    </li>
-                @endforeach
-            @else
-                <li class="list-group-item bg-transparent text-white">No items in your cart.</li>
-            @endif
-        </ul>
-    </div>
-    <!-- Edit Actions -->
-    <div id="editActions" class="d-none my-3 row justify-content-center">
-        <button type="submit" class="btn btn-success mb-2">
-            <i class="fas fa-save me-2"></i> Save Changes
-        </button>
-        <button type="button" id="cancelEdit" class="btn btn-secondary">
-            <i class="fas fa-times me-2"></i> Cancel
-        </button>
+        <div class="table-responsive">
+            <table class="table table-dark" style="background-color: rgba(0, 0, 0, 0.5);">
+                <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price Per Unit</th>
+                    <th>Total</th>
+                    <th>Shipping Method</th>
+                    <th>Available for City</th>
+                    <th>Shipping Fee</th>
+                </tr>
+                </thead>
+                <tbody>
+                @if($cart && $cart->items->isNotEmpty())
+                    @php $totalAmount = 0; $totalShippingFee = 0; @endphp
+                    @foreach($cart->items as $item)
+                        @php
+                            $itemTotal = $item->PricePerUnit * $item->Quantity;
+                            $totalAmount += $itemTotal;
+                            $productShippingMethod = $item->product->shipping; // Get shipping method for the product
+                            $shippingFee = $productShippingMethod ? $productShippingMethod->ShippingFee : 0; // Get shipping fee
+                            $totalShippingFee += $shippingFee; // Accumulate total shipping fee
+
+                            $isShippingAvailable = ''; // Initialize shipping availability message
+
+                            if ($productShippingMethod) {
+                                // Check if shipping is available for the user's city with 'like'
+                                $isAvailable = \App\Models\Shipping::where('id', $productShippingMethod->id)
+                                    ->where('City', 'like', '%' . $shippingAddress->CityOrState . '%')
+                                    ->exists();
+
+                                $isShippingAvailable = $isAvailable ? $shippingAddress->CityOrState : 'Not Available'; // Show availability
+                            }
+                        @endphp
+                        <tr>
+                            <td class="text-center">
+                                <img src="{{ $item->product->images->first()->ImageURL ?? asset('images/default.png') }}" alt="{{ $item->product->ProductName }}" class="img-thumbnail" style="width: 80px; height: 80px;">
+                                <div>{{ $item->product->ProductName }}</div>
+                            </td>
+                            <td class="text-center">{{ $item->Quantity }}</td>
+                            <td class="text-center">${{ number_format($item->PricePerUnit, 2) }}</td>
+                            <td class="text-center">${{ number_format($itemTotal, 2) }}</td>
+                            <td class="text-center">{{ $productShippingMethod->Method ?? 'N/A' }}</td>
+                            <td class="text-center">{{ $productShippingMethod->City ?? 'N/A' }}</td>
+                            <td class="text-center">${{ number_format($shippingFee, 2) }}</td>
+                        </tr>
+                    @endforeach
+                @else
+                    <tr>
+                        <td colspan="7" class="text-center">No items in your cart.</td>
+                    </tr>
+                @endif
+                </tbody>
+                <tfoot>
+                @if($cart && $cart->items->isNotEmpty())
+                    <tr>
+                        <td colspan="3" class="text-end"><strong>Subtotal</strong></td>
+                        <td class="text-center"><strong>${{ number_format($totalAmount, 2) }}</strong></td>
+                        <td colspan="3" class="text-end"><strong>Total Shipping Fee: </strong>${{ number_format($totalShippingFee, 2) }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="text-end"><strong>Grand Total</strong></td>
+                        <td class="text-center" colspan="4"><strong>${{ number_format($totalAmount + $totalShippingFee, 2) }}</strong></td>
+                    </tr>
+                @endif
+                </tfoot>
+            </table>
+        </div>
     </div>
 
     <!-- Proceed to Checkout Button -->
     <div class="text-center">
-        <a href="{{ route('checkout.process') }}" class="btn btn-success">Checkout</a>
+        <button type="submit" class="btn btn-success">Checkout</button>
     </div>
 </form>
 

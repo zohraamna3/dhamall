@@ -14,6 +14,7 @@ class Address extends Model
         'CityOrState',
         'Street',
         'PostalCode',
+        'Map',
     ];
 
 

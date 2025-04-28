@@ -19,6 +19,7 @@ class AddressController extends Controller
             'CityOrState' => 'required|string|max:100',
             'Street' => 'required|string|max:255',
             'PostalCode' => 'required|string|max:20',
+            'Map' => 'required|string|max:500',
         ]);
 
         $user = Auth::user();
@@ -53,6 +54,7 @@ class AddressController extends Controller
             'CityOrState' => 'required|string|max:100',
             'Street' => 'required|string|max:255',
             'PostalCode' => 'required|string|max:20',
+            'Map' => 'required|string|max:500',
         ]);
 
         // Update the address

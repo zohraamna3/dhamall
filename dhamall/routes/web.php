@@ -97,7 +97,7 @@ Route::prefix('products')->group(function () {
 Route::prefix('checkout')->middleware(['auth'])->group(function () {
     Route::get('/', [CheckoutController::class, 'index'])->name('checkout.index');
     Route::post('/process', [CheckoutController::class, 'process'])->name('checkout.process');
-    Route::get('/success', [CheckoutController::class, 'success'])->name('checkout.success');
+    Route::get('/success/{order}', [CheckoutController::class, 'success'])->name('checkout.success');
 });// Reviews routes
 Route::middleware(['auth'])->group(function () {
     Route::post('/products/{product}/reviews', [ProductController::class, 'storeReview'])

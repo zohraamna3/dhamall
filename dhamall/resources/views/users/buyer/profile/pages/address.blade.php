@@ -24,7 +24,30 @@
                         </p>
 
                         <p class="mb-3"><strong><i class="fas fa-city me-2"></i> City/State:</strong>
-                            <input type="text" name="CityOrState" class="form-control" value="{{ $address->CityOrState }}" required>
+                            <select name="CityOrState" class="form-control" required>
+                                <option value="">Select a city</option>
+                                <option value="Karachi" {{ $address->CityOrState == 'Karachi' ? 'selected' : '' }}>Karachi</option>
+                                <option value="Lahore" {{ $address->CityOrState == 'Lahore' ? 'selected' : '' }}>Lahore</option>
+                                <option value="Islamabad" {{ $address->CityOrState == 'Islamabad' ? 'selected' : '' }}>Islamabad</option>
+                                <option value="Faisalabad" {{ $address->CityOrState == 'Faisalabad' ? 'selected' : '' }}>Faisalabad</option>
+                                <option value="Rawalpindi" {{ $address->CityOrState == 'Rawalpindi' ? 'selected' : '' }}>Rawalpindi</option>
+                                <option value="Multan" {{ $address->CityOrState == 'Multan' ? 'selected' : '' }}>Multan</option>
+                                <option value="Peshawar" {{ $address->CityOrState == 'Peshawar' ? 'selected' : '' }}>Peshawar</option>
+                                <option value="Quetta" {{ $address->CityOrState == 'Quetta' ? 'selected' : '' }}>Quetta</option>
+                                <option value="Gujranwala" {{ $address->CityOrState == 'Gujranwala' ? 'selected' : '' }}>Gujranwala</option>
+                                <option value="Hyderabad" {{ $address->CityOrState == 'Hyderabad' ? 'selected' : '' }}>Hyderabad</option>
+                                <option value="Sialkot" {{ $address->CityOrState == 'Sialkot' ? 'selected' : '' }}>Sialkot</option>
+                                <option value="Sheikhupura" {{ $address->CityOrState == 'Sheikhupura' ? 'selected' : '' }}>Sheikhupura</option>
+                                <option value="Mardan" {{ $address->CityOrState == 'Mardan' ? 'selected' : '' }}>Mardan</option>
+                                <option value="Larkana" {{ $address->CityOrState == 'Larkana' ? 'selected' : '' }}>Larkana</option>
+                                <option value="Jhang" {{ $address->CityOrState == 'Jhang' ? 'selected' : '' }}>Jhang</option>
+                                <option value="Bahawalpur" {{ $address->CityOrState == 'Bahawalpur' ? 'selected' : '' }}>Bahawalpur</option>
+                                <option value="Sukkur" {{ $address->CityOrState == 'Sukkur' ? 'selected' : '' }}>Sukkur</option>
+                                <option value="Bannu" {{ $address->CityOrState == 'Bannu' ? 'selected' : '' }}>Bannu</option>
+                                <option value="Dera Ismail Khan" {{ $address->CityOrState == 'Dera Ismail Khan' ? 'selected' : '' }}>Dera Ismail Khan</option>
+                                <option value="Kotli" {{ $address->CityOrState == 'Kotli' ? 'selected' : '' }}>Kotli</option>
+                                <option value="Abbottabad" {{ $address->CityOrState == 'Abbottabad' ? 'selected' : '' }}>Abbottabad</option>
+                            </select>
                         </p>
 
                         <p class="mb-3"><strong><i class="fas fa-road me-2"></i> Street:</strong>
@@ -33,6 +56,10 @@
 
                         <p class="mb-3"><strong><i class="fas fa-code me-2"></i> Postal Code:</strong>
                             <input type="text" name="PostalCode" class="form-control" value="{{ $address->PostalCode }}" required>
+                        </p>
+
+                        <p class="mb-3"><strong><i class="fas fa-map-marker me-2"></i> Google Map Location Link:</strong>
+                            <input type="url" name="Map" class="form-control" value="{{ $address->Map }}" placeholder="Enter Google Map link">
                         </p>
 
                         <div class="mt-3">
@@ -61,6 +88,14 @@
                         <p class="mb-3"><strong><i class="fas fa-code me-2"></i> Postal Code:</strong>
                             {{ $address->PostalCode ?? 'Not provided' }}
                         </p>
+
+                        @if ($address->Map)
+                            <p class="mb-3"><strong><i class="fas fa-map-marker me-2"></i> Google Map Link:</strong>
+                                <a href="{{ $address->Map }}" target="_blank" class="text-primary">{{ $address->Map }}</a>
+                            </p>
+                        @else
+                            <p class="mb-3"><strong><i class="fas fa-map-marker me-2"></i> Google Map Link:</strong> Not provided</p>
+                        @endif
                     </div>
                 </div>
             @endforeach
@@ -83,7 +118,30 @@
                 </p>
 
                 <p class="mb-3"><strong><i class="fas fa-city me-2"></i> City/State:</strong>
-                    <input type="text" name="CityOrState" class="form-control" required>
+                    <select name="CityOrState" class="form-control" required>
+                        <option value="">Select a city</option>
+                        <option value="Karachi">Karachi</option>
+                        <option value="Lahore">Lahore</option>
+                        <option value="Islamabad">Islamabad</option>
+                        <option value="Faisalabad">Faisalabad</option>
+                        <option value="Rawalpindi">Rawalpindi</option>
+                        <option value="Multan">Multan</option>
+                        <option value="Peshawar">Peshawar</option>
+                        <option value="Quetta">Quetta</option>
+                        <option value="Gujranwala">Gujranwala</option>
+                        <option value="Hyderabad">Hyderabad</option>
+                        <option value="Sialkot">Sialkot</option>
+                        <option value="Sheikhupura">Sheikhupura</option>
+                        <option value="Mardan">Mardan</option>
+                        <option value="Larkana">Larkana</option>
+                        <option value="Jhang">Jhang</option>
+                        <option value="Bahawalpur">Bahawalpur</option>
+                        <option value="Sukkur">Sukkur</option>
+                        <option value="Bannu">Bannu</option>
+                        <option value="Dera Ismail Khan">Dera Ismail Khan</option>
+                        <option value="Kotli">Kotli</option>
+                        <option value="Abbottabad">Abbottabad</option>
+                    </select>
                 </p>
 
                 <p class="mb-3"><strong><i class="fas fa-road me-2"></i> Street:</strong>
@@ -92,6 +150,10 @@
 
                 <p class="mb-3"><strong><i class="fas fa-code me-2"></i> Postal Code:</strong>
                     <input type="text" name="PostalCode" class="form-control" required>
+                </p>
+
+                <p class="mb-3"><strong><i class="fas fa-map-marker me-2"></i> Google Map Location Link:</strong>
+                    <input type="url" name="Map" class="form-control" placeholder="Enter Google Map link">
                 </p>
 
                 <button type="submit" class="btn btn-success mt-3">

@@ -95,14 +95,5 @@ class Product extends Model
         return $query->orderBy('NumberOfOrders', 'desc')->take($limit);
     }
 
-    /**
-     * Update product rating statistics
-     */
-    public function updateRatingStats(): void
-    {
-        $this->update([
-            'Rating' => $this->reviews()->avg('Rating') ?? 0,
-            'ReviewCount' => $this->reviews()->count()
-        ]);
-    }
+
 }
