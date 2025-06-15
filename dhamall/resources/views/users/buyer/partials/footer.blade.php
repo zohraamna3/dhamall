@@ -36,7 +36,7 @@
                 <h5 class="fw-bold">Stay Connected</h5>
                 <p>Email: <a href="mailto:support@dhamall.com" class="footer-link">support@dhamall.com</a></p>
                 <p>1234, Main Street, Lahore, Pakistan</p>
-                <form class="mt-3">
+                <form class="mt-3" method="POST" action="{{route('subscribe')}}">
                     <input type="email" class="form-control mb-2" placeholder="Enter your email">
                     <button class="btn btn-light w-100">Subscribe</button>
                 </form>

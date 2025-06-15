@@ -175,6 +175,8 @@ Route::prefix('admin')->group(function () {
         ]);
 });
 
+//Subscribe
+Route::post("/subscribe",[SubscriptionController::class,'store'])->name('subscribe');
 
 // Home Route (Earbuds E-commerce Homepage)
 Route::get('/', [HomeController::class, 'index'])->name('home');
