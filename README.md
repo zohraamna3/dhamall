@@ -1,153 +1,63 @@
 # Dhamall – E-Commerce Earpods Platform
 
-**Semester Project (6th Semester)**
+Dhamall is a Laravel-based e-commerce project focused on browsing and purchasing earpods and related gadgets. The implemented code includes buyer, seller, and admin experiences, product detail pages, search, authentication, checkout flow, wishlist/cart/profile data, and support/legal pages.
 
-Dhamall is a feature-rich e-commerce platform developed for buying and selling earpods and related gadgets. Built with Laravel (PHP), MySQL, HTML, CSS, JavaScript, and Bootstrap, it demonstrates a modern full-stack approach to e-commerce application development.
+## Implemented features
 
----
+### Buyer features
+- Sign up, sign in, and logout
+- Browse the homepage and product detail pages
+- Search products by name or description
+- View related products on product pages
+- Add items to a shopping cart and proceed to checkout
+- Checkout with a saved default shipping address and payment method
+- View and update profile information
+- Manage wishlist, shopping cart, and payment details from the profile page
+- Access support and information pages such as Contact Us, About Us, FAQs, Returns & Refunds, Privacy Policy, Shipping Policy, Terms & Conditions, Media, Collaboration, and Career
 
-## Table of Contents
+### Seller features
+- Seller dashboard
+- Seller profile page
+- Seller orders page
+- Seller reviews page
+- Seller product listings page
+- Seller support pages, including Help Center, Seller Guidelines, Contact Support, FAQs for Sellers, Terms of Service, Privacy Policy, and Seller Agreement
 
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [System Overview](#system-overview)
-- [Database Schema](#database-schema)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
-- [Contributing](#contributing)
+### Admin features
+- Admin login page
+- Admin dashboard
+- Seller request review page
+- Seller approval and rejection actions
+- Manage sellers page
+- Manage categories page
+- Product review moderation page
 
----
+### Product and data features
+- Product model with images, reviews, and category relationships
+- Category hierarchy with parent and subcategories
+- Reviews linked to products
+- Orders, order items, and payments tables
+- Shipping addresses and user payment details
+- Wishlist and shopping cart tables
+- Coupon storage
 
-## Features
+## Tech stack
 
-- Responsive Front-end (32+ pages)
-  - Product Listings
-  - Product Details
-  - Wishlist
-  - Shopping Cart
-  - Checkout and Payments
-  - User Authentication (Login/Register)
-  - Profile Management
-- Role-based Back-end
-  - Buyer, Seller, and Admin modules
-  - Seller Dashboard (Product Management, Orders)
-  - Admin Dashboard (User & Product Moderation)
-- Relational Database Schema (MySQL)
-  - Product Listings
-  - User Data
-  - Transaction Records
-- Efficient Data Handling
-- Version Control with Git for team collaboration
+- **Backend:** Laravel 11 / PHP 8.2
+- **Frontend:** Blade, JavaScript, CSS, Bootstrap, Tailwind CSS, Vite
+- **Database:** Relational database via Laravel migrations
+- **Media handling:** Cloudinary Laravel package
 
----
+## Basic setup
 
-## Tech Stack
-
-- **Back-end:** Laravel (PHP)
-- **Database:** MySQL
-- **Front-end:** HTML, CSS, JavaScript, Bootstrap
-- **Version Control:** Git
-
----
-
-## System Overview
-
-Dhamall enables users to browse and purchase earpods as buyers, manage products as sellers, and oversee the platform as admins. The platform is designed for scalability, modularity, and maintainability, with clear separation between user roles and strict access controls.
-
----
-
-## Database Schema
-
-The relational database is designed with the following core tables (though it contains further tables):
-
-- **Users:** Stores buyer, seller, and admin profiles.
-- **Products:** Manages product listings, stock, and pricing.
-- **Orders:** Tracks purchase transactions.
-- **Order_Items:** Details of individual items in each order.
-- **Wishlists:** For user product preferences.
-- **Reviews:** User feedback on products.
-
-> **Note:** The schema ensures referential integrity and efficient queries for all major user flows.
-
----
-
-## Installation
-
-1. **Clone the Repository**
-   ```bash
-   git clone https://github.com/zohraamna3/dhamall.git
-   ```
-2. **Navigate to the Project Directory**
-   ```bash
-   cd dhamall/dhamall
-   ```
-3. **Install Dependencies**
-   ```bash
-   composer install
-   npm install
-   ```
-4. **Set Up Environment Variables**
-   - Copy `.env.example` to `.env` and update database credentials.
-   ```bash
-   cp .env.example .env
-   ```
-5. **Generate Application Key**
-   ```bash
-   php artisan key:generate
-   ```
-6. **Run Migrations**
-   ```bash
-   php artisan migrate
-   ```
-7. **Serve the Application**
-   ```bash
-   php artisan serve
-   ```
-
----
-
-## Usage
-
-- Access the application at `http://localhost:8000`
-- Register as a buyer or seller to explore relevant features.
-- Admin users can be set directly through the database or seeder.
-
----
-
-## Project Structure
-
-```
-dhamall/
-├── app/                # Laravel application logic
-├── bootstrap/          # Laravel bootstrap files
-├── config/             # Configuration files
-├── database/           # Migrations and seeds
-├── public/             # Public assets and entry point
-├── resources/          # Blade templates and resources
-├── routes/             # Route definitions
-├── storage/            # File storage
-├── tests/              # Unit and feature tests
-├── .env.example        # Sample environment file
-├── composer.json       # PHP dependencies
-└── package.json        # Node dependencies
+```bash
+composer install
+npm install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate
+php artisan serve
+npm run dev
 ```
 
----
-
-## Contributing
-
-Contributions are welcome! Please fork the repository and submit a pull request.
-
----
-
-
----
-
-## Credits
-
-Developed for the 6th Semester PWE Project.
-
----
-
-> For more details, see the [Laravel documentation](https://laravel.com/docs/) and [project source code](https://github.com/zohraamna3/dhamall/).
+> Note: the project also includes a Composer `dev` script for running the app, queue listener, logs, and Vite together.
